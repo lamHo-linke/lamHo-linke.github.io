@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/css/main.css">
 
   
-<script src="/js/pace.min.js"></script>
+<script src="/js/pace.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
   
@@ -28,7 +28,7 @@
 </html>
 
 <body>
-  <div id="app">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content">
       <section class="outer">
   <article class="articles">
@@ -52,35 +52,13 @@
       <article class="archive-article archive-type-post">
   <div class="archive-article-inner">
     <header class="archive-article-header">
-      <a href="/2020/03/03/test-new-site-haha/" class="archive-article-date">
-  <time datetime="2020-03-03T12:10:24.000Z" itemprop="datePublished">03/03</time>
+      <a href="/2020/03/05/2020%E6%98%A5%EF%BC%8C%E6%98%AF%E4%B8%96%E7%95%8C%E6%9C%AB%E6%97%A5%E7%9A%84%E5%BC%80%E7%AB%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E9%BB%8E%E6%98%8E%E5%89%8D%E7%9A%84%E9%BB%91%E6%9A%97/" class="archive-article-date">
+  <time datetime="2020-03-05T12:41:11.627Z" itemprop="datePublished">03/05</time>
 </a>
        
 <h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/03/03/test-new-site-haha/"
-    >test_new_site_haha</a
-  >
-</h2>
-  
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/03/02/hello-world/" class="archive-article-date">
-  <time datetime="2020-03-02T14:48:24.528Z" itemprop="datePublished">03/02</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/03/02/hello-world/"
-    >Hello World</a
+  <a class="archive-article-title" href="/2020/03/05/2020%E6%98%A5%EF%BC%8C%E6%98%AF%E4%B8%96%E7%95%8C%E6%9C%AB%E6%97%A5%E7%9A%84%E5%BC%80%E7%AB%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E9%BB%8E%E6%98%8E%E5%89%8D%E7%9A%84%E9%BB%91%E6%9A%97/"
+    >2020春，是世界末日的开端，还是黎明前的黑暗</a
   >
 </h2>
   
@@ -264,7 +242,7 @@
 
 <script>
   var ayerConfig = {
-    mathjax: false
+    mathjax: true
   }
 </script>
 
@@ -385,11 +363,30 @@
 
 
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 <script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
 
     
-  </div>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 
 </html>
