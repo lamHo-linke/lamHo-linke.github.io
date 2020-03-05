@@ -135,6 +135,83 @@
 
 </article>
     
+    <article id="post-白痴版普通最小二乘法OLS的计算过程" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/03/04/%E7%99%BD%E7%97%B4%E7%89%88%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B/"
+    >白痴版普通最小二乘法OLS的计算过程</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/04/%E7%99%BD%E7%97%B4%E7%89%88%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E8%AE%A1%E7%AE%97%E8%BF%87%E7%A8%8B/" class="article-date">
+  <time datetime="2020-03-04T13:16:40.985Z" itemprop="datePublished">2020-03-04</time>
+</a>
+      
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="一元线性回归"><a href="#一元线性回归" class="headerlink" title="一元线性回归"></a>一元线性回归</h2><p>模型：</p>
+<p>$$\mathbf{y}\approx\beta _0+\beta _1\mathbf{x}$$ </p>
+<p>$$\mathbf{y}=\begin{pmatrix}y_1\\y_2\\\vdots\\y_n\end{pmatrix},<br>\quad\mathbf{x}=\begin{pmatrix}x_1\\x_2\\\vdots\\x_n\end{pmatrix}$$</p>
+<p>对于每个样本：$$y_i=\hat{\beta}_0+\hat{\beta}_1x_i+\varepsilon_i$$ $$\hat{y}_i=\hat{\beta}_0+\hat{\beta}_1x_i$$<br>残差平方和 $$\text{RSS}=\sum^n_{i=1}(y_i-\hat{y}_i)^2$$</p>
+<p>记函数$L(\beta_0,\beta_1)$为 $$L(\beta_0,\beta_1)=\sum^n_{i=1}(y_i-\beta_0-\beta_1x_i)^2$$<br>那么 $$(\hat{\beta}_0,\hat{\beta}_1)=\arg\min_{(\beta_0,\beta_1)}L(\beta_0,\beta_1)$$</p>
+<h3 id="OLS第一步：求偏导"><a href="#OLS第一步：求偏导" class="headerlink" title="OLS第一步：求偏导"></a>OLS第一步：求偏导</h3><p>$$<br>\left \{<br>\begin{array}{c}<br>    \frac{\partial L}{\partial \beta _0} =-2\displaystyle\sum_{i=1}^n{\left( y_i-\beta _0-\beta _1x_i \right)} \\<br>    \frac{\partial L}{\partial \beta _1} =-2\displaystyle\sum_{i=1}^n{\left( y_i-\beta _0-\beta _1x_i \right) x_i}<br>\end{array}<br>\right.<br>$$</p>
+<h3 id="OLS第二步：让偏导等于零求解"><a href="#OLS第二步：让偏导等于零求解" class="headerlink" title="OLS第二步：让偏导等于零求解"></a>OLS第二步：让偏导等于零求解</h3><p>$$<br>\left \{<br>\begin{array}{c}<br>    -2\displaystyle\sum_{i=1}^n{\left( y_i-\beta _0-\beta _1x_i \right)}=0 \\<br>    -2\displaystyle\sum_{i=1}^n{\left( y_i-\beta _0-\beta _1x_i \right) x_i}=0<br>\end{array}<br>\right.<br>$$</p>
+<p>约掉-2，把求和里的每一项拆出来<br>$$<br>\left \{<br>\begin{array}{c}<br>    \displaystyle\sum_{i=1}^n{y_i}-n\beta _0-\left( \displaystyle\sum_{i=1}^n{x_i} \right) \beta _1&amp;=0 &amp;&amp;&amp;① \\<br>    \displaystyle\sum_{i=1}^n{x_iy_i}-\left( \displaystyle\sum_{i=1}^n{x_i} \right) \beta _0-\left( \displaystyle\sum_{i=1}^n{x_i^2} \right) \beta _1&amp;=0 &amp;&amp;&amp;②<br>\end{array}<br>\right.<br>$$</p>
+<p>消元法，把①式的$\beta_0$用$\beta_1$来表示，然后代入②式求解出$\beta_1$<br>$$<br>\beta _0=\frac{1}{n}\sum_{i=1}^n{y_i}-\left( \frac{1}{n}\sum_{i=1}^n{x_i} \right) \beta _1<br>$$ $$<br>\sum_{i=1}^n{x_iy_i}-\frac{1}{n}\left( \sum_{i=1}^n{x_i} \right) \left( \sum_{i=1}^n{y_i} \right) +\frac{1}{n}\left( \sum_{i=1}^n{x_i} \right) ^2\beta _1-\left( \sum_{i=1}^n{x_i^2} \right) \beta _1=0<br>$$<br>求出$\beta_1$的值，这是$\beta_1$的估计值，记为$\hat{\beta_1}$<br>$$<br>\hat{\beta}_1=\frac{\sum\limits_{i=1}^n{x_iy_i}-\frac{1}{n}\left( \sum\limits_{i=1}^n{x_i} \right) \left( \sum\limits_{i=1}^n{y_i} \right)}{\sum\limits_{i=1}^n{x_i^2}-\frac{1}{n}\left( \sum\limits_{i=1}^n{x_i} \right) ^2}<br>$$ 这个表达式一大坨不好看，还可以简化一下，之后用在数据集上算也简便很多。$\frac{1}{n}\sum\limits_{i=1}^n{x_i}$是$x$的均值，记为$\bar{x}$；同样有$\bar{y}=\sum\limits_{i=1}^n{y_i}$<br>$$<br>\sum_{i=1}^n{x_i}=n\bar{x}，<br>\sum_{i=1}^n{y_i}=n\bar{y}<br>$$<br>先变分子，<br>$$<br>\begin{align}\text{分子}<br>&amp;=\sum_{i=1}^n{x_iy_i}-\frac{1}{n}\left( n\bar{x} \right) \left( n\bar{y} \right) \\\<br>&amp;=\sum_{i=1}^n{x_iy_i}-n\bar{x}\bar{y}\\\<br>&amp;=\sum_{i=1}^n{x_iy_i}-2n\bar{x}\bar{y}+n\bar{x}\bar{y}\\\<br>&amp;=\sum_{i=1}^n{x_iy_i}-\bar{x}\left( n\bar{y} \right) -\bar{y}\left( n\bar{x} \right) +n\bar{x}\bar{y}\\\<br>&amp;=\sum_{i=1}^n{x_iy_i}-\bar{x}\left( \sum_{i=1}^n{y_i} \right)-\bar{y}\left( \sum_{i=1}^n{x_i} \right) +\sum_{i=1}^n{\bar{x}\bar{y}}\\\<br>&amp;=\sum_{i=1}^n{\left( x_iy_i-\bar{x}y_i-\bar{y}x_i+\bar{x}\bar{y} \right)}\\\<br>&amp;=\sum_{i=1}^n{\left( x_i-\bar{x} \right) \left( y_i-\bar{y} \right)}\end{align}<br>$$<br>再变分母，<br>$$<br>\begin{aligned}\text{分母}&amp;=\sum_{i=1}^n{x_i^2}-\frac{1}{n}\left( n\bar{x} \right) ^2\\\<br>&amp;=\sum_{i=1}^n{x_i^2}-n\bar{x}^2\\\<br>&amp;=\sum_{i=1}^n{x_i^2}-2n\bar{x}^2+n\bar{x}^2\\\<br>&amp;=\sum_{i=1}^n{x_i^2}-2\left( n\bar{x} \right) \bar{x}+n\bar{x}^2\\\<br>&amp;=\sum_{i=1}^n{x_i^2}-2\bar{x}\left( \sum_{i=1}^n{x_i} \right) +\sum_{i=1}^n{\bar{x}^2}\\\<br>&amp;=\sum_{i=1}^n{\left( x_i^2-2\bar{x}x_i+\bar{x}^2 \right)}\\\<br>&amp;=\sum_{i=1}^n{\left( x_i-\bar{x} \right) ^2}\end{aligned}<br>$$<br>最后得到<br>$$<br>\hat{\beta}_1=\frac{\sum\limits_{i=1}^n{\left( x_i-\bar{x} \right) \left( y_i-\bar{y} \right)}}{\sum\limits_{i=1}^n{\left( x_i-\bar{x} \right) ^2}}<br>$$<br>刚才的$\beta_0$用$\beta_1$表示，现在求出了$\beta_1$，$\beta_0$也就呼之欲出<br>$$<br>\hat{\beta}_0=\bar{y}-\hat{\beta}_1\bar{x}<br>$$<br>最终，得到对于一元线性回归模型OLS的解为<br>$$<br>\left\{ \begin{aligned}<br>    \hat{\beta}_0&amp;=\bar{y}-\hat{\beta}_1\bar{x}\<br>    \hat{\beta}_1&amp;=\frac{\sum\limits_{i=1}^n{\left( x_i-\bar{x} \right) \left( y_i-\bar{y} \right)}}{\sum\limits_{i=1}^n{\left( x_i-\bar{x} \right) ^2}}\<br>\end{aligned} \right.<br>$$</p>
+<h2 id="多元线性回归"><a href="#多元线性回归" class="headerlink" title="多元线性回归"></a>多元线性回归</h2><p>模型：$$\mathbf{y}=\boldsymbol{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon }$$ $$\mathbf{y}=\begin{pmatrix}y_1\\y_2\\\vdots\\y_n\end{pmatrix},\quad<br>\boldsymbol{X}=\begin{pmatrix}1&amp;x_{11}&amp;x_{12}&amp;\dots&amp;x_{1p}\\1&amp;x_{21}&amp;x_{22}&amp;\dots&amp;x_{2p}\\\vdots&amp; &amp;&amp;\ddots&amp;\vdots\\1&amp;x_{n1}&amp;x_{n2}&amp;\dots&amp;x_{np}\end{pmatrix},\quad<br>\boldsymbol{\beta}=\begin{pmatrix}\beta_0\\\beta_1\\\vdots\\\beta_p\end{pmatrix},\quad<br>\boldsymbol{\varepsilon}=\begin{pmatrix}\varepsilon_1\\\varepsilon_2\\\vdots\\\varepsilon_n\end{pmatrix}$$<br>对于每个样本：$$\begin{aligned}y_i&amp;=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}+\cdots+\beta_px_{ip}+\varepsilon_i\\&amp;=x\beta+\end{aligned}$$<br>残差平方和 $$\text{RSS}=\sum^n_{i=1}(y_i-\hat{y}_i)^2$$</p>
+<p>记函数$L(\beta_0,\beta_1)$为 $$L(\beta_0,\beta_1)=\sum^n_{i=1}(y_i-\beta_0-\beta_1x_i)^2$$<br>那么 $$(\hat{\beta}_0,\hat{\beta}_1)=\arg\min_{(\beta_0,\beta_1)}L(\beta_0,\beta_1)$$</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
   </article>
   
 
