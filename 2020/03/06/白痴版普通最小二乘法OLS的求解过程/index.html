@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    白痴版最小二乘法OLS的求解过程 |  Dream d&#39;Orange
+    白痴版普通最小二乘法OLS的求解过程 |  Dream d&#39;Orange
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -31,7 +31,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-白痴版最小二乘法OLS的求解过程" class="article article-type-post" itemscope
+  <article id="post-白痴版普通最小二乘法OLS的求解过程" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -39,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  白痴版最小二乘法OLS的求解过程
+  白痴版普通最小二乘法OLS的求解过程
 </h1>
   
 
@@ -48,7 +48,7 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/06/%E7%99%BD%E7%97%B4%E7%89%88%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/" class="article-date">
+      <a href="/2020/03/06/%E7%99%BD%E7%97%B4%E7%89%88%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/" class="article-date">
   <time datetime="2020-03-05T16:32:32.000Z" itemprop="datePublished">2020-03-06</time>
 </a>
       
@@ -59,7 +59,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0字</span>
+            <span class="post-count">2.3k字</span>
         </span>
     </span>
 
@@ -68,7 +68,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
+            <span class="post-count">12分钟</span>
         </span>
     </span>
 </div>
@@ -79,6 +79,8 @@
 
     
     
+    <div class="tocbot"></div>
+
 
 
 
@@ -93,7 +95,42 @@
       
 
       
-      
+      <h2 id="1-一元线性回归"><a href="#1-一元线性回归" class="headerlink" title="1. 一元线性回归"></a>1. 一元线性回归</h2><p>模型：</p>
+<p>$$\mathbf{y}\approx\beta _0+\beta _1\mathbf{x}$$ </p>
+<p>$$\mathbf{y}=\begin{pmatrix}y_1\\y_2\\\vdots\\y_n\end{pmatrix},<br>\quad\mathbf{x}=\begin{pmatrix}x_1\\x_2\\\vdots\\x_n\end{pmatrix}$$</p>
+<p>对于每个样本：$$y_i=\hat{\beta}_0+\hat{\beta}_1x_i+\varepsilon_i$$ $$\hat{y}_i=\hat{\beta}_0+\hat{\beta}_1x_i$$<br>残差平方和 $$\text{RSS}=\sum^n_{i=1}(y_i-\hat{y}_i)^2$$</p>
+<p>记函数$L(\beta_0,\beta_1)$为 $$L(\beta_0,\beta_1)=\sum^n_{i=1}(y_i-\beta_0-\beta_1x_i)^2$$<br>那么 $$(\hat{\beta}_0,\hat{\beta}_1)=\arg\min_{(\beta_0,\beta_1)}L(\beta_0,\beta_1)$$</p>
+<h3 id="1-1-OLS第一步：求偏导"><a href="#1-1-OLS第一步：求偏导" class="headerlink" title="1.1 OLS第一步：求偏导"></a>1.1 OLS第一步：求偏导</h3><p>$$<br>\left \{<br>\begin{array}{c}<br>    \frac{\partial L}{\partial \beta _0} =-2\displaystyle\sum_{i=1}^n{\left( y_i-\beta _0-\beta _1x_i \right)} \\<br>    \frac{\partial L}{\partial \beta _1} =-2\displaystyle\sum_{i=1}^n{\left( y_i-\beta _0-\beta _1x_i \right) x_i}<br>\end{array}<br>\right.<br>$$</p>
+<h3 id="1-2-OLS第二步：让偏导等于零求解"><a href="#1-2-OLS第二步：让偏导等于零求解" class="headerlink" title="1.2 OLS第二步：让偏导等于零求解"></a>1.2 OLS第二步：让偏导等于零求解</h3><p>$$<br>\left \{<br>\begin{array}{c}<br>    -2\displaystyle\sum_{i=1}^n{\left( y_i-\beta _0-\beta _1x_i \right)}=0 \\<br>    -2\displaystyle\sum_{i=1}^n{\left( y_i-\beta _0-\beta _1x_i \right) x_i}=0<br>\end{array}<br>\right.<br>$$</p>
+<p>约掉-2，把求和里的每一项拆出来<br>$$<br>\left \{<br>\begin{array}{c}<br>    \displaystyle\sum_{i=1}^n{y_i}-n\beta _0-\left( \displaystyle\sum_{i=1}^n{x_i} \right) \beta _1&amp;=0 &amp;&amp;&amp;① \\<br>    \displaystyle\sum_{i=1}^n{x_iy_i}-\left( \displaystyle\sum_{i=1}^n{x_i} \right) \beta _0-\left( \displaystyle\sum_{i=1}^n{x_i^2} \right) \beta _1&amp;=0 &amp;&amp;&amp;②<br>\end{array}<br>\right.<br>$$</p>
+<p>消元法，把①式的$\beta_0$用$\beta_1$来表示，然后代入②式求解出$\beta_1$<br>$$<br>\beta _0=\frac{1}{n}\sum_{i=1}^n{y_i}-\left( \frac{1}{n}\sum_{i=1}^n{x_i} \right) \beta _1<br>$$ $$<br>\sum_{i=1}^n{x_iy_i}-\frac{1}{n}\left( \sum_{i=1}^n{x_i} \right) \left( \sum_{i=1}^n{y_i} \right) +\frac{1}{n}\left( \sum_{i=1}^n{x_i} \right) ^2\beta _1-\left( \sum_{i=1}^n{x_i^2} \right) \beta _1=0<br>$$<br>求出$\beta_1$的值，这是$\beta_1$的估计值，记为$\hat{\beta_1}$<br>$$<br>\hat{\beta}_1=\frac{\sum\limits_{i=1}^n{x_iy_i}-\frac{1}{n}\left( \sum\limits_{i=1}^n{x_i} \right) \left( \sum\limits_{i=1}^n{y_i} \right)}{\sum\limits_{i=1}^n{x_i^2}-\frac{1}{n}\left( \sum\limits_{i=1}^n{x_i} \right) ^2}<br>$$ 这个表达式一大坨不好看，还可以简化一下，之后用在数据集上算也简便很多。$\frac{1}{n}\sum\limits_{i=1}^n{x_i}$是$x$的均值，记为$\bar{x}$；同样有$\bar{y}=\sum\limits_{i=1}^n{y_i}$<br>$$<br>\sum_{i=1}^n{x_i}=n\bar{x}，<br>\sum_{i=1}^n{y_i}=n\bar{y}<br>$$<br>先变分子，<br>$$<br>\begin{aligned}\text{分子}<br>&amp;=\sum_{i=1}^n{x_iy_i}-\frac{1}{n}\left( n\bar{x} \right) \left( n\bar{y} \right) \\\<br>&amp;=\sum_{i=1}^n{x_iy_i}-n\bar{x}\bar{y}\\\<br>&amp;=\sum_{i=1}^n{x_iy_i}-2n\bar{x}\bar{y}+n\bar{x}\bar{y}\\\<br>&amp;=\sum_{i=1}^n{x_iy_i}-\bar{x}\left( n\bar{y} \right) -\bar{y}\left( n\bar{x} \right) +n\bar{x}\bar{y}\\\<br>&amp;=\sum_{i=1}^n{x_iy_i}-\bar{x}\left( \sum_{i=1}^n{y_i} \right)-\bar{y}\left( \sum_{i=1}^n{x_i} \right) +\sum_{i=1}^n{\bar{x}\bar{y}}\\\<br>&amp;=\sum_{i=1}^n{\left( x_iy_i-\bar{x}y_i-\bar{y}x_i+\bar{x}\bar{y} \right)}\\\<br>&amp;=\sum_{i=1}^n{\left( x_i-\bar{x} \right) \left( y_i-\bar{y} \right)}\end{aligned}<br>$$<br>再变分母，<br>$$<br>\begin{aligned}\text{分母}&amp;=\sum_{i=1}^n{x_i^2}-\frac{1}{n}\left( n\bar{x} \right) ^2\\\<br>&amp;=\sum_{i=1}^n{x_i^2}-n\bar{x}^2\\\<br>&amp;=\sum_{i=1}^n{x_i^2}-2n\bar{x}^2+n\bar{x}^2\\\<br>&amp;=\sum_{i=1}^n{x_i^2}-2\left( n\bar{x} \right) \bar{x}+n\bar{x}^2\\\<br>&amp;=\sum_{i=1}^n{x_i^2}-2\bar{x}\left( \sum_{i=1}^n{x_i} \right) +\sum_{i=1}^n{\bar{x}^2}\\\<br>&amp;=\sum_{i=1}^n{\left( x_i^2-2\bar{x}x_i+\bar{x}^2 \right)}\\\<br>&amp;=\sum_{i=1}^n{\left( x_i-\bar{x} \right) ^2}\end{aligned}<br>$$<br>最后得到<br>$$<br>\hat{\beta}_1=\frac{\sum\limits_{i=1}^n{\left( x_i-\bar{x} \right) \left( y_i-\bar{y} \right)}}{\sum\limits_{i=1}^n{\left( x_i-\bar{x} \right) ^2}}<br>$$<br>刚才的$\beta_0$用$\beta_1$表示，现在求出了$\beta_1$，$\beta_0$也就呼之欲出<br>$$<br>\hat{\beta}_0=\bar{y}-\hat{\beta}_1\bar{x}<br>$$<br>最终，得到对于一元线性回归模型OLS的解为<br>$$<br>\left \{<br>\begin{array}{l}<br>    \hat{\beta}_0= \bar{y}-\hat{\beta}_1\bar{x} \\<br>    \hat{\beta}_1= \displaystyle\frac{\sum\limits_{i=1}^n{\left( x_i-\bar{x} \right) \left( y_i-\bar{y} \right)}}{\sum\limits_{i=1}^n{\left( x_i-\bar{x} \right) ^2}}<br>\end{array}<br>\right.<br>$$</p>
+<h2 id="2-多元线性回归"><a href="#2-多元线性回归" class="headerlink" title="2. 多元线性回归"></a>2. 多元线性回归</h2><p>模型：$$\mathbf{y}=\boldsymbol{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon }$$ $$\mathbf{y}=\begin{pmatrix}y_1\\y_2\\\vdots\\y_n\end{pmatrix},\quad<br>\boldsymbol{X}=\begin{pmatrix}1&amp;x_{11}&amp;x_{12}&amp;\dots&amp;x_{1p}\\1&amp;x_{21}&amp;x_{22}&amp;\dots&amp;x_{2p}\\\vdots&amp; &amp;&amp;\ddots&amp;\vdots\\1&amp;x_{n1}&amp;x_{n2}&amp;\dots&amp;x_{np}\end{pmatrix},\quad<br>\boldsymbol{\beta}=\begin{pmatrix}\beta_0\\\beta_1\\\vdots\\\beta_p\end{pmatrix},\quad<br>\boldsymbol{\varepsilon}=\begin{pmatrix}\varepsilon_1\\\varepsilon_2\\\vdots\\\varepsilon_n\end{pmatrix}$$<br>对于每个样本：$$\begin{aligned}y_i<br>&amp;=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}+\cdots+\beta_px_{ip}+\varepsilon_i\\\<br>&amp;=\begin{pmatrix}1&amp;x_{i1}&amp;x_{i2}&amp;\cdots&amp;x_{ip}\end{pmatrix}\begin{pmatrix}\beta_0\\\beta_1\\\vdots\\\beta_p\end{pmatrix}+\varepsilon_i\end{aligned}$$<br>残差平方和$L(\boldsymbol{\beta})$<br>$$\begin{aligned}<br>L\left( \boldsymbol{\beta } \right)<br>&amp; =\sum_{i=1}^n{\left( y_i-\hat{y}_i \right) ^2}=\sum_{i=1}^n{\varepsilon _i^2}\\\<br>&amp; =\varepsilon _1^2+\varepsilon _2^2+\cdots +\varepsilon _n^2\\\<br>&amp;=\left( \begin{matrix}<br>    \varepsilon _1&amp;        \varepsilon _2&amp;        \cdots&amp;        \varepsilon _n\<br>\end{matrix} \right) \left( \begin{array}{c}<br>    \varepsilon _1\<br>    \varepsilon _2\<br>    \vdots\<br>    \varepsilon _n\<br>\end{array} \right) \\\<br>&amp; =\boldsymbol{\varepsilon }^T\boldsymbol{\varepsilon }\\\<br>&amp; =\left( \mathbf{y}-\boldsymbol{X\beta } \right) ^T\left( \mathbf{y}-\boldsymbol{X\beta } \right)<br>\end{aligned}<br>$$</p>
+<h3 id="2-1-矩阵相乘"><a href="#2-1-矩阵相乘" class="headerlink" title="2.1 矩阵相乘"></a>2.1 矩阵相乘</h3><p>前方一波矩阵运算，先补一点矩阵运算基础小知识：</p>
+<ul>
+<li>矩阵相乘不满足交换律<br>$$AB\ne BA$$</li>
+<li>矩阵相乘满足结合律<br>$$(AB)C=A(BC)$$</li>
+<li>矩阵相乘的转置提出来，要把前后两个矩阵位置换一下<br>$$(AB)^T=B^TA^T$$</li>
+</ul>
+<p>继续算$L(\boldsymbol{\beta})$<br>$$\begin{aligned}<br>L\left( \boldsymbol{\beta } \right)<br>&amp;=\left( \mathbf{y}-\boldsymbol{X\beta } \right) ^T\left( \mathbf{y}-\boldsymbol{X\beta } \right)\\\<br>&amp;=\left( \mathbf{y}^T-\left( \boldsymbol{X\beta } \right) ^T \right) \left( \mathbf{y}-\boldsymbol{X\beta } \right)\\\<br>&amp;=\mathbf{y}^T\mathbf{y}-\left( \boldsymbol{X\beta } \right) ^T\mathbf{y}-\mathbf{y}^T\boldsymbol{X\beta }+\left( \boldsymbol{X\beta } \right) ^T\boldsymbol{X\beta }\\\<br>&amp;=\mathbf{y}^T\mathbf{y}-\boldsymbol{\beta }^T\boldsymbol{X}^T\mathbf{y}-\mathbf{y}^T\boldsymbol{X\beta }+\boldsymbol{\beta }^T\boldsymbol{X}^T\boldsymbol{X\beta }<br>\end{aligned}$$</p>
+<p>第3项$\mathbf{y}^T\boldsymbol{X\beta }$乘出来的结果是一个标量，也就是一个数（一个数怎么转置都是同一个东西）<br>$$<br>\mathbf{y}^T\boldsymbol{X\beta }=\left( \begin{matrix}<br>    &amp;        &amp;        \mathbf{y}^T&amp;        &amp;<br>\end{matrix} \right) _{1\times n}\left( \begin{array}{c}<br>    \<br>    \<br>    \boldsymbol{X\beta }\<br>    \<br>    \<br>\end{array} \right) _{n\times 1}=\left(\cdot\right) _{1\times 1}<br>$$</p>
+<p>所以第3项可以写成$\mathbf{y}^T\boldsymbol{X\beta }=\left( \mathbf{y}^T\boldsymbol{X\beta } \right) ^T=\boldsymbol{\beta }^T\boldsymbol{X}^T\mathbf{y}$，跟前面第二项一样，合并起来$L(\boldsymbol{\beta})$最后写成这样<br>$$<br>L\left( \boldsymbol{\beta } \right) =\mathbf{y}^T\mathbf{y}-2\boldsymbol{\beta }^T\boldsymbol{X}^T\mathbf{y}+\boldsymbol{\beta }^T\boldsymbol{X}^T\boldsymbol{X\beta }<br>$$</p>
+<h3 id="2-2-矩阵求导"><a href="#2-2-矩阵求导" class="headerlink" title="2.2 矩阵求导"></a>2.2 矩阵求导</h3><p>接下来要求偏导，又来补一波矩阵小知识，关于对矩阵求导</p>
+<ul>
+<li>$\boldsymbol{a,b}$都是K阶向量<br>$$<br>\frac{\partial \boldsymbol{a}^T\boldsymbol{b}}{\partial \boldsymbol{b}}=\frac{\partial \boldsymbol{b}^T\boldsymbol{a}}{\partial \boldsymbol{b}}=\boldsymbol{a}<br>$$</li>
+<li>$\boldsymbol{A}$是对称矩阵<br>$$<br>\frac{\partial \boldsymbol{b}^T\boldsymbol{Ab}}{\partial \boldsymbol{b}}=2\boldsymbol{Ab}=2\boldsymbol{b}^T\boldsymbol{A}<br>$$</li>
+</ul>
+<p>OK，刀磨好了继续砍柴，来求$L(\boldsymbol{\beta})$的偏导，第一项没有$\boldsymbol{\beta }$，不管它；第二项的$\boldsymbol{\beta }$是px1向量，$\boldsymbol{X}^T\mathbf{y}$也是px1向量<br>$$<br>\frac{\partial 2\boldsymbol{\beta }^T\boldsymbol{X}^T\mathbf{y}}{\partial \boldsymbol{\beta }}=\frac{\partial 2\boldsymbol{\beta }^T\left( \boldsymbol{X}^T\mathbf{y} \right)}{\partial \boldsymbol{\beta }}=2\boldsymbol{X}^T\mathbf{y}<br>$$</p>
+<p>第3项的$\boldsymbol{X}^T\boldsymbol{X}$是p×p对称矩阵<br>$$<br>\frac{\partial \boldsymbol{\beta }^T\left( \boldsymbol{X}^T\boldsymbol{X} \right) \boldsymbol{\beta }}{\partial \boldsymbol{\beta }}=2\boldsymbol{X}^T\boldsymbol{X\beta }<br>$$</p>
+<p>所以对$\boldsymbol{X}^T\boldsymbol{X}$求出来偏导是<br>$$<br>\frac{\partial L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }}=-2\boldsymbol{X}^T\mathbf{y}+2\boldsymbol{X}^T\boldsymbol{X\beta }<br>$$</p>
+<p>令偏导等于零求解<br>$$<br>2\boldsymbol{X}^T\boldsymbol{X\beta }=2\boldsymbol{X}^T\mathbf{y}<br>$$</p>
+<p>约掉2，然后两边都乘$\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}$（需要$\boldsymbol{X}^T\boldsymbol{X}$可逆）<br>$$<br>\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}\boldsymbol{X}^T\boldsymbol{X\beta }=\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}\boldsymbol{X}^T\mathbf{y}<br>$$</p>
+<p>$\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}\left( \boldsymbol{X}^T\boldsymbol{X} \right) =\boldsymbol{I}$，$\boldsymbol{I}$是一个pxp的单位矩阵，那么$\boldsymbol{I\beta }=\boldsymbol{\beta }$，所以求出来<br>$$<br>\hat{\beta}_{OLS}=\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}\boldsymbol{X}^T\mathbf{y}<br>$$</p>
+<p>Done！</p>
+<h2 id="3-再补充点说明"><a href="#3-再补充点说明" class="headerlink" title="3. 再补充点说明"></a>3. 再补充点说明</h2><h3 id="3-1-Q1：什么函数能找到它的最小值？"><a href="#3-1-Q1：什么函数能找到它的最小值？" class="headerlink" title="3.1 Q1：什么函数能找到它的最小值？"></a>3.1 Q1：什么函数能找到它的最小值？</h3><p>令偏导为零能找到最小值？<br>对于残差平方和这个函数$L(\boldsymbol{\beta})$是的，这是一个凸函数。<br>一元函数$f\left( x \right) =\left( x-4 \right) ^2+3$，我们求一阶导数$f’\left( x \right) =2\left( x-4 \right)$，再求二阶导数$f’’\left( x \right) =2$，<font color='red'>二阶导大于零</font>，所以这个函数是凸函数，可以在导数等于零的时候找到最小值。<br>多元函数$L(\boldsymbol{\beta})$，一阶导刚才我们求出来，是$\displaystyle\frac{\partial L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }}=-2\boldsymbol{X}^T\mathbf{y}+2\boldsymbol{X}^T\boldsymbol{X\beta }$，继续求二阶导$\displaystyle\frac{\partial ^2L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }^2}=2\boldsymbol{X}^T\boldsymbol{X}$，求出来这个二阶导是个矩阵。跟一元函数类似的，<font color='red'>二阶导如果是一个正定矩阵（类比正实数）</font>，那么这个函数是凸函数，可以找到最小值。而$2\boldsymbol{X}^T\boldsymbol{X}$是一个正定矩阵，因为$\boldsymbol{X}$是满秩的（基于各变量X相互独立的基本假设）。关于满秩和正定矩阵什么的在这篇文章有详解，一两句话说不清楚。</p>
+<h3 id="3-2-Q2：-boldsymbol-X-T-boldsymbol-X-可逆？"><a href="#3-2-Q2：-boldsymbol-X-T-boldsymbol-X-可逆？" class="headerlink" title="3.2 Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？"></a>3.2 Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？</h3><p>$\boldsymbol{X}^T\boldsymbol{X}$可逆？<br>$\boldsymbol{X}^T\boldsymbol{X}$是正定矩阵  $\Longrightarrow\boldsymbol{X}^T\boldsymbol{X}$的行列式大于零<br>行列式$\ne 0\Longrightarrow$ 可逆</p>
+<p>$$ ===== Fin =====$$</p>
+<p>之前学习写下的笔记，主要是修改一下解决公示显示问题。</p>
+
       
       <!-- reward -->
       
@@ -162,7 +199,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/06/%E7%99%BD%E7%97%B4%E7%89%88%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/06/%E7%99%BD%E7%97%B4%E7%89%88%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/" alt="微信分享二维码">
     </div>
 </div>
 
