@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>矩阵的一些事</title>
+    <url>/2020/03/08/%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/</url>
+    <content><![CDATA[<p>还没写好，稍等~</p>
+]]></content>
+  </entry>
+  <entry>
     <title>白痴版普通最小二乘法OLS的求解过程</title>
     <url>/2020/03/06/%E7%99%BD%E7%97%B4%E7%89%88%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="1-一元线性回归"><a href="#1-一元线性回归" class="headerlink" title="1. 一元线性回归"></a>1. 一元线性回归</h2><p>模型：</p>
@@ -37,7 +43,10 @@
 <h2 id="3-再补充点说明"><a href="#3-再补充点说明" class="headerlink" title="3. 再补充点说明"></a>3. 再补充点说明</h2><h3 id="3-1-Q1：什么函数能找到它的最小值？"><a href="#3-1-Q1：什么函数能找到它的最小值？" class="headerlink" title="3.1 Q1：什么函数能找到它的最小值？"></a>3.1 Q1：什么函数能找到它的最小值？</h3><p>令偏导为零能找到最小值？<br>对于残差平方和这个函数$L(\boldsymbol{\beta})$是的，这是一个凸函数。<br>一元函数$f\left( x \right) =\left( x-4 \right) ^2+3$，我们求一阶导数$f’\left( x \right) =2\left( x-4 \right)$，再求二阶导数$f’’\left( x \right) =2$，<font color='red'>二阶导大于零</font>，所以这个函数是凸函数，可以在导数等于零的时候找到最小值。<br>多元函数$L(\boldsymbol{\beta})$，一阶导刚才我们求出来，是$\displaystyle\frac{\partial L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }}=-2\boldsymbol{X}^T\mathbf{y}+2\boldsymbol{X}^T\boldsymbol{X\beta }$，继续求二阶导$\displaystyle\frac{\partial ^2L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }^2}=2\boldsymbol{X}^T\boldsymbol{X}$，求出来这个二阶导是个矩阵。跟一元函数类似的，<font color='red'>二阶导如果是一个正定矩阵（类比正实数）</font>，那么这个函数是凸函数，可以找到最小值。而$2\boldsymbol{X}^T\boldsymbol{X}$是一个正定矩阵，因为$\boldsymbol{X}$是满秩的（基于各变量X相互独立的基本假设）。关于满秩和正定矩阵什么的在这篇文章有详解，一两句话说不清楚。</p>
 <h3 id="3-2-Q2：-boldsymbol-X-T-boldsymbol-X-可逆？"><a href="#3-2-Q2：-boldsymbol-X-T-boldsymbol-X-可逆？" class="headerlink" title="3.2 Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？"></a>3.2 Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？</h3><p>$\boldsymbol{X}^T\boldsymbol{X}$可逆？<br>$\boldsymbol{X}^T\boldsymbol{X}$是正定矩阵  $\Longrightarrow\boldsymbol{X}^T\boldsymbol{X}$的行列式大于零<br>行列式$\ne 0\Longrightarrow$ 可逆</p>
 <p>$$ ===== Fin =====$$</p>
-<p>之前学习写下的笔记，主要是修改一下解决公示显示问题。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://web.stanford.edu/~mrosenfe/soc_meth_proj3/matrix_OLS_NYU_notes.pdf" target="_blank" rel="noopener">OLS in Matrix Form</a></li>
+</ol>
 ]]></content>
   </entry>
   <entry>
