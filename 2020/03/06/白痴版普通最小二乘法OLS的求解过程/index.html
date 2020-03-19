@@ -52,6 +52,10 @@
   <time datetime="2020-03-05T16:32:32.000Z" itemprop="datePublished">2020-03-06</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Math/">Math</a>
+  </div>
+
       
       
 <div class="word_count">
@@ -128,7 +132,7 @@
 <p>Done！</p>
 <h2 id="3-再补充点说明"><a href="#3-再补充点说明" class="headerlink" title="3. 再补充点说明"></a>3. 再补充点说明</h2><h3 id="3-1-Q1：什么函数能找到它的最小值？"><a href="#3-1-Q1：什么函数能找到它的最小值？" class="headerlink" title="3.1 Q1：什么函数能找到它的最小值？"></a>3.1 Q1：什么函数能找到它的最小值？</h3><p>令偏导为零能找到最小值？<br>对于残差平方和这个函数$L(\boldsymbol{\beta})$是的，这是一个凸函数。<br>一元函数$f\left( x \right) =\left( x-4 \right) ^2+3$，我们求一阶导数$f’\left( x \right) =2\left( x-4 \right)$，再求二阶导数$f’’\left( x \right) =2$，<font color='red'>二阶导大于零</font>，所以这个函数是凸函数，可以在导数等于零的时候找到最小值。<br>多元函数$L(\boldsymbol{\beta})$，一阶导刚才我们求出来，是$\displaystyle\frac{\partial L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }}=-2\boldsymbol{X}^T\mathbf{y}+2\boldsymbol{X}^T\boldsymbol{X\beta }$，继续求二阶导$\displaystyle\frac{\partial ^2L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }^2}=2\boldsymbol{X}^T\boldsymbol{X}$，求出来这个二阶导是个矩阵。跟一元函数类似的，<font color='red'>二阶导如果是一个正定矩阵（类比正实数）</font>，那么这个函数是凸函数，可以找到最小值。而$2\boldsymbol{X}^T\boldsymbol{X}$是一个正定矩阵，因为$\boldsymbol{X}$是满秩的（基于各变量X相互独立的基本假设）。</p>
 <h3 id="3-2-Q2：-boldsymbol-X-T-boldsymbol-X-可逆？"><a href="#3-2-Q2：-boldsymbol-X-T-boldsymbol-X-可逆？" class="headerlink" title="3.2 Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？"></a>3.2 Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？</h3><p>$\boldsymbol{X}^T\boldsymbol{X}$可逆？<br>$\boldsymbol{X}^T\boldsymbol{X}$是正定矩阵  $\Longrightarrow\boldsymbol{X}^T\boldsymbol{X}$的行列式大于零<br>行列式$\ne 0\Longrightarrow$ 可逆</p>
-<p>这些问题在「<a href="/2020/03/08/%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/" title="矩阵的一些事">矩阵的一些事</a>」这篇文章有详解，这里一两句话说不完。</p>
+<p>这些问题在「<a href="/2020/03/08/%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/" title="矩阵的一些事：满秩矩阵、正定矩阵和可逆矩阵">矩阵的一些事：满秩矩阵、正定矩阵和可逆矩阵</a>」这篇文章有详解，这里一两句话说不完。</p>
 <p>$$ ===== Fin =====$$</p>
 <p>参考资料：</p>
 <ol>
@@ -210,6 +214,8 @@
 <div id="share-mask"></div>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math/" rel="tag">Math</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OLS/" rel="tag">OLS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" rel="tag">线性回归</a></li></ul>
+
 
     </footer>
 
@@ -223,7 +229,7 @@
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            矩阵的一些事
+            矩阵的一些事：满秩矩阵、正定矩阵和可逆矩阵
           
         </div>
       </a>
@@ -304,8 +310,8 @@
     <ul class="list-inline">
       <li>
         &copy;
-        2015-2020
-        a橘
+        2019-2020
+        an 橘
       </li>
       <li>
         

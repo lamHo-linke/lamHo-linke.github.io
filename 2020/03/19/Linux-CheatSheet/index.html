@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Linux CheatSheet |  Dream d&#39;Orange
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/orange-favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<script src="/js/pace.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-Linux-CheatSheet" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Linux CheatSheet
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/19/Linux-CheatSheet/" class="article-date">
+  <time datetime="2020-03-19T14:28:54.000Z" itemprop="datePublished">2020-03-19</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.5k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">15分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <ol>
+<li><p>cron 后台常驻程序 (daemon) 用于：<br>A. 负责文件在网络中的共享<br>B. 管理打印子系统<br>C. 跟踪管理系统信息和错误<br>D. 管理系统日常任务的调度</p>
+<details>
+<summary><u>答案：</u></summary>
+D.
+</details>
+</li>
+<li><p>在大多数Linux发行版本中，以下哪个属于块设备 (block devices) ？<br>A. 串行口<br>B. 硬盘<br>C. 虚拟终端<br>D. 打印机</p>
+<details>
+<summary><u>答案：</u></summary>
+B.
+</details>
+</li>
+<li><p>下面哪个Linux命令可以一次显示一页内容？<br>A. pause<br>B. cat<br>C. more<br>D. grep</p>
+<details>
+<summary><u>答案：</u></summary>
+C.
+</details>
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>怎样了解您在当前目录下还有多大空间？<br>A. Use df<br>B. Use du /<br>C. Use du .<br>D. Use df .</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>怎样更改一个文件的权限设置？<br>A. attrib<br>B. chmod<br>C. change<br>D. file</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>假如您需要找出 /etc/my.conf 文件属于哪个包 (package) ，您可以执行：<br>A. rpm -q /etc/my.conf<br>B. rpm -requires /etc/my.conf<br>C. rpm -qf /etc/my.conf<br>D. rpm -q | grep /etc/my.conf</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>假如当前系统是在 level 3 运行，怎样不重启系统就可转换到 level 5 运行？<br>A. Set level = 5<br>B. telinit 5<br>C. run 5<br>D. ALT-F7-5</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>那个命令用于改变 IDE 硬盘的设置？<br>A. hdparam<br>B. ideconfig<br>C. hdparm<br>D. hddparm</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>下面哪个命令可以列出定义在以后特定时间运行一次的所有任务？<br>A. atq<br>B. cron<br>C. batch<br>D. at</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>下面命令的作用是：set PS1=”[\u\w\t]\$“ ; export PS1<br>A. 改变错误信息提示<br>B. 改变命令提示符<br>C. 改变一些终端参数<br>D. 改变辅助命令提示符</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>作为一个管理员，你希望在每一个新用户的目录下放一个文件 .bashrc ，那么你应该在哪个目录下放这个文件，以便于新用户创建主目录时自动将这个文件复制到自己的目录下。<br>A. /etc/skel/<br>B. /etc/default/<br>C. /etc/defaults/<br>D. /etc/profile.d/</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>在bash中，export命令的作用是：<br>A. 在子shell中运行命令<br>B. 使在子shell中可以使用命令历史记录<br>C. 为其它应用程序设置环境变量<br>D. 提供NFS分区给网络中的其它系统使用</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>在使用了shadow口令的系统中，/etc/passwd和/etc/shadow两个文件的权限正确的是：<br>A. -rw-r—– , -r——–<br>B. -rw-r–r– , -r–r–r–<br>C. -rw-r–r– , -r——–<br>D. -rw-r–rw- , -r—–r–</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>下面哪个参数可以删除一个用户并同时删除用户的主目录？<br>A. rmuser -r<br>B. deluser -r<br>C. userdel -r<br>D. usermgr -r</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>有一个备份程序mybackup，需要在周一至周五下午1点和晚上8点各运行一次，下面哪条crontab的项可以完成这项工作？<br>A. 0 13,20 <em> </em> 1,5 mybackup<br>B. 0 13,20 <em> </em> 1,2,3,4,5 mybackup<br>C. <em> 13,20 </em> <em> 1,2,3,4,5 mybackup<br>D. 0 13,20 1,5 </em> * mybackup</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>如何从当前系统中卸载一个已装载的文件系统<br>A. umount<br>B. dismount<br>C. mount -u<br>D. 从 /etc/fstab 中删除这个文件系统项</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>如果你的umask设置为022，缺省的你创建的文件的权限为：<br>A. —-w–w-<br>B. -w–w—-<br>C. r-xr-x—<br>D. rw-r–r–</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>在一条命令中如何查找一个二进制命令 Xconfigurator 的路径？<br>A. apropos Xconfigurator<br>B. find Xconfigurator<br>C. where Xconfigurator<br>D. which Xconfigurator</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>哪一条命令用来装载所有在 /etc/fstab 中定义的文件系统？<br>A. amount<br>B. mount -a<br>C. fmount<br>D. mount -f</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>运行一个脚本，用户不需要什么样的权限？<br>A. read<br>B. write<br>C. execute<br>D. browse on the directory</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>在Linux中，如何标识接在IDE0上的slave硬盘的第2个扩展分区？<br>A. /dev/hdb2<br>B. /dev/hd1b2<br>C. /dev/hdb6<br>D. /dev/hd1b6</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>在应用程序起动时，如何设置进程的优先级？<br>A. priority<br>B. nice<br>C. renice<br>D. setpri</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>在 bash 中, 在一条命令后加入”1&gt;&amp;2” 意味着：<br>A. 标准错误输出重定向到标准输入<br>B. 标准输入重定向到标准错误输出<br>C. 标准输出重定向到标准错误输出<br>D. 标准输出重定向到标准输入</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>下面哪条命令可以把f1.txt复制为f2.txt?<br>A. cp f1.txt | f2.txt<br>B. cat f1.txt | f2.txt<br>C. cat f1.txt &gt; f2.txt<br>D. copy f1.txt | f2.txt</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>显示一个文件最后几行的命令是：<br>A. tac<br>B. tail<br>C. rear<br>D. last</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>如何快速切换到用户John的主目录下？<br>A. cd @John<br>B. cd #John<br>C. cd &amp;John<br>D. cd ~John</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>　
+</li>
+<li><p>把一个流中所有字符转换成大写字符，可以使用下面哪个命令？<br>A. tr a-z A-Z<br>B. tac a-z A-Z<br>C.sed /a-z/A-Z<br>D. sed –toupper</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>使用什么命令可以查看Linux的启动信息？<br>A. mesg -d<br>B. dmesg<br>C. cat /etc/mesg<br>D. cat /var/mesg</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>运行级定义在：<br>A. in the kernel<br>B. in /etc/inittab<br>C. in /etc/runlevels<br>D. using the rl command</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>如何装载(mount)上在 /etc/fstab 文件中定义的所有文件系统？<br>A. mount -a<br>B. mount /mnt/*<br>C. mount<br>D. mount /etc/fstab</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>使用ln命令将生成了一个指向文件old的符号链接new，如果你将文件old删除，是否还能够访问文件中的数据？<br>A. 不可能再访问<br>B. 仍然可以访问<br>C. 能否访问取决于文件的所有者<br>D. 能否访问取决于文件的权限</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>xt2fs文件系统中，缺省的为root用户保留多大的空间？<br>A. 3%<br>B. 5%<br>C. 10%<br>D. 15%</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>哪个命令用来显示系统中各个分区中inode的使用情况？<br>A. df -i<br>B. df -H<br>C. free -b<br>D. du -a -c /</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>　
+</li>
+<li><p>多数Linux发行版本中，图形方式的运行级定义为？<br>A. 1<br>B. 2<br>C. 3<br>D. 5</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>在系统文档中找到关于print这个单词的所有说明？<br>A. man print<br>B. which print<br>C. locate print<br>D. apropos print</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>man 5 passwd 含义是？<br>A. 显示 passwd 命令的使用方法<br>B. 显示 passwd 文件的结构<br>C. 显示 passwd 命令的说明的前五行<br>D. 显示关于passwd的前五处说明文档。</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>如何在文件中查找显示所有以”<em>“打头的行？<br>A. find \</em> file<br>B. wc -l <em> &lt; file<br>C. grep -n </em> file<br>D. grep ‘^*’ file</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>在ps命令中什么参数是用来显示所有用户的进程的？<br>A. a<br>B. b<br>C. u<br>D. x</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>显示二进制文件的命令是？<br>A. od<br>B. vil<br>C. view<br>D. binview</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>如何显示Linux系统中注册的用户数（包含系统用户）？<br>A. account -l<br>B. nl /etc/passwd |head<br>C. wc –users /etc/passwd<br>D. wc –lines /etc/passwd</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>在一行结束位置加上什么符号，表示未结束，下一行继续？<br>A. /<br>B. <br>C. ;<br>D. |</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>命令 kill 9 的含义是：<br>A. kills the process whose PID is 9.<br>B. kills all processes belonging to UID 9.<br>C. sends SIGKILL to the process whose PID is 9.<br>D. sends SIGTERM to the process whose PID IS 9.</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>如何删除一个非空子目录/tmp？<br>A. del /tmp/<em><br>B. rm -rf /tmp<br>C. rm -Ra /tmp/</em><br>D. rm -rf /tmp/*</p>
+<details>
+<summary><u>答案：</u></summary>
+B. rm -rf * 删除当前目录下所有文件
+</details>
+</li>
+<li><p>使用什么命令可以在今天午夜运行命令 cmd1 ？<br>A. at midnight cmd1<br>B. cron -at “00:00” cmd1<br>C. batch -t “00:00” &lt; cmd1<br>D. echo “cmd1” | at midnight</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>你的系统使用增量备份策略，当需要恢复系统时，你需要按什么顺序恢复备份数据？<br>A. 最后一次全备份，然后从最早到最近的增量备份<br>B. 最后一次全备份，然后从最近到最早的增量备份<br>C. 最早到最近的增量备份，然后最后一次全备份<br>D. 最近到最早的增量备份，然后最后一次全备份</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>对所有用户的变量设置，应当放在哪个文件下？<br>A. /etc/bashrc<br>B. /etc/profile<br>C. ~/.bash_profile<br>D. /etc/skel/.bashrc</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>Linux系统中，一般把命令 ls 定义为 ls –color 的别名，以便以不同颜色来标识不同类型的文件。但是，如何能够使用原先的ls命令？<br>A. \ls<br>B. ;ls<br>C. ls $$<br>D. ls –noalias</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>在Linux系统中的脚本文件一般以什么开头？<br>A. $/bin/sh<br>B. #!/bin/sh<br>C. use /bin/sh<br>D. set shell=/bin/sh</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>下面哪种写法表示如果cmd1成功执行，则执行cmd2命令？<br>A. cmd1&amp;&amp;cmd2<br>B. cmd1|cmd2<br>C. cmd1;cmd2<br>D. cmd1||cmd2</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>在哪个文件中定义网卡的I/O地址？<br>A. cat /proc/modules<br>B. cat /proc/devices<br>C. cat /proc/ioports<br>D. cat /io/dma</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>Linux中，提供TCP/IP包过滤功能的软件叫什么？<br>A. rarp<br>B. route<br>C. iptables<br>D. filter</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>如何暂停一个打印队列？<br>A. lpr<br>B. lpq<br>C. lpc<br>D. lpd</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>在vi中退出不保存的命令是？<br>A. :q<br>B. :w<br>C. :wq<br>D. :q!</p>
+<details>
+<summary><u>答案：</u></summary>
+D. A. :q 退出；B. :w 保存 C. :wq 保存并退出 D. :q! 强制退出
+</details>
+</li>
+<li><p>在 XFree86 3.x 中, 缺省的字体服务器为：<br>A. xfs<br>B. xfserv<br>C. fonts<br>D. xfstt</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>使用什么命令检测基本网络连接？<br>A. ping<br>B. route<br>C. netstat<br>D. ifconfig</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>下面哪个协议使用了二个以上的端口？<br>A. telnet<br>B. FTP<br>C. rsh<br>D. HTTP</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>在PPP协议中，哪个认证协议不以明文传递密码？<br>A. PAM<br>B. PAP<br>C. PGP<br>D. CHAP</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>下面哪个文件系统应该分配最大的空间？<br>A. /usr<br>B. /lib<br>C. /root<br>D. /bin</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>如何在Debian系统中安装rpm包？<br>A. alien pkgname.rpm<br>B. dpkg –rpm pkgname.rpm<br>C. dpkg –alien pkgname.rpm<br>D. alien pkganme.rpm ; dpkg -i pkganme.deb</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>在安装软件时下面哪一步需要root权限？<br>A. make<br>B. make deps<br>C. make config<br>D. make install</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>什么命令用来只更新已经安装过的rpm软件包？<br>A. rpm -U <em>.rpm<br>B. rpm -F </em>.rpm<br>C. rpm -e <em>.rpm<br>D. rpm -q </em>.rpm</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>在 windows 与 Linux 双起动的系统中，如果要让LILO 管理引导，则 LILO 应该放在：<br>A. MBR<br>B. /<br>C. root分区的首扇区<br>D. /LILO</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>ldconfig的配置文件是<br>A. /lib/ld.so<br>B. /etc/ld.so.conf<br>C. /etc/ld.so.cache<br>D. /etc/modules.conf</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>下面哪个命令可以压缩部分文件：<br>A. tar -dzvf filename.tgz <em><br>B. tar -tzvf filename.tgz </em><br>C. tar -czvf filename.tgz <em><br>D. tar -xzvf filename.tgz </em></p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>网络服务的daemon是：<br>A. lpd<br>B. netd<br>C. httpd<br>D. inetd</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>Linux与windows 的网上领居互联，需要提供什么daemon?<br>A. bind<br>B. smbd<br>C. nmbd<br>D. shard</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>对于Apache服务器，提供的子进程的缺省的用户是：<br>A. root<br>B. apached<br>C. httpd<br>D. nobody</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>sendmail中缺省的未发出信件的存放位置是：<br>A. /var/mail/<br>B. /var/spool/mail/<br>C. /var/spool/mqueue/<br>D. /var/mail/deliver/</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>apache的主配置文件是：<br>A. httpd.conf<br>B. httpd.cfg<br>C. access.cfg<br>D. apache.conf</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>关于可装载的模块，装载时的参数，如I/O地址等的存放位置是：<br>A. /etc/conf.modules<br>B. /etc/lilo.conf<br>C. /boot/System.map<br>D. /etc/sysconfig</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>在 Linux 中，如何关闭邮件提示？<br>A. biff n<br>B. mesg n<br>C. notify off<br>D. set notify=off</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>在 bash shell 环境下，当一命令正在执行时，按下 control-Z 会：<br>A. 中止前台任务<br>B. 给当前文件加上 EOF.<br>C. 将前台任务转入后台<br>D. 注销当前用户</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>定义bash环境的用户文件是：<br>A. bash &amp; .bashrc<br>B. bashrc &amp; .bash_conf<br>C. bashrc &amp; bash_profile<br>D. .bashrc &amp; .bash_profile</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>下面哪条命令用来显示一个程序所使用的库文件？<br>A. ldd<br>B. ld so<br>C. modprobe<br>D. ldconfig</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>如何查看一个RPM软件的配置文件的存放位置？<br>A. rpm -qc rpm1<br>B. rpm -Vc rpm1<br>C. rpm –config rpm1<br>D. rpm -qa –config rpm1</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>如何查看一个RPM软件的修改记录？<br>A. rpm -Vc postfix<br>B. rpm -qpil postfix<br>C. rpm –changelog postfix<br>D. rpm -q –changelog postfix</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>通过Makefile来安装已编译过的代码的命令是：<br>A. make<br>B. install<br>C. make depend<br>D. make install</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>什么命令解压缩tar文件？<br>A. tar -czvf filename.tgz<br>B. tar -xzvf filename.tgz<br>C. tar -tzvf filename.tgz<br>D. tar -dzvf filename.tgz</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>在 XF86Config 配置文件中，哪个段用来设置字体文件？<br>A. The Fonts section.<br>B. The Files section.<br>C. The xfsCodes section.<br>D. The Graphics section.</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>8 bit color 指的是：<br>A. 64K colors<br>B. 16K colors<br>C. 256 colors<br>D. 16M colors</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>下面哪个文件用来设置 X window 的显示分辨率？<br>A. xinit<br>B. xinitrc<br>C. XF86Setup<br>D. XF86Config</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>哪个变量用来指定一个远程X应用程序将输出放到哪个X server上？<br>A. DISPLAY<br>B. TERM<br>C. ECHO<br>D. OUTPUT</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>在xdm的配置目录中，哪个文件用来设置在用户通过xdm登录后自动起动的应用程序？<br>A. The Xsession file<br>B. The Xsetup_0 file<br>C. The Xstart_up file<br>D. The GiveConsole file</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>命令 netstat -a 停了很长时间没有响应，这可能是哪里的问题？<br>A. NFS.<br>B. DNS.<br>C. NIS.<br>D. routing.</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>ping使用的协议是：<br>A. TCP<br>B. UDP<br>C. SMB<br>D. ICMP</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>下面哪个命令不是用来查看网络故障的？<br>A. ping<br>B. init<br>C. telnet<br>D. netstat</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>拨号上网使用的协议通常是：<br>A. PPP<br>B. UUCP<br>C. SLIP<br>D. Ethernet</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>TCP/IP中，哪个协议是用来进行IP自动分配的？<br>A. ARP<br>B. NFS<br>C. DHCP<br>D. DNS</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>下面哪个文件定义了网络服务的端口？<br>A. /etc/netport<br>B. /etc/services<br>C. /etc/server<br>D. /etc/netconf</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>下面哪个功能用来生成一个文件的校验码？<br>A. md5<br>B. tar<br>C. crypt<br>D. md5sum</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>缺省的，用户邮件放在：<br>A. ~/mail/<br>B. /var/mail/<br>C. /var/mail/spool/<br>D. /var/spool/mail/</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>下面哪个文件包含了供 NFS daemon 使用的目录列表？<br>A. /etc/nfs<br>B. /etc/nfs.conf<br>C. /etc/exports<br>D. /etc/netdir</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>如何停止一台机器的telnet服务？<br>A. Put NONE in /etc/telnet.allow<br>B. Put a line ‘ALL:ALL’ in /etc/hosts.deny<br>C. Comment the telnet entry in /etc/inittab<br>D. Comment the telnet entry in /etc/xinetd.conf</p>
+<details>
+<summary><u>答案：</u></summary>
+D. 
+</details>
+</li>
+<li><p>在哪个文件中保存了sendmail的别名？<br>A. /etc/aliases<br>B. /etc/mailaliases<br>C. /etc/sendmail.aliases<br>D. /etc/sendmail/aliases</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>smbd and nmbddaemons 的配置文件是：<br>A. /etc/exports<br>B. /etc/smb.conf<br>C. /etc/samba/config<br>D. /usr/local/samba.cfg</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>下面哪个命令用来卸载一个内核模块？<br>A. rmmod<br>B. unmod<br>C. delmod<br>D. modprobe</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>什么情况下必须运行lilo<br>A. once a day from cron<br>B. once a week from cron<br>C. after installing a new kernel<br>D. after installing a new module</p>
+<details>
+<summary><u>答案：</u></summary>
+C. 
+</details>
+</li>
+<li><p>什么命令显示所有装载的模块？<br>A. lsmod<br>B. dirmod<br>C. modules<br>D. modlist</p>
+<details>
+<summary><u>答案：</u></summary>
+A. 
+</details>
+</li>
+<li><p>下面哪个命令刷新打印机队列？<br>A. lpflush<br>B. lprm -<br>C. lpclear<br>D. lprm all</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details>
+</li>
+<li><p>下面哪个命令可以查看网卡的中断？<br>A. cat /proc/ioports<br>B. cat /proc/interrupts<br>C. cat /proc/memoryinfo<br>D. which interrupts</p>
+<details>
+<summary><u>答案：</u></summary>
+B. 
+</details></li>
+</ol>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong s>
+              本博客所有文章除特别声明外，均采用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 许可协议。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/19/Linux-CheatSheet/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/03/08/%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">矩阵的一些事：满秩矩阵、正定矩阵和可逆矩阵</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: 'IWtOhB4nNoD1F4BDWzQYMALe-gzGzoHsz',
+        app_key: 'k0iOFayd99sSBGuohToahHe3',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '想说什么告诉我吧O(∩_∩)O',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        an 橘
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/orange_logo.png" alt="Dream d&#39;Orange"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>走过路过赏杯奶茶呗~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['砥砺名行，不疾不徐','',''],
+    startDelay: 0,
+    typeSpeed: 300,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+    
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+
+</html>
