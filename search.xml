@@ -1,6 +1,1073 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>NLP CheatSheet</title>
+    <url>/2020/04/03/nlp-cheatsheet/</url>
+    <content><![CDATA[<ol>
+<li><p>请大致对比下plsa和LDA的区别。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> <a href="https://zhuanlan.zhihu.com/p/30781802" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30781802</a> #21</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>下列哪个不属于CRF模型相对HMM和MEMM模型的优势：<br> A. 特征灵活<br> B. 速度快<br> C. 可容纳较多上下文信息<br> D. 全局最优</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选B。首先，CRF，HMM，MEMM都常用来做序列标注的建模。<br> HMM一个最大的缺点就是由于其输出独立性假设，导致其不能考虑上下文的特征，限制了特征的选择。<br> MEMM则解决了HMM的问题，可以任意选择特征，但由于其在每一节点都要进行归一化，所以只能找到局部的最优值，同时也带来了标记偏见的问题，即凡是训练语料中未出现的情况全都忽略掉。<br> CRF则很好的解决了这一问题，他并不在每一个节点进行归一化，而是所有特征进行全局归一化，因此可以求得全局的最优值。</p>
+ </details>
+
+
+
+
+
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>Deep Learning CheatSheet</title>
+    <url>/2020/04/03/dl-cheatsheet/</url>
+    <content><![CDATA[<p>七月在线 - BAT机器学习面试1000题系列</p>
+<h2 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h2><ol>
+<li>考虑某个具体问题时，你可能只有少量数据来解决这个问题。不过幸运的是你有一个类似问题已经预先训练好的神经网络。可以用下面哪种方法来利用这个预先训练好的网络？<br> A. 把除了最后一层外所有的层都冻住，重新训练最后一层<br> B. 对新数据重新训练整个模型<br> C. 只对最后几层进行调参(fine tune)<br> D. 对每一层模型进行评估，选择其中的少数来用 <details>
+ <summary><u>答案：</u></summary>
+ 选C。如果有个pre-trained的神经网络，就相当于网络各参数有个很靠谱的先验代替随机初始化。若新的少量数据来自于pre-trained数据（或者pre-trained数据量很好地描述了数据分布，而新数据采样自完全相同的分布），则冻结前面所有层而重新训练最后一层即可；但一般情况下，新数据分布跟先前训练集分布有所偏差，所以先验网络不足以完全拟合新数据时，可以冻结大部分前层网络，只对最后几层进行训练调参（fine tune）。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>下列哪一项在神经网络中引入了非线性？<br> A. 随机梯度下降<br> B. 修正线性单元（ReLU）<br> C. 卷积函数<br> D. 以上都不正确 <details>
+ <summary><u>答案：</u></summary>
+ 选B。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>简单说下sigmoid激活函数。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> $$\sigma(z)=\frac{1}{1+e^{-z}}$$ 导函数 $$\sigma’(z)=\sigma(1-\sigma)$$ sigmoid函数对输入的数据做非线性变换，压缩在0<del>1之间。sigmoid函数的缺点：当输入数据过大或者过小时，导数值非常小，在BP算法训练数据时导数连乘会出现梯度消失的问题，导致参数值无法更新。所以为了避免梯度消失，现在很少使用sigmoid作为隐藏层的激活函数。而因为sigmoid的函数值在0</del>1之间，当最后的输出是做分类任务时，输出层的激活函数就用sigmoid。</p>
+ </details>
+
+
+
+
+</li>
+</ol>
+<h2 id="RNN-amp-LSTM"><a href="#RNN-amp-LSTM" class="headerlink" title="RNN &amp; LSTM"></a>RNN &amp; LSTM</h2><ol>
+<li><p>LSTM结构推导，为什么比RNN好？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+ <a href="/2020/04/02/rnn-lstm/" title="LSTM 公式推导">LSTM 公式推导</a>
+<p> 因为LSTM有进有出且当前的cell informaton是通过input gate控制之后叠加的，RNN是叠乘，因此LSTM可以防止梯度消失或者爆炸。</p>
+ </details>
+
+
+
+
+
+
+</li>
+</ol>
+<h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><ol>
+<li><p>什么是卷积？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+ <img src="https://pic4.zhimg.com/v2-fe4569fe1348a47119c1c1f6d509029b_r.jpg" width=400>
+ 对图像（不同的数据窗口数据）和滤波矩阵（一组固定的权重：因为每个神经元的多个权重固定，所以又可以看做一个恒定的filter）做内积（逐个元素相乘再求和）的操作就是所谓的『卷积』操作，也是卷积神经网络的名字来源。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>什么是CNN的池化pool层？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+ <img src="https://pic3.zhimg.com/v2-ecf2c6a85a22c13cb6122ae3e959bfd2_r.jpg" width=400>
+ 池化（pooling），简言之，即取区域平均（average pooling）或最大（max pooling）。池化层是为了保留主要的特征同时减少参数（降维），防止过拟合，提高模型泛化能力。
+ </details>
+
+
+
+
+
+
+</li>
+</ol>
+<h2 id="TensorFlow"><a href="#TensorFlow" class="headerlink" title="TensorFlow"></a>TensorFlow</h2><ol>
+<li><p>简述TensorFlow计算图。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ Tensorflow框架，通过计算图（Graph）的形式来表述运算。计算图是一种有向图，TensorFlow的每一个节点都是计算图上的一个Tensor，而节点之间的边描述了计算之间的依赖关系（定义时）和数学操作（运算时）。如下两图表示：
+
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = x*y; b = a+z; c = tf.reduce_sum(b);</span><br></pre></td></tr></table></figure>
+ <img src="https://pic.downk.cc/item/5e7c76f8504f4bcb04a1c87b.png" width=100>
+
+<p> Tensorflow计算的过程就是利用的Tensor来建立一个计算图，然后使用Session会话来启动计算，最后得到结果的过程。<br> 不同于一般的编程语言，变量计算后，比如c=a+b，TF不会得到c的值。TF先构建一个计算图出来，然后启用一个会话（Session）来把数据作为输入，通过这个图规定的计算步骤计算，最后得到结果。</p>
+ </details>
+</li>
+<li><p>简述TensorFlow的会话管理，使用会话的两种方式。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ 会话用来执行定义好的运算，它拥有和管理程序运行时的所有资源。当计算完成之后，需要通过关闭会话来帮助系统回收资源，否则可能导致资源泄露的问题。在TensorFlow中使用会话有两种方式。
+
+<ul>
+<li><p>需要明确调用会话<strong>生成</strong>函数和<strong>关闭</strong>会话函数</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = tf.constant([<span class="number">1.</span>,<span class="number">2.</span>],name=<span class="string">"a"</span>)  </span><br><span class="line">b = tf.constant([<span class="number">2.0</span>,<span class="number">3.0</span>],name=<span class="string">"b"</span>)  </span><br><span class="line">result = tf.add(a,b,name=<span class="string">"add"</span>)  </span><br><span class="line"><span class="comment"># 创建session  </span></span><br><span class="line">sess = tf.Session()  </span><br><span class="line"><span class="comment"># 获取运算结果  </span></span><br><span class="line">sess.run(result)  </span><br><span class="line"><span class="comment"># 关闭会话,释放资源  </span></span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+<p>  当程序因为异常而退出的时候，<code>sess.close()</code>有可能不会执行从而导致资源泄露问题的发生。</p>
+</li>
+<li><p>通过上下文管理器来创建Session，管理会话，不需要调用<code>sess.close()</code>来关闭会话，当上下文退出的时候会话会自动关闭和释放资源</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:  </span><br><span class="line">    sess.run(result)</span><br></pre></td></tr></table></figure>
+</details>
+</li>
+</ul>
+</li>
+<li><p>简述TensorFlow框架如何构建神经网络。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ Tensorflow通过Graph和Session的设定，对神经网络模型进行了三重解构：
+
+<ul>
+<li>第一层解构是将数据与神经网络模型进行了分离，所以要先设计神经网络模型，再导入数据进行训练，从而得出神经网络节点参数；</li>
+<li>第二层解构是通Graph将神经网络模型进行结构化分区，通过结构化分区把复杂的神经网络进行了解构，研究人员可以按Graph的结果对特定的神经网络模型组成部分进行局部微调，通过局部微调实现全局复杂神经网络的组建；</li>
+<li>第三层次的解构就是通过Session的设计，将神经网络的运算拆解到相关的算力中心，这就导致大规模的算力组合训练复杂的人工神经网络模型成为了可能性。</details></li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>TensorFlow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>rnn_lstm</title>
+    <url>/2020/04/02/rnn-lstm/</url>
+    <content><![CDATA[<h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2><h2 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h2>]]></content>
+  </entry>
+  <entry>
+    <title>Python CheatSheet</title>
+    <url>/2020/03/30/Python-CheatSheet/</url>
+    <content><![CDATA[<details>
+<summary><u>答案：</u></summary>
+
+</details>
+
+<ol>
+<li> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python my.py v1 v2</span><br></pre></td></tr></table></figure>
+<p> 命令运行脚本，通过 <code>from sys import argv</code> 如何获得v2的参数值?<br> A. argv[0]<br> B. argv[1]<br> C. argv[2]<br> D. argv[3]</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ 选C。sys.argv是传递给python脚本的命令行参数【字符串】列表，<b>argv[0]为该脚本自身路径</b>，其余为命令行参数。
+ argv[0]: [path]/my.py
+ argv[1]: v1
+ argv[2]: v2
+ </details>
+</li>
+<li><p>下面输出是<code>False</code>，怎么解释？</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1.2</span> - <span class="number">1.0</span> == <span class="number">0.2</span></span><br></pre></td></tr></table></figure>
+<p> A. Python的实现有错误<br> B. 浮点数无法精确表示<br> C. 布尔运算不能用于浮点数比较<br> D. Python将非0数视为False</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ 选B。因为精度问题，十进制数转换为二进制进行计算的时候产生的误差：
+
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">1.2</span> - <span class="number">1.0</span></span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+0.19999999999999996</code></pre><p> 解决办法：用decimal模块</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line">print(Decimal(<span class="string">'1.2'</span>)-Decimal(<span class="string">'1.0'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+0.2</code></pre> </details>
+</li>
+<li><p>如何遍历一个字典？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ 3种方式：
+
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">d = &#123;<span class="string">'num'</span>: <span class="number">1</span>, <span class="string">'name'</span>: <span class="string">'lizz'</span>, <span class="string">'age'</span>: <span class="number">16</span>&#125;</span><br></pre></td></tr></table></figure>
+<p> #1. 遍历key</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> d.keys():</span><br><span class="line">    print(k)</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+num
+name
+age</code></pre><p> #2. 遍历value</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> d.values():</span><br><span class="line">    print(v)</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+1
+lizz
+16</code></pre><p> #3. 同时遍历key和value</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> d.items():</span><br><span class="line">    print(k,v)</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+num 1
+name lizz
+age 16</code></pre> </details>
+</li>
+<li><p>列表的增删改查</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l = list((<span class="number">2</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">-5</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<p> 增</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l.append(<span class="number">1000</span>)    <span class="comment"># 在最后增加</span></span><br><span class="line">l</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+[2, 3, 7, -5, 3, 1000]</code></pre> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l.insert(<span class="number">1</span>,<span class="string">'new'</span>)    <span class="comment"># 在位置 1 后插入</span></span><br><span class="line">l</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+[2, &apos;new&apos;, 3, 7, -5, 3, 1000]</code></pre><p> 查</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l[<span class="number">1</span>]    <span class="comment"># 索引</span></span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+&apos;new&apos;</code></pre> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l.index(<span class="string">'new'</span>)    <span class="comment"># 返回所在位置</span></span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+1</code></pre><p> 改</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l[<span class="number">0</span>] = <span class="number">250</span></span><br><span class="line">l</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+[250, &apos;new&apos;, 3, 7, -5, 3, 1000]</code></pre><p> 删</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l.remove(<span class="number">3</span>)    <span class="comment"># 删除第一个3</span></span><br><span class="line">l</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+[250, &apos;new&apos;, 7, -5, 3, 1000]</code></pre> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l.pop(<span class="number">2</span>)    <span class="comment"># 删除第3个元素，并显示该元素</span></span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+7</code></pre> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">l</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+[250, &apos;new&apos;, -5, 3, 1000]</code></pre> </details>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>请用python编写函数find_string，从文本中搜索并打印内容，要求支持通配符星号和问号。<br> 例子：<br> <code>find_string(&#39;hello\nworld\n&#39;,&#39;wor&#39;)</code><br> [‘wor’]<br> <code>find_string(&#39;hello\nworld\n&#39;,&#39;l*d&#39;)</code><br> [‘ld’]<br> <code>find_string(&#39;hello\nworld\n&#39;,&#39;o.&#39;)</code><br> [‘or’]</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_string</span><span class="params">(str, pat)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> re</span><br><span class="line">    <span class="keyword">return</span> re.findall(pat, str, re.I)</span><br></pre></td></tr></table></figure>
+<p> <code>findall(pattern, string, flags=0)</code> 返回string中所有与pattern相匹配的全部字符串，<code>re.I</code>表示使匹配忽略大小写</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="6">
+<li><p>现在有 a 到 z 26 个元素， 编写程序打印 a 到 z 中任取 3 个元素的组合（比如：打印 a b c ，d y z等）。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_letters</span><span class="params">(num=<span class="number">3</span>)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> string</span><br><span class="line">    alphabet = string.ascii_lowercase</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    ind = np.random.randint(<span class="number">0</span>,<span class="number">26</span>,num)   <span class="comment"># choose randomly integers as index</span></span><br><span class="line">    letters = [alphabet[i] <span class="keyword">for</span> i <span class="keyword">in</span> ind]    <span class="comment"># choose letters from alphabet by index</span></span><br><span class="line">    s = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s.join(letters)</span><br></pre></td></tr></table></figure>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="7">
+<li><p>Python是如何进行内存管理的？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 从三个方面来说：</p>
+<p> <strong>一、对象的引用计数机制</strong></p>
+<p> Python内部使用引用计数，来保持追踪内存中的对象，所有对象都有引用计数。</p>
+ <ul>
+     <li>引用计数增加的情况：
+     <ol>
+         <li>一个对象分配一个新名称
+         <li>将其放入一个容器中（如列表、元组或字典）
+     </ol>
+     <li>引用计数减少的情况：
+     <ol>
+         <li>使用del语句对对象别名显示的销毁
+         <li>引用超出作用域或被重新赋值
+     </ol>
+ </ul>
+
+<p> <code>sys.getrefcount( )</code>函数可以获得对象的当前引用计数<br> 多数情况下，引用计数比你猜测得要大得多。对于不可变数据（如数字和字符串），解释器会在程序的不同部分共享内存，以便节约内存。</p>
+<p> <strong>二、垃圾回收</strong></p>
+ <ol>
+     <li>当一个对象的引用计数归零时，它将被垃圾收集机制处理掉。
+     <li>当两个对象a和b相互引用时，del语句可以减少a和b的引用计数，并销毁用于引用底层对象的名称。然而由于每个对象都包含一个对其他对象的应用，因此引用计数不会归零，对象也不会销毁。（从而导致内存泄露）。为解决这一问题，解释器会定期执行一个循环检测器，搜索不可访问对象的循环并删除它们。
+ </ol>
+
+<p> <strong>三、内存池机制</strong></p>
+<p> Python提供了对内存的垃圾收集机制，但是它将不用的内存放到内存池而不是返回给操作系统。</p>
+ <ol>
+     <li>Pymalloc机制。为了加速Python的执行效率，Python引入了一个内存池机制，用于管理对小块内存的申请和释放。
+     <li>Python中所有小于256个字节的对象都使用pymalloc实现的分配器，而大的对象则使用系统的malloc。
+     <li>对于Python对象，如整数，浮点数和List，都有其独立的私有内存池，对象间不共享他们的内存池。也就是说如果你分配又释放了大量的整数，用于缓存这些整数的内存就不能再分配给浮点数。
+ </ol>
+ </details>
+
+
+
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>Machine Learning CheatSheet</title>
+    <url>/2020/03/26/ml-cheatsheet/</url>
+    <content><![CDATA[<p>（小注：集成学习部分答案未考究）<br>七月在线 - BAT机器学习面试1000题系列</p>
+<h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><ol>
+<li><p>KNN中的K如何选取的？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> #1. 如果选择较小的K值，就相当于用较小的领域中的训练实例进行预测，“学习”近似误差会减小，只有与输入实例较近或相似的训练实例才会对预测结果起作用，与此同时带来的问题是“学习”的估计误差会增大，换句话说，K值的减小就意味着整体模型变得复杂，容易发生过拟合；</p>
+<p> #2. 如果选择较大的K值，就相当于用较大领域中的训练实例进行预测，其优点是可以减少学习的估计误差，但缺点是学习的近似误差会增大。这时候，与输入实例较远（不相似的）训练实例也会对预测器作用，使预测发生错误，且K值的增大就意味着整体的模型变得简单。</p>
+<p> #3. K=N，则完全不足取，因为此时无论输入实例是什么，都只是简单的预测它属于在训练实例中最多的累，模型过于简单，忽略了训练实例中大量有用信息。</p>
+<p> 在实际应用中，K值一般取一个比较小的数值，例如采用交叉验证法（简单来说，就是一部分样本做训练集，一部分做测试集）来选择最优的K值。</p>
+ </details>
+
+
+
+
+
+
+
+
+</li>
+</ol>
+<h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><ol>
+<li><p>什么是最小二乘法？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 一般我们所说的最小二乘法，指的是普通最小二乘法（Ordinary Least Squares），只适用于线性回归问题。通过求解目标函数对参数的偏导函数，使得偏导函数为零，求出使得残差平方和最小化的最优解 $$\hat{\beta}^{\text{OLS}}=(X^TX)^{-1}X^Ty$$ 只有符合线性回归假设的问题才能用OLS求解。</p>
+ </details>
+
+
+
+
+</li>
+</ol>
+<h2 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h2><ol>
+<li><p>逻辑斯特回归为什么要对特征进行离散化？（*）</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 在工业界，很少直接将连续值作为逻辑回归模型的特征输入，而是将连续特征离散化为一系列0、1特征交给逻辑回归模型，这样做的优势有以下几点：</p>
+<ol start="0">
+<li><p>离散特征的增加和减少都很容易，易于模型的快速迭代；</p>
+</li>
+<li><p>稀疏向量内积乘法运算速度快，计算结果方便存储，容易扩展；</p>
+</li>
+<li><p>离散化后的特征对异常数据有很强的鲁棒性：比如一个特征是年龄&gt;30是1，否则0。如果特征没有离散化，一个异常数据“年龄300岁”会给模型造成很大的干扰；</p>
+</li>
+<li><p>逻辑回归属于广义线性模型，表达能力受限；单变量离散化为N个后，每个变量有单独的权重，相当于为模型引入了非线性，能够提升模型表达能力，加大拟合；</p>
+</li>
+<li><p>离散化后可以进行特征交叉，由M+N个变量变为M*N个变量，进一步引入非线性，提升表达能力；</p>
+</li>
+<li><p>特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20-30作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问；</p>
+</li>
+<li><p>特征离散化以后，起到了简化了逻辑回归模型的作用，降低了模型过拟合的风险。</p>
+<p>李沐曾经说过：模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。就看是喜欢折腾特征还是折腾模型了。通常来说，前者容易，而且可以n个人一起并行做，有成功经验；后者目前看很赞，能走多远还须拭目以待。</p>
+</details>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><ol>
+<li>下列不是SVM核函数的是：<br> A. 多项式核函数<br> B. logistic核函数<br> C. 径向基核函数<br> D. Sigmoid核函数 <details>
+ <summary><u>答案：</u></summary>
+ 选B。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>介绍一下核函数。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ 核技巧是构造一个核函数，可以表示输入低维空间的向量，经过某个变换后在高维空间里的向量内积。满足了Mercer条件的函数，都可以作为核函数，表示成向量内积。以下是几个常用的核函数：
+
+<ul>
+<li><p><b>线性核</b>：$K(x_i,x_j)=x_i^Tx_j$<br>$\hspace{1em}$这是SVM的原始形式那个内积，没做高维映射。</p>
+</li>
+<li><p><b>多项式核</b>：$K(x_i,x_j)=(\gamma x_i^Tx_j+b)^d$<br>$\hspace{1em}$类似于多项式回归，d是多项式的阶数。如果d较大计算量增大，所以阶数d不能取太高。</p>
+</li>
+<li><p><b>RBF核</b>，又叫径向基核或者高斯核：$K(x_i,x_j)=\exp(-\gamma\lVert x_i-x_j\rVert^2)$<br>$\hspace{1em}$应用最多的核函数，好处是只有一个参数，将样本映射到无穷维，对大样本或者小样本性能都较好。$\gamma$越大，高斯分布越窄；$\gamma$越小，高斯分布越宽。$\gamma$相当于调整模型的复杂度，$\gamma$越小模型复杂度越低；$\gamma$越高，模型复杂度越大。</p>
+</li>
+<li><p><b>sigmoid核</b>：$K(x_i,x_j)=\tanh(\gamma x_i^Tx_j+b)$<br>$\hspace{1em}$相当于神经网络。</p>
+</details>
+
+
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><ol>
+<li><p>经常在网上搜索东西的朋友知道，当你不小心输入一个不存在的单词时，搜索引擎会提示你是不是要输入某一个正确的单词，这叫做拼写检查。根据谷歌一员工写的文章 (<a href="http://norvig.com/spell-correct.html" target="_blank" rel="noopener">http://norvig.com/spell-correct.html</a>) 显示，Google的拼写检查基于贝叶斯方法。请说说你的理解，具体Google是怎么利用贝叶斯方法，实现“拼写检查”的功能。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 用户输入一个单词时，可能拼写正确，也可能拼写错误。如果把拼写正确的情况记做 $c$（correct），拼写错误的情况记做 $w$（wrong），那么“拼写检查”要做的事情就是：在发生 $w$ 的情况下，试图推断出 $c$。换言之：已知 $w$，然后在若干个备选方案中，找出可能性最大的那个 $c$，也就是求 $P(c|w)$ 的最大值。<br> 根据贝叶斯定理，有：$$P(c|w)=\frac{P(w|c)P(c)}{P(w)}$$ 由于对于所有备选的 $c$ 来说，对应的都是同一个 $w$，所以它们的 $P(w)$ 是相同的，因此我们只要最大化 $P(w|c)P(c)$即可。其中：$P(c)$ 表示某个正确的词的出现“概率”，它可以用“频率”代替。如果我们有一个足够大的文本库，那么这个文本库中每个单词的出现频率，就相当于它的发生概率。某个词的出现频率越高，$P(c)$ 就越大。比如在你输入一个错误的词“Julw”时，系统更倾向于去猜测你可能想输入的词是“July”，而不是“Jult”，因为“July”更常见。<br> $P(w|c)$ 表示在试图拼写 $c$ 的情况下，出现拼写错误 $w$ 的概率。为了简化问题，假定两个单词在字形上越接近，就有越可能拼错，$P(w|c)$ 就越大。举例来说，相差一个字母的拼法，就比相差两个字母的拼法，发生概率更高。你想拼写单词July，那么错误拼成Julw（相差一个字母）的可能性，就比拼成Jullw高（相差两个字母）。值得一提的是，一般把这种问题称为“编辑距离”，参见<a href="http://blog.csdn.net/v_july_v/article/details/8701148#t4" target="_blank" rel="noopener">http://blog.csdn.net/v_july_v/article/details/8701148#t4</a><br> 所以，我们比较所有拼写相近的词在文本库中的出现频率，再从中挑出出现频率最高的一个，即是用户最想输入的那个词。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>朴素贝叶斯“朴素”在哪里？ <details>
+ <summary><u>答案：</u></summary>
+ Naive Bayes的假设：所有特征都是相互独立的。而这个假设在现实中是不存在的，是很naive的假设。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>简单说说贝叶斯定理。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 贝叶斯公式 $$P(A|B)=\frac{P(B|A)P(A)}{P(B)}$$</p>
+<ul>
+<li>先验概率 $P(A)$：预估事件A发生的概率</li>
+<li>后验概率 $P(A|B)$：收集到在A条件下相关事件B发生的概率，借助这个实际发生的概率来“纠正”A的概率</li>
+<li>标准似然度 $\displaystyle\frac{P(B|A)}{P(B)}$：<ul>
+<li>标准似然度大于1，意味着“先验概率”被增强，事件A发生的可能性变大；</li>
+<li>标准似然度等于1，意味着事件B无助于判断事件A的可能性；</li>
+<li>标准似然度小于1，意味着“先验概率”被削弱，事件A的可能性变小。</details>
+
+
+
+
+
+
+
+
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h2 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h2><ol>
+<li><p>随机森林、Boosting、AdaBoost、GBDT和XGBoost的区别。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> <a href="https://xijunlee.github.io/2017/06/03/集成学习总结/" target="_blank" rel="noopener">https://xijunlee.github.io/2017/06/03/集成学习总结/</a></p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>为什么XGBoost要用泰勒展开，优势在哪里？ <details>
+ <summary><u>答案：</u></summary>
+ 目标函数难求解，运用泰勒公式展开原目标函数从而近似求解，只需要求一阶和二阶导，大大简化计算，更快速更准确。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li>XGBoost如何寻找最优特征？是又放回还是无放回的呢？ <details>
+ <summary><u>答案：</u></summary>
+ XGBoost在生成树的时候，类似决策树的生成，不同的是以目标函数（也就是损失函数）作为特征选取标准。XGBoost利用梯度优化模型算法，样本是不放回的，但xgboost支持子采样，也就是每轮计算可以不使用全部样本。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>说一下Adaboost，权值更新公式。当弱分类器是Gm时，每个样本的的权重是w1，w2…，请写出最终的决策公式。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> <a href="https://blog.csdn.net/v_july_v/article/details/40718799" target="_blank" rel="noopener">https://blog.csdn.net/v_july_v/article/details/40718799</a></p>
+ </details>
+
+
+
+</li>
+</ol>
+<h2 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h2><ol>
+<li><p>影响聚类算法效果的主要原因中，不正确的是：<br> A. 特征选取<br> B. 模式相似性测度<br> C. 分类准则<br> D. 已知类别的样本质量</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ 选D。聚类是对无类别的数据进行聚类，不使用已经标记好的数据。
+ </details>
+</li>
+<li><p> 2.1. 为了初步观察不同性别说话人的语音特征的区别，甲尝试用聚类的方法对所获得的语音特征进行分析。在对语音数据做了简单的处理后，甲得到了部分对话中一共M句话的特征x1, x2, …, xM，其中每个xi均为N维实数向量。然后甲通过K-Means算法将这M句话聚类为两类。试写出针对该问题的K-Means聚类代码或伪代码</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ #1. Input: $X=(\mathbf{x}_1,\cdots,\mathbf{x}_N)$, $K$<br>
+ #2. Initialize $K$ centroids: $c_1^{(0)},\cdots,c_K^{(0)}$<br>
+ #3. for $i=1,\cdots,N$：<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $d_{ij}=\text{distance}(\mathbf{x}_i, c_j)$<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $k=\left\{j: \min\{d_{ij}\}\right\}$<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $\mathbf{x}_i\in$ cluster $k$<br>
+ #4. for $j=1,\cdots,K$：<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $c_j^{new}=\text{mean}(\mathbf{x}_i, \text{for } \mathbf{x}_i\in \text{cluster }j)$<br>
+ #5. repeat #3 #4, till $|{c^{old}-c^{new}}|<\varepsilon$, END。
+ </details>
+
+<p> 2.2. 聚类完成后，甲通过训练好的聚类模型对另外挑选的1000句话（包括800句男声说话与200句女声说话）的说话人性别进行了预测，预测结果如下：800句男声说话中预测正确了600句，200句女声说话中预测正确了100句。请从不同角度评价该分类结果的表现，并提出改进的建议。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ 1). 准确率：$\displaystyle\frac{600+100}{1000}=0.7$。
+
+<p> 2). 两类样本的比例是8/2，分类不均衡。以男声作为正类 (1)，女声作为负类 (0)，混淆矩阵如下：</p>
+ <img src="https://pic.downk.cc/item/5e82e9e4504f4bcb04fb800a.png"  width=250>
+ 召回率：$R=\displaystyle\frac{600}{600+200}=\displaystyle\frac{3}{4}$
+
+<p> 精确率：$P=\displaystyle\frac{600}{600+100}=\displaystyle\frac{6}{7}$</p>
+<p> 召回率R和精确率P都是越大越好。但往往当R较大，P会较小，反之亦然。而F1-score可以平衡两者$\displaystyle\frac{1}{F_1}=\displaystyle\frac{1}{2}(\displaystyle\frac{1}{P}+\displaystyle\frac{1}{R})$<br> $$F_1=\displaystyle\frac{2PR}{P+R}=0.8$$</p>
+<p> 3). 真正例率：$TPR=\displaystyle\frac{600}{600+200}=\displaystyle\frac{3}{4}$，男声中，预测正确的概率是75%。<br> 假正例率：$FPR=\displaystyle\frac{100}{100+100}=\displaystyle\frac{1}{2}$，女声中，预测错误的概率是50%。<br> 对于女声样本，这个分类器的效果很差，把女声判断为男声和女声的概率是相等的。</p>
+<p> 改进：由于样本分类不均衡使得模型效果不佳，可以在本身算法上做集成学习，若干个弱分类器集成可以增强分类器效果。</p>
+ </details>
+
+<p> 2.3. 甲认为上述聚类结果并不能作为很好的识别说话人性别的参考标准，所以决定采用神经网络构造说话人性别分类模型。他设计得网络结构如下：第一层Input Layer为输入层，输入x为N1维实向量；第二、第三层为隐藏层Hidden Layer，其中第二层有N2个节点，第三层有2个节点，每个节点均为一个实数；最后一层为输出层Output Layer，输出2维向量y=(Prob0, Prob1)，Prob0和Prob1分别代表对应输入x的语句说话人为女 (0) 和男 (1) 的概率。激活函数使用sigmoid函数，代价函数使用交叉熵函数。<br> 现在甲有M个训练样本(xi, Yi), i=1,2,…,M。其中xi为N1维向量，Yi为对应句子的实际说话人性别，若Yi=(0,1)表示说话人为男，若Yi=(1,0)表示说话人为女。试根据甲设计得网络结构，构造函数返回对这M个样本的单次前向传播后的平均代价函数值。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+ <img src="https://pic.downk.cc/item/5e82fc7d504f4bcb0409e049.png"  width=350>
+ Input：$\mathbf{x}=(x_1,\cdots,x_{N1})$，Output：$y$是男声的概率Prob1，Prob0=1-Prob1
+ $$\begin{aligned}
+ &z^{[1]}=W^{[1]}\mathbf{x}+b^{[1]}, &&a^{[1]}=\sigma(z^{[1]})\\\\
+ &z^{[2]}=W^{[2]}a^{[1]}+b^{[2]}, &&a^{[2]}=\sigma(z^{[2]})\\\\
+ &z^{[3]}=W^{[3]}a^{[2]}+b^{[3]}, &&a^{[3]}=\sigma(z^{[3]})
+ \end{aligned}
+ $$
+ 单个样本$\mathbf{x}_i$的代价函数
+ $$L(a^{[3](i)},y_i)=-(y_i\log a^{[3](i)}+(1-y_i)\log(1-a^{[3](i)}))$$
+ M个样本的平均代价函数
+ $$J=\frac{1}{M}\sum^M_{i=1}L(a^{[3](i)},y_i)$$
+ </details>
+
+
+
+
+
+</li>
+</ol>
+<h2 id="监督，回归，分类"><a href="#监督，回归，分类" class="headerlink" title="监督，回归，分类"></a>监督，回归，分类</h2><ol>
+<li>下列算法中，均为监督学习算法的为：<br> A. CRF，SVM，Logistic Regression<br> B. K-Means，KNN，决策树<br> C. 决策树，KNN，朴素贝叶斯<br> D. K-Means，SVM，朴素贝叶斯 <details>
+ <summary><u>答案：</u></summary>
+ 选AC。聚类是对无类别的数据进行聚类，不使用已经标记好的数据。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>在分类问题中，我们经常会遇到正负样本数据量不等的情况，比如正样本为10w条数据，负样本只有1w条数据，以下最不合适的处理方法是：<br> A. 将负样本重复10次，生成10w样本量，打乱顺序参与分类<br> B. 直接进行分类，可以最大限度利用数据<br> C. 从10w正样本中随机抽取1w参与分类<br> D. 将负样本每个权重设置为10，正样本权重为1，参与训练过程 <details>
+ <summary><u>答案：</u></summary>
+ 选B。A. 重采样，通过多次复制小样本，改变数据分布消除不平衡，可能导致过拟合；C. 欠采样，通过随机抽样减少多样本规模，提高少数类的分类性能，可能丢失多数类的重要信息；D. 权值调整。
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>在K-Means或KNN，我们常用欧氏距离来计算最近的邻居之间的距离，有时也用曼哈顿距离，请对比下这两种距离的差别。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 两个n维样本$\mathbf{x}=(x_1,\cdots,x_n), \mathbf{y}=(y_1,\cdots,y_n)$</p>
+<p> 欧氏距离 $$d=\sqrt{\sum^n_{i=1}(x_i-y_i)^2}$$<br> 曼哈顿距离 $$d=\sum^n_{i=1}|x_i-y_i|$$<br> 在2维平面，欧氏距离就是两点间的直线距离，曼哈顿距离就是在x轴和y轴的距离之和。</p>
+<p> 这两种距离都是明可夫斯基距离的特殊情况 $$d=\left(\sum^n_{i=1}|x_i-y_i|^p\right)^{1/p}$$<br> p=1时是曼哈顿距离，p=2时是欧氏距离。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>线性分类器与非线性分类器的区别以及优劣。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 如果模型是参数的线性函数，并且存在线性分类面，那么就是线性分类器，否则不是。<br> 常见的线性分类器有：LR，贝叶斯分类，单层感知机，原始SVM<br> 常见的非线性分类器：决策树，RF，GBDT，多层感知机，SVM+非线性核</p>
+<p> 线性分类器速度快、编程方便，但是可能拟合效果不会很好<br> 非线性分类器编程复杂，但是效果拟合能力强</p>
+ </details>
+
+
+
+</li>
+</ol>
+<h2 id="过拟合，正则化"><a href="#过拟合，正则化" class="headerlink" title="过拟合，正则化"></a>过拟合，正则化</h2><ol>
+<li><p>Overfitting怎么解决？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<ul>
+<li><b>Regularization</b><br>  l1正则化：（通过假设参数的先验分布为拉普拉斯分布，由最大后验概率估计导出。）<br>  $$\min_\beta L(\beta) \hspace{3em}\text{s.t.} \sum^p_{j=1}|\beta_j|\leq C$$<br>  l2正则化：（通过假设参数的先验分布为高斯分布，由最大后验概率估计导出。）<br>  $$\min_\beta L(\beta) \hspace{3em}\text{s.t.} \sum^p_{j=1}\beta_j^2\leq C$$ 假设只有两个参数$\beta_0, \beta_1$，可以在二维平面表示成这样  <img src="https://pic.downk.cc/item/5e845dd8504f4bcb040d5354.png" width=350>
+  正则化对参数的限制：l1正则化是让个别参数近似于零，从而消除这些变量达到降维的效果，同时包含了特征选择和正则化；l2正则化则是控制每个参数的权重来调整参数，使得所有参数趋向零但不为零。</li>
+<li><b>Dropout</b><br>  随机drop掉某些神经元，防止过拟合。<br>  Training：让神经元以$p$的概率被激活（也就是$1-p$的概率被设置为0），这样每个w都可以随机参与训练，模型泛化能力更强。  <img src="https://pic.downk.cc/item/5e8453d0504f4bcb0406611e.png" width=250>
+  Test：在测试集不会dropout，要用所有的神经元，每个神经元需要乘上p作为权重。</li>
+<li><b>Batch Normalization</b><br>  这个方法给每层的输出都做一次归一化（纵向规范化），使得下一层的输入接近高斯分布。因为在深度学习里，无论一开始的input有没有做归一化处理，随着层数的加深，隐藏层接收到的input value（上一层的output）也会产生大幅度的波动，BN就是scaling这些值。<br>  $$\begin{aligned}\mu_B&amp;=\frac{1}{m}\sum^m_{i=1}x_i\\\<br>  \sigma_B^2&amp;=\frac{1}{m}\sum^m_{i=1}(x_i-\mu_B)^2\\\<br>  \hat{x}_i&amp;=\frac{x_i-\mu_B}{\sqrt{\sigma_B^2+\varepsilon}}\\\<br>  y_i&amp;=\gamma\hat{x}_i+\beta\end{aligned}$$ $\varepsilon$是为了让分母不为零，避免出现计算错误。$\gamma, \beta$两个参数对最后的结果进行缩放和平移，需要被学习。</li>
+<li><b>交叉验证</b></li>
+<li><b>Early Stopping</b><br>  结合cross-validation使用，当在测试集上连续的几次迭代中都出现损失上升，则训练停止。</li>
+<li><b>数据集扩增</b></li>
+<li><b>特征选择/特征降维</b></details>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>L1和L2的区别？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> L1正则化：（通过假设参数的先验分布为拉普拉斯分布，由最大后验概率估计导出。）<br> $$\min_\beta L(\beta) \hspace{3em}\text{s.t.} \sum^p_{j=1}|\beta_j|\leq C$$<br> L2正则化：（通过假设参数的先验分布为高斯分布，由最大后验概率估计导出。）<br> $$\min_\beta L(\beta) \hspace{3em}\text{s.t.} \sum^p_{j=1}\beta_j^2\leq C$$ 正则化对参数的限制：L1正则化是让个别参数近似于零，从而消除这些变量达到降维的效果，同时包含了特征选择和正则化；L2正则化则是控制每个参数的权重来调整参数，使得所有参数趋向零但不为零。    </p>
+<p> 几何含义：<br> 假设只有两个参数$\beta_0, \beta_1$，可以在二维平面表示成这样</p>
+ <img src="https://pic.downk.cc/item/5e845dd8504f4bcb040d5354.png" width=350>
+ 红色的等高线代表损失函数，等高线中心的红点代表损失函数取到最小值。
+
+<p> 左图（L1正则化）：灰底方块表示惩罚项（绝对值之和）$$|\beta_0|+|\beta_1|\leq C$$<br> 右图（L2正则化）：灰底圆形表示惩罚项（平方和）$$\beta_0^2+\beta_1^2\leq C$$<br> 黑点（圆点）表示惩罚项取到最小值（$|\beta_0|+|\beta_1|=0$ 或 $\beta_0^2+\beta_1^2=0$），也就是零。方块（或圆形）与等高线相切的点，也就是蓝点，同时使得损失函数与惩罚项之和最小。 </p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>L1和L2正则先验分别服从什么分布？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> L1是Laplace先验分布，L2是高斯先验分布。<br> <a href="https://blog.csdn.net/m0_38045485/article/details/82147817" target="_blank" rel="noopener">https://blog.csdn.net/m0_38045485/article/details/82147817</a>  </p>
+ </details>
+
+
+
+
+
+
+</li>
+</ol>
+<h2 id="梯度下降法，EM算法，牛顿法，拟牛顿法"><a href="#梯度下降法，EM算法，牛顿法，拟牛顿法" class="headerlink" title="梯度下降法，EM算法，牛顿法，拟牛顿法"></a>梯度下降法，EM算法，牛顿法，拟牛顿法</h2><ol>
+<li><p>SGD中 S (stochastic) 代表什么?</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> BGD (Batch Gradient Descent) 每次迭代都用全部样本来计算。而SGD (Stochastic Gradient Descent) 每次迭代只随机选取一个样本来计算。<br> BGD的优点：全局最优解；易于并行实现；缺点：当样本数目很多时，训练过程会很慢。<br> SGD的优点：训练速度快；缺点：准确度下降，并不是全局最优；不易于并行实现。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>请简要说说EM算法。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 有时候因为样本的产生和隐含变量有关（隐含变量不能被观察），求模型的参数时一般采用极大似然估计，由于有隐含变量，所以对似然函数参数求导是求不出来的，这时可以采用EM算法来求模型的参数，EM算法一般分为2步：</p>
+<ul>
+<li><p>E步：选取一组参数，求出在该参数下隐含变量的条件概率值；</p>
+</li>
+<li><p>M步：结合E步求出的隐含变量条件概率，求出似然函数下界函数（本质上是某个期望函数）的最大值。<br>重复上面2步直至收敛。</p>
+<p>(E-step) For i: $$Q_i(z^{(i)}):=p(z^{(i)}|x^{(i)};\theta)$$ (M-step) $$\theta:=\arg\max_\theta\sum_i\sum_{z^{(i)}}Q_i(z^{(i)})\log\frac{p(x^{(i)},z^{(i)};\theta)}{Q_i(z^{(i)})}$$</p>
+</details>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>说说梯度下降法。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 梯度下降法的步骤，是让参数值往梯度下降最快的方向迭代，从而快速达到目标函数的最小值。<br> 比如我们要最小化 cost function $J(\theta)$，梯度下降法的步骤是先选取参数的初始值，还要设定一个超参数步长$\alpha$，每次迭代用当前的参数减去梯度乘以$\alpha$值，$\alpha$的大小决定往梯度下降最快的方向跨多大一步，直到收敛。<br> #1. 选定$\alpha$，初始化参数值$\theta^{(0)}$<br> #2. 迭代参数值 $\theta^{(t+1)}:=\theta^{(t)}-\alpha\nabla_\theta J$<br> 直到 $|\theta^{(t+1)}-\theta^{(t)}|&lt;\varepsilon$</p>
+<p> 缺点：</p>
+<ul>
+<li>对于步长的选择需要慎重，$\alpha$过大，参数值动荡很大，会错过最小值；如果$\alpha$过小，计算的时间会变长。</li>
+<li>当样本量很大时，梯度的计算非常耗时。</details>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li><p>梯度下降法找到的一定是下降最快的方向么？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 梯度下降法并不是下降最快的方向，它只是目标函数在当前的点的切平面（二维参数）上下降最快的方向。<br> 牛顿方向（Hessian矩阵）才一般被认为是下降最快的方向，可以达到Superlinear的收敛速度。梯度下降类的算法的收敛速度一般是Linear甚至Sublinear的（在某些带复杂约束的问题）。<br> 梯度下降法比牛顿法更常用，是因为数据较大时要计算Hessian矩阵非常耗时，而梯度下降法的收敛速度已经足够了。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>牛顿法和梯度下降法有什么不同？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 梯度下降法迭代公式： $\theta^{(t+1)}:=\theta^{(t)}-\alpha\nabla_\theta J$<br> 牛顿法迭代公式： $\theta^{(t+1)}:=\theta^{(t)}-\alpha H^{-1}\nabla_\theta J$</p>
+<p> 梯度下降法和牛顿法相比，两者都是迭代求解，不过梯度下降法是梯度求解，而牛顿法是用二阶的Hessian矩阵的逆矩阵求解。相对而言，使用牛顿法收敛更快（迭代更少次数）。但是每次迭代的时间比梯度下降法长，因为要计算Hessian矩阵的逆。梯度下降法每次只从你当前所处位置选一个坡度最大的方向走一步，牛顿法在选择方向时，不仅会考虑坡度是否够大，还会考虑你走了一步之后，坡度是否会变得更大。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="6">
+<li><p>什么是拟牛顿法？（*）</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 拟牛顿法的本质思想是改善牛顿法每次需要求解复杂的Hessian矩阵的逆矩阵的缺陷，它使用正定矩阵来近似Hessian矩阵的逆，从而简化了运算的复杂度。<br> <a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37524275</a></p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="7">
+<li><p>函数 $f(\theta_0,\theta_1)$ 输出一个数。$f$ 未知，且平滑。假设我们用梯度下降法求解 $\min f(\theta_0,\theta_1)$。下面哪些描述是对的：<br> A. 如果开始的几次迭代使得函数值不减反增，可能是因为步长 $\alpha$ 设置得太大<br> B. 如果 $\theta_0,\theta_1$ 初始值就在函数的全局最小，那迭代不会改变它们的值<br> C. 把 $\alpha$ 设得很小没什么坏处，只会加快收敛速度<br> D. 无论 $\theta_0,\theta_1$ 初始值是多少，只要 $\alpha$ 足够小，梯度下降法就能收敛到同一个结果</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选AB。<br> C. $\alpha$ 设得很小会使得收敛速度过慢。<br> D. 初始值选取不同，可能会收敛到不同的局部最小值。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="8">
+<li><p>假设对于线性回归问题 $h_\theta(x)=\theta_0+\theta_1x$，训练某个训练集能找到使得 $J(\theta_0,\theta_1)=0$ 的 $\theta_0,\theta_1$。下面描述正确的是：<br> A. 可以用一条直线完美拟合训练集<br> B. A成立的条件，必须有 $y^{(i)}=0, \forall i$<br> C. 梯度下降法可能会到达一个局部最小值，到不了全局最小值<br> D. C成立的条件，必须有 $\theta_0=0,\theta_1=0$ 使得 $h_\theta(x)=0$</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选A。<br> A. 对于完美无噪音的训练集可能存在。<br> C. $J$ 是凸函数，只有一个最小值，求到的就是全局最优解。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="9">
+<li><p>说说共轭梯度法？（*）</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 共轭梯度法是介于梯度下降法（最速下降法）与牛顿法之间的一个方法，它仅需利用一阶导数信息，但克服了梯度下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hessian矩阵并求逆的缺点，共轭梯度法不仅是解决大型线性方程组最有用的方法之一，也是解大型非线性最优化最有效的算法之一。在各种优化算法中，共轭梯度法是非常重要的一种。其优点是所需存储量小，具有逐步收敛性，稳定性高，而且不需要任何外来参数。<br> <a href="https://blog.csdn.net/qq547276542/article/details/78186050" target="_blank" rel="noopener">https://blog.csdn.net/qq547276542/article/details/78186050</a></p>
+ </details>
+
+
+
+
+
+
+
+
+</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li><p>谈谈判别式模型和生成式模型？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<ul>
+<li><p>判别式模型：由数据直接学习决策函数 $Y = f(X)$，或者由条件分布概率 $P(Y|X)$ 作为预测模型，即判别模型。比如KNN、SVM、决策树、感知机、线性判别分析（LDA）、线性回归、传统的神经网络、LR、boosting、CRF。</p>
+</li>
+<li><p>生成式模型：由数据学习联合概率密度分布函数 $P(X,Y)$，然后求出条件概率分布 $P(Y|X)$ 作为预测的模型，即生成模型。比如NB、HMM、高斯混合模型、LDA主题模型、限制玻尔兹曼机。</p>
+<p>由生成模型可以得到判别模型，但由判别模型得不到生成模型。</p>
+</details>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>机器学习中，为何要对数据做归一化？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> #1. 归一化能提高梯度下降法求解<br> #2. 归一化有可能提高精度，特别对于要计算距离的KNN、K-Means这种算法</p>
+<ul>
+<li><p>（归一化）最值归一化：把所有数据映射到 0-1 之间（适用于有明显边界的情况）$$x_{scale}=\frac{x-\min}{\max-\min}$$ <code>sklearn.preprocessing.MinMaxScaler</code></p>
+</li>
+<li><p>（标准化）均值方差归一化：把所有数据归一到均值为0、方差为1的分布中（没有明显边界；有可能存在极端数据值）$$x_{scale}=\frac{x-\mu}{\sigma}$$ <code>sklearn.preprocessing.StandardScaler</code></p>
+</details>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>哪些机器学习算法不需要做归一化处理？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 概率模型不需要归一化，因为它们不关心变量的值，而是关心变量的分布和变量之间的条件概率，如决策树、随机森林。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>对于树形结构为什么不需要归一化？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 数值缩放，不影响分裂点位置。因为第一步都是按照特征值进行排序的，排序的顺序不变，那么所属的分支以及分裂点就不会有不同。<br> 另外注意树模型是不能进行梯度下降的，因为树模型是阶跃的，阶跃点是不可导的，并且求导没意义，所以树模型（回归树）寻找最优点是通过寻找最优分裂点完成的。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>协方差和相关性有什么区别？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<ul>
+<li><p>协方差 $$Cov(X,Y)=\mathbb{E}[(X-\mu_X)(Y-\mu_Y)]$$ 用来衡量两个变量是正相关，还是负相关：</p>
+<ul>
+<li>正相关：X变大，Y也变大，协方差为正；</li>
+<li>负相关：X变大，Y变小，协方差为负。</li>
+</ul>
+<p>$Cov(X,Y)=0 \Longrightarrow$ X，Y不相关<br>X，Y相互独立 $\Longrightarrow Cov(X,Y)=0$</p>
+</li>
+<li><p>相关系数 $$\rho=\frac{Cov(X,Y)}{\sigma_X\sigma_Y}$$ 可以看做是协方差的标准化，取值范围是 $[-1,1]$。根据定义和协方差一样，正值表示正相关，负值表示负相关。$|\rho|$ 越大（接近1）相关性越强，越小（接近0）则越不相关。</p>
+</details>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ol start="6">
+<li><p>熵、联合熵、条件熵、相对熵、互信息的定义。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<ul>
+<li>熵：衡量不确定性（熵越大，不确定性越大，包含信息量越多） $$H(X)=-\sum_xp(x)\log p(x)$$</li>
+<li>联合熵：(X,Y)一起出现的不确定性 $$H(X,Y)=-\sum_{x,y}p(x,y)\log p(x,y)$$</li>
+<li>条件熵：X确定时，Y的不确定性 $$\begin{aligned}H(Y|X)<br>&amp;=\sum_xp(x)H(Y|X=x)\\\<br>&amp;=-\sum_xp(x)\sum_yp(x|y)\log p(y|x)\\\<br>&amp;=-\sum_x\sum_yp(x,y)\log p(y|x)\\\<br>&amp;=-\sum_{x,y}p(x,y)\log p(y|x)\\\<br>&amp;=-\sum_{x,y}p(x,y)\log\frac{p(x,y)}{p(x)}<br>\end{aligned}$$ $$H(Y|X)=H(X,Y)-H(X)$$</li>
+<li>互信息 $$I(X,Y)=\sum_{x,y}p(x,y)\log\frac{p(x,y)}{p(x)p(y)}$$ $$I(X,Y)=H(X)+H(Y)-H(X,Y)$$</li>
+<li>交叉熵：衡量两个概率分布的相似度 $$H(p,q)=-\sum_xp(x)\log q(x)$$</li>
+<li>相对熵（KL散度）：衡量两个概率分布的距离（不相似度） $$D(p||q)=\sum_xp(x)\log\frac{p(x)}{q(x)}$$ $$H(p,q)=H(p)+D(p||q)$$</details>
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<ol start="7">
+<li><p>对于树形结构为什么不需要归一化？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 数值缩放，不影响分裂点位置。因为第一步都是按照特征值进行排序的，排序的顺序不变，那么所属的分支以及分裂点就不会有不同。<br> 另外注意树模型是不能进行梯度下降的，因为树模型是阶跃的，阶跃点是不可导的，并且求导没意义，所以树模型（回归树）寻找最优点是通过寻找最优分裂点完成的。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="8">
+<li><p>什么是分布式数据库？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 分布式数据库系统是在集中式数据库系统成熟技术的基础上发展起来的，但不是简单地把集中式数据库分散地实现，它具有自己的性质和特征。集中式数据库系统的许多概念和技术，如数据独立性、数据共享和减少冗余度、并发控制、完整性、安全性和恢复等在分布式数据库系统中都有了不同的、更加丰富的内容。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="9">
+<li><p>#include和#include“filename.h”有什么区别？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 用 #include 格式来引用标准库的头文件（编译器将从标准库目录开始搜索）。<br> 用 #include “filename.h” 格式来引用非标准库的头文件（编译器将从用户的工作目录开始搜索）。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="10">
+<li>某超市研究销售纪录数据后发现，买啤酒的人很大概率也会购买尿布，这种属于数据挖掘的哪类问题？<br>A. 关联规则发现<br>B. 聚类<br>C. 分类<br>D. 自然语言处理<details>
+<summary><u>答案：</u></summary>
+选A。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="11">
+<li>将原始数据进行集成、变换、维度规约、数值规约是在以下哪个步骤的任务？<br>A. 频繁模式挖掘<br>B. 分类和预测<br>C. 数据预处理<br>D. 数据流挖掘<details>
+<summary><u>答案：</u></summary>
+选C。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="12">
+<li>下面哪种不属于数据预处理的方法？<br>A. 变量代换<br>B. 离散化<br>C. 聚集<br>D. 估计遗漏值<details>
+<summary><u>答案：</u></summary>
+选D。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="13">
+<li>什么是KDD？<br>A. 数据挖掘与知识发现<br>B. 领域知识发现<br>C. 文档知识发现<br>D. 动态知识发现<details>
+<summary><u>答案：</u></summary>
+选A。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="14">
+<li>当不知道数据所带标签时，可以使用哪种技术促使带同类标签的数据与带其他标签的数据相分离？<br>A. 分类<br>B. 聚类<br>C. 关联分析<br>D. 隐马尔可夫链<details>
+<summary><u>答案：</u></summary>
+选A。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="15">
+<li>建立一个模型，通过这个模型根据已知的变量值来预测其他某个变量值属于数据挖掘的哪一类任务？<br>A. 根据内容检索<br>B. 建模描述<br>C. 预测建模<br>D. 寻找模式和规则<details>
+<summary><u>答案：</u></summary>
+选C。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="16">
+<li>以下哪种方法不属于特征选择的标准方法：<br>A. 嵌入<br>B. 过滤<br>C. 包装<br>D. 抽样<details>
+<summary><u>答案：</u></summary>
+选D。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="17">
+<li><p>说下红黑树的五个性质。</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>#1. 每个结点要么是红的要么是黑的。<br>#2. 根结点是黑的。<br>#3. 每个叶结点（叶结点即指树尾端NIL指针或NULL结点）都是黑的。<br>#4. 如果一个结点是红的，那么它的两个儿子都是黑的。<br>#5. 对于任意结点而言，其到叶结点树尾端NIL指针的每条路径都包含相同数目的黑结点。</p>
+<p><a href="https://blog.csdn.net/v_july_v/article/details/6105630" target="_blank" rel="noopener">https://blog.csdn.net/v_july_v/article/details/6105630</a></p>
+</details>
+
+
+
+</li>
+</ol>
+<ol start="18">
+<li><p>简述下什么是生成对抗网络。（*）</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>GAN之所以是对抗的，是因为GAN的内部是竞争关系，一方叫generator，它的主要工作是生成图片，并且尽量使得其看上去是来自于训练样本的；另一方是discriminator，其目标是判断输入图片是否属于真实训练样本。<br>更直白的讲，将generator想象成假币制造商，而discriminator是警察。generator目的是尽可能把假币造的跟真的一样，从而能够骗过discriminator，即生成样本并使它看上去好像来自于真实训练样本一样。</p>
+</details>
+
+
+
+
+
+
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>ML</category>
+      </categories>
+      <tags>
+        <tag>SVM</tag>
+        <tag>分类</tag>
+        <tag>聚类</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Lagrange_Multipliers</title>
+    <url>/2020/03/24/Lagrange-Multipliers/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Support Vector Machine (SVM)</title>
+    <url>/2020/03/24/SVM/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>ML</category>
+      </categories>
+      <tags>
+        <tag>数学计算</tag>
+        <tag>对偶问题</tag>
+        <tag>SVM</tag>
+        <tag>拉格朗日乘子法</tag>
+        <tag>KKT条件</tag>
+        <tag>硬间隔&amp;软间隔</tag>
+        <tag>核函数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux CheatSheet</title>
     <url>/2020/03/19/Linux-CheatSheet/</url>
     <content><![CDATA[<ol>
@@ -735,9 +1802,9 @@ $$所以$\det \left( A \right) =\lambda _1\lambda _2\cdots \lambda _K$。
         <category>Math</category>
       </categories>
       <tags>
-        <tag>Math</tag>
         <tag>OLS</tag>
         <tag>线性回归</tag>
+        <tag>数学计算</tag>
       </tags>
   </entry>
   <entry>
@@ -746,7 +1813,7 @@ $$所以$\det \left( A \right) =\lambda _1\lambda _2\cdots \lambda _K$。
     <content><![CDATA[<h2 id="2020春，被迫进入HARD模式"><a href="#2020春，被迫进入HARD模式" class="headerlink" title="2020春，被迫进入HARD模式"></a>2020春，被迫进入HARD模式</h2><p>开始放春节假了，下午大家都逐渐放慢手脚。收拾好我的小抱枕拿回去洗洗，也没打算拷啥回去做了，想学啥我收藏夹里的东西这辈子都要学不完。好好放个假，两个星期后回来开工！<br>现在过年又不能放鞭炮，我们家又不爱走亲戚，我的关注点都是在贺岁片上。今年的贺岁片都是2D，不搞3D那种花里胡哨的东西，还都挺期待的。<br>20号的时候看到有自媒体总结贺岁片我还兴致勃勃地转发“安排上了”，当时新闻已经报了有传染病病例，但是我们都没有觉得是什么大事。好像那时候是深圳有了病例吧，记不太清了，现在还是各处管制着没有完全解封，但对疫情扩散之前的印象居然有点模糊了。有个在深圳工作的朋友提醒我别乱跑了。我还想这孩子居然忽然这么严肃。<br><img src="https://pic.downk.cc/item/5e60f87398271cb2b8bf58e7.jpg" width=350><br>那晚还是买了贺岁片的电影票，年初一早上一场，晚上一场。<br><img src="https://pic.downk.cc/item/5e60fb8d98271cb2b8c06f53.jpg" width=350><br>很快，我就开始跳脚售票平台不主动给我提供退票渠道了。然后到了23号，贺岁档电影接连宣布退档。<br><img src="https://pic.downk.cc/item/5e60fbab98271cb2b8c07ac1.jpg" width=350><br>再后面支付宝的交易信息是一串的口罩交易记录，付款-退款，付款-退款。现在回头看那段时间真的是昏暗，即使我们不在疫区，身边没有病例，但是大家都受到很大影响。到处买不到口罩，不断收到新确诊病例的消息。明明应该是欢天喜地的春节，却笼罩在一片迷雾中。感觉这种日子看不到尽头。</p>
 <h2 id="在家办公初体验"><a href="#在家办公初体验" class="headerlink" title="在家办公初体验"></a>在家办公初体验</h2><p>春节假期快要结束了，大家都很不愿意回去上班。形势很不明朗，病毒传播性很强。各地政府都出文推迟开工时间。我们也如愿推迟了，一开始是推迟两天，再接着是一周，再然后就直接不通知上班时间了，届时再通知。<br>我们新项目本来打算年后把之前的计划立马落实，争取了在家办公。本来我们办公大多数时候都是各自敲电脑，实行起来也不太艰难。就是在家办公工资被粉碎性打折，但是活还是一样多，还得花自己水电。<br>在家办公三周了，大家都开始有点坐不住了，希望回到公司上班，不然太没有安全感。月底那周老大也通知在外地的同事要回到广州，随时准备回公司上班。</p>
 <h2 id="无解"><a href="#无解" class="headerlink" title="无解"></a>无解</h2><p>紧接着就是忽如其来的被辞退。当外地的同事回来准备去上班的时候，收到的是公司要断臂自保的决定。<br>虽然时势艰难，但我们都表示理解，毕竟我们也想去寻找别的机会。接下来就是跟人资不愉快的交流。人资小姐姐年龄不小，不过似乎不会讲道理喜欢胡搅蛮缠，提出合理赔偿的时候，她就用女孩子对男朋友撒泼的招数，一直重复“你怎么这样啊！你别说这种话！”完全无法理智交流。只是提出依法赔偿而已，这是哪种话呢？后来还是被忽悠了，还得继续留下来干活，干的啥也不想提。反正就是赶紧找下家吧。<br>其实是公司想转型，失败，年前已经解雇了一批人，这次借疫情又来一刀。想要用技术脱离传统来个质的飞跃，然而研发是费钱费力，还见效无法预估的。舍不得价钱请个实干的领导者，底下的人再有能力也没法成事。技术研发靠虚假宣传、夸大效果、注重形式主义是骗不了人的。<br>领导者对技术一知半解在国内是很平常的事。这不是最糟糕，最可怕的是他不要你觉得，他只要他觉得。技术研发部全员营销，虚假宣传、无脑画饼，骗得了他自己，骗不过老板。老板要看结果，技术员也是要恰饭的呀！</p>
-<h2 id="向前看，回头没意义"><a href="#向前看，回头没意义" class="headerlink" title="向前看，回头没意义"></a>向前看，回头没意义</h2><p>“如果选择做的事是自己认可的，且有它的意义在，我会把心态调整好再开始。做了又抱怨，这是逻辑问题。”某人说的这句话很平实很有道理。<br>我还是比较情绪化的，喜欢埋怨或许是每个人的常态。抱怨也抱怨过了，再抱怨下去于事无补。虽然事态发展非我所愿，但事已至此，该调整心态，调整计划，走好接下来的路。<br>一直犯懒，老大靠谱、同事相处和谐就觉得不太想变动了，过于安逸了。这次的不快对我来说可能转变成一个好事，被迫加快落实我的个人规划，尽早拨云见日。<br>距上次弄出来个github博客之后一年了，一直都没有更新过。我都忘了看的哪个教程搭出来的了，之前好像因为前端技能没有点亮遇到了瓶颈就丢弃了。这次找到对的方式认真搭好，开始用起来！<br>另外，最近我觉得还是有不少好事的，虽然不是发生在我身上，但都是我朋友的好事，我也觉得很快乐。老同学准备入职新公司了，仙女网友添丁了，沙雕网友拉埋天窗了，留学时的好朋友在当地买房了。跳槽、添丁、结婚、置业，一堆喜事萦绕着我呀~<br>我也希望实现19年末的新年许愿，在2020年找到新工作！<br>$$====== Fin =====$$</p>
+<h2 id="向前看，回头没意义"><a href="#向前看，回头没意义" class="headerlink" title="向前看，回头没意义"></a>向前看，回头没意义</h2><p>“如果选择做的事是自己认可的，且有它的意义在，我会把心态调整好再开始。做了又抱怨，这是逻辑问题。”某人说的这句话很平实很有道理。<br>我还是比较情绪化的，喜欢埋怨或许是每个人的常态。抱怨也抱怨过了，再抱怨下去于事无补。虽然事态发展非我所愿，但事已至此，该调整心态，调整计划，走好接下来的路。<br>一直犯懒，老大靠谱、同事相处和谐就觉得不太想变动了，过于安逸了。这次的不快对我来说可能转变成一个好事，被迫加快落实我的个人规划，尽早拨云见日。<br>距上次弄出来个github博客之后一年了，一直都没有更新过。我都忘了看的哪个教程搭出来的了，之前好像因为前端技能没有点亮遇到了瓶颈就丢弃了。这次找到对的方式认真搭好，开始用起来！<br>另外，最近我觉得还是有不少好事的，虽然不是发生在我身上，但都是我朋友的好事，我也觉得很快乐。老同学准备入职新公司了，仙女网友添丁了，沙雕网友拉埋天窗了，留学时的好朋友在当地买房了。跳槽、添丁、结婚、置业，一堆喜事萦绕着我呀~<br>我也希望实现19年末的新年许愿，在2020年找到新工作！<br><img src="https://pic.downk.cc/item/5e7aca66504f4bcb049f780c.jpg" width=300><br>$$====== Fin =====$$</p>
 ]]></content>
   </entry>
 </search>
