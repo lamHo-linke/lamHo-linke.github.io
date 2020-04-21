@@ -52,6 +52,10 @@
   <time datetime="2020-04-03T02:05:30.000Z" itemprop="datePublished">2020-04-03</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ML/">ML</a>
+  </div>
+
       
       
 <div class="word_count">
@@ -59,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.5k字</span>
+            <span class="post-count">1.9k字</span>
         </span>
     </span>
 
@@ -68,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5分钟</span>
+            <span class="post-count">7分钟</span>
         </span>
     </span>
 </div>
@@ -126,6 +130,22 @@
 
 
 
+</li>
+</ol>
+<ol start="4">
+<li><p>在用sigmoid作为激活函数的时候，为什么要用交叉熵损失函数，而不用均方误差损失函数？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> $$z=wx+b\hspace{2em}a=\sigma(z)$$</p>
+<p> MSE：$C=\displaystyle\frac{1}{2n}\sum_x (a-y)^2$<br> $$\begin{cases}\displaystyle\frac{\partial C}{\partial w}=(a-y)\sigma’(z)x\\\displaystyle\frac{\partial C}{\partial b}=(a-y)\sigma’(z)\end{cases}$$ 参数更新迭代：$$\begin{cases}w=w-\alpha(a-y)\sigma’(z)x\\b=b-\alpha(a-y)\sigma’(z)\end{cases}$$</p>
+<p> Cross Entropy：$C=\displaystyle\frac{1}{n}\sum_x \left[y\ln a+(1-y)\ln(1-a)\right]$<br> $$\begin{cases}\displaystyle\frac{\partial C}{\partial w}=(a-y)x\\\displaystyle\frac{\partial C}{\partial b}=(a-y)\end{cases}$$ 参数更新迭代：$$\begin{cases}w=w-\alpha(a-y)x\\b=b-\alpha(a-y)\end{cases}$$</p>
+<p> 两者的参数更新迭代公式差别就在：MSE有 $\sigma’$ 这一项，Cross Entropy没有。sigmoid函数的导数，当变量值比较大或比较小的时候，导数是接近于零的，这时用MSE做损失的更新是非常缓慢的。用Cross Entropy的好处是，当误差大的时候，权重更新快；当误差小的时候，权重更新慢。</p>
+ </details>
+
+
+
+
 
 </li>
 </ol>
@@ -140,12 +160,16 @@
 
 
 
-
+</li>
+</ol>
+<ol start="2">
+<li>简述RNN？ <details>
+ <summary><u>答案：</u></summary>
 
 
 </li>
 </ol>
-<h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><ol>
+<pre><code>&lt;/details&gt;</code></pre><h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><ol>
 <li><p>什么是卷积？</p>
  <details>
  <summary><u>答案：</u></summary>
@@ -169,6 +193,15 @@
 
 
 
+</li>
+</ol>
+<ol start="3">
+<li><p>输入图片大小为200×200，依次经过一层卷积（kernel size 5×5，padding 1，stride 2），pooling（kernel size 3×3，padding 0，stride 1），又一层卷积（kernel size 3×3，padding 1，stride 1）之后，输出特征图大小为(？) (*)</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 计算尺寸不被整除只在GoogLeNet中遇到过。卷积向下取整，池化向上取整。<br> 本题 （200-5+2<em>1）/2+1 为99.5，取99<br> （99-3）/1+1 为97<br> （97-3+2</em>1）/1+1 为97<br> 研究过网络的话看到stride为1的时候，当kernel为 3 padding为1或者kernel为5 padding为2 一看就是卷积前后尺寸不变。计算GoogLeNet全过程的尺寸也一样。</p>
+ </details>
 
 
 
@@ -205,12 +238,31 @@
 <li><p>简述TensorFlow框架如何构建神经网络。</p>
  <details>
  <summary><u>答案：</u></summary>
- Tensorflow通过Graph和Session的设定，对神经网络模型进行了三重解构：
 
+<p> Tensorflow通过Graph和Session的设定，对神经网络模型进行了三重解构：</p>
 <ul>
 <li>第一层解构是将数据与神经网络模型进行了分离，所以要先设计神经网络模型，再导入数据进行训练，从而得出神经网络节点参数；</li>
 <li>第二层解构是通Graph将神经网络模型进行结构化分区，通过结构化分区把复杂的神经网络进行了解构，研究人员可以按Graph的结果对特定的神经网络模型组成部分进行局部微调，通过局部微调实现全局复杂神经网络的组建；</li>
-<li>第三层次的解构就是通过Session的设计，将神经网络的运算拆解到相关的算力中心，这就导致大规模的算力组合训练复杂的人工神经网络模型成为了可能性。</details></li>
+<li>第三层次的解构就是通过Session的设计，将神经网络的运算拆解到相关的算力中心，这就导致大规模的算力组合训练复杂的人工神经网络模型成为了可能性。</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
 </ul>
 </li>
 </ol>
@@ -290,7 +342,7 @@
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CheatSheet/" rel="tag">CheatSheet</a></li></ul>
 
 
     </footer>

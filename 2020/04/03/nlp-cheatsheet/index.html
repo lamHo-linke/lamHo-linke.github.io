@@ -52,6 +52,10 @@
   <time datetime="2020-04-03T02:25:29.000Z" itemprop="datePublished">2020-04-03</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/NLP/">NLP</a>
+  </div>
+
       
       
 <div class="word_count">
@@ -59,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">252字</span>
+            <span class="post-count">488字</span>
         </span>
     </span>
 
@@ -115,7 +119,17 @@
 
 
 
+</li>
+</ol>
+<ol start="3">
+<li><p>在HMM中，如果已知观察序列和产生观察序列的状态序列,那么可用以下哪种方法直接进行参数估计<br> A. EM算法<br> B. 维特比算法<br> C. 前向后向算法<br> D. 极大似然估计</p>
+ <details>
+ <summary><u>答案：</u></summary>
 
+<p> 选D。</p>
+<p> A. EM算法：只有观测序列，无状态序列时来学习模型参数，即Baum-Welch算法<br> B. 维特比算法：用动态规划解决HMM的预测问题，不是参数估计<br> C. 前向后向算法：用来算概率<br> D. 极大似然估计：即观测序列和相应的状态序列都存在时的监督学习算法，用来估计参数</p>
+<p> 注意的是在给定观测序列和<strong>对应的状态序列</strong>估计模型参数，可以利用<strong>极大似然估计</strong>。如果给定观测序列，<strong>没有对应的状态序列</strong>，才用<strong>EM</strong>，将状态序列看作隐数据。</p>
+ </details>
 
 </li>
 </ol>
@@ -195,6 +209,8 @@
 <div id="share-mask"></div>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CheatSheet/" rel="tag">CheatSheet</a></li></ul>
+
 
     </footer>
 

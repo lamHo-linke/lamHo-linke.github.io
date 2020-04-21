@@ -33,11 +33,27 @@
 
 
 
+</li>
+</ol>
+<ol start="3">
+<li><p>在HMM中，如果已知观察序列和产生观察序列的状态序列,那么可用以下哪种方法直接进行参数估计<br> A. EM算法<br> B. 维特比算法<br> C. 前向后向算法<br> D. 极大似然估计</p>
+ <details>
+ <summary><u>答案：</u></summary>
 
+<p> 选D。</p>
+<p> A. EM算法：只有观测序列，无状态序列时来学习模型参数，即Baum-Welch算法<br> B. 维特比算法：用动态规划解决HMM的预测问题，不是参数估计<br> C. 前向后向算法：用来算概率<br> D. 极大似然估计：即观测序列和相应的状态序列都存在时的监督学习算法，用来估计参数</p>
+<p> 注意的是在给定观测序列和<strong>对应的状态序列</strong>估计模型参数，可以利用<strong>极大似然估计</strong>。如果给定观测序列，<strong>没有对应的状态序列</strong>，才用<strong>EM</strong>，将状态序列看作隐数据。</p>
+ </details>
 
 </li>
 </ol>
 ]]></content>
+      <categories>
+        <category>NLP</category>
+      </categories>
+      <tags>
+        <tag>CheatSheet</tag>
+      </tags>
   </entry>
   <entry>
     <title>Deep Learning CheatSheet</title>
@@ -73,6 +89,22 @@
 
 
 
+</li>
+</ol>
+<ol start="4">
+<li><p>在用sigmoid作为激活函数的时候，为什么要用交叉熵损失函数，而不用均方误差损失函数？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> $$z=wx+b\hspace{2em}a=\sigma(z)$$</p>
+<p> MSE：$C=\displaystyle\frac{1}{2n}\sum_x (a-y)^2$<br> $$\begin{cases}\displaystyle\frac{\partial C}{\partial w}=(a-y)\sigma’(z)x\\\displaystyle\frac{\partial C}{\partial b}=(a-y)\sigma’(z)\end{cases}$$ 参数更新迭代：$$\begin{cases}w=w-\alpha(a-y)\sigma’(z)x\\b=b-\alpha(a-y)\sigma’(z)\end{cases}$$</p>
+<p> Cross Entropy：$C=\displaystyle\frac{1}{n}\sum_x \left[y\ln a+(1-y)\ln(1-a)\right]$<br> $$\begin{cases}\displaystyle\frac{\partial C}{\partial w}=(a-y)x\\\displaystyle\frac{\partial C}{\partial b}=(a-y)\end{cases}$$ 参数更新迭代：$$\begin{cases}w=w-\alpha(a-y)x\\b=b-\alpha(a-y)\end{cases}$$</p>
+<p> 两者的参数更新迭代公式差别就在：MSE有 $\sigma’$ 这一项，Cross Entropy没有。sigmoid函数的导数，当变量值比较大或比较小的时候，导数是接近于零的，这时用MSE做损失的更新是非常缓慢的。用Cross Entropy的好处是，当误差大的时候，权重更新快；当误差小的时候，权重更新慢。</p>
+ </details>
+
+
+
+
 
 </li>
 </ol>
@@ -87,12 +119,16 @@
 
 
 
-
+</li>
+</ol>
+<ol start="2">
+<li>简述RNN？ <details>
+ <summary><u>答案：</u></summary>
 
 
 </li>
 </ol>
-<h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><ol>
+<pre><code>&lt;/details&gt;</code></pre><h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><ol>
 <li><p>什么是卷积？</p>
  <details>
  <summary><u>答案：</u></summary>
@@ -116,6 +152,15 @@
 
 
 
+</li>
+</ol>
+<ol start="3">
+<li><p>输入图片大小为200×200，依次经过一层卷积（kernel size 5×5，padding 1，stride 2），pooling（kernel size 3×3，padding 0，stride 1），又一层卷积（kernel size 3×3，padding 1，stride 1）之后，输出特征图大小为(？) (*)</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 计算尺寸不被整除只在GoogLeNet中遇到过。卷积向下取整，池化向上取整。<br> 本题 （200-5+2<em>1）/2+1 为99.5，取99<br> （99-3）/1+1 为97<br> （97-3+2</em>1）/1+1 为97<br> 研究过网络的话看到stride为1的时候，当kernel为 3 padding为1或者kernel为5 padding为2 一看就是卷积前后尺寸不变。计算GoogLeNet全过程的尺寸也一样。</p>
+ </details>
 
 
 
@@ -152,18 +197,40 @@
 <li><p>简述TensorFlow框架如何构建神经网络。</p>
  <details>
  <summary><u>答案：</u></summary>
- Tensorflow通过Graph和Session的设定，对神经网络模型进行了三重解构：
 
+<p> Tensorflow通过Graph和Session的设定，对神经网络模型进行了三重解构：</p>
 <ul>
 <li>第一层解构是将数据与神经网络模型进行了分离，所以要先设计神经网络模型，再导入数据进行训练，从而得出神经网络节点参数；</li>
 <li>第二层解构是通Graph将神经网络模型进行结构化分区，通过结构化分区把复杂的神经网络进行了解构，研究人员可以按Graph的结果对特定的神经网络模型组成部分进行局部微调，通过局部微调实现全局复杂神经网络的组建；</li>
-<li>第三层次的解构就是通过Session的设计，将神经网络的运算拆解到相关的算力中心，这就导致大规模的算力组合训练复杂的人工神经网络模型成为了可能性。</details></li>
+<li>第三层次的解构就是通过Session的设计，将神经网络的运算拆解到相关的算力中心，这就导致大规模的算力组合训练复杂的人工神经网络模型成为了可能性。</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
 </ul>
 </li>
 </ol>
 ]]></content>
+      <categories>
+        <category>ML</category>
+      </categories>
       <tags>
-        <tag>TensorFlow</tag>
+        <tag>CheatSheet</tag>
       </tags>
   </entry>
   <entry>
@@ -324,12 +391,59 @@ age 16</code></pre> </details>
 
 </li>
 </ol>
+<ol start="8">
+<li><p>请写出一段Python代码实现删除一个list里面的重复元素。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> <code>set</code>函数：Build an unordered collection of unique elements.</p>
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">set(a)</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+{1, 2, 3, 4, 5}</code></pre> </details>
+
+
+
+</li>
+</ol>
+<ol start="9">
+<li><p>编程用sort进行排序，然后从最后一个元素开始判断 a=[1,2,4,2,4,5,7,10,5,5,7,8,9,0,3]。</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+ <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">10</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">3</span>]</span><br><span class="line">a.sort()     <span class="comment"># 排序：a=[0,1,2,2,3,4,4,5,5,5,7,7,8,9,10]</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)<span class="number">-1</span>,<span class="number">0</span>,<span class="number">-1</span>):</span><br><span class="line">    <span class="keyword">if</span> a[i] &lt; a[i<span class="number">-1</span>]:</span><br><span class="line">        print(<span class="string">"Error: position %d greater than position %d"</span> %(i<span class="number">-1</span>,i))</span><br><span class="line">    print(<span class="string">"Sorted list checked."</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+Sorted list checked.</code></pre> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">last = a[<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)<span class="number">-2</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">    <span class="keyword">if</span> last == a[i]:</span><br><span class="line">        <span class="keyword">del</span> a[i]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        last = a[i]</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+<pre><code>输出：
+[0, 1, 2, 3, 4, 5, 7, 8, 9, 10]</code></pre> </details>
+
+
+
+</li>
+</ol>
+<ol start="10">
+<li><p>Python里面如何生成随机数？。</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">random.randint(<span class="number">0</span>,<span class="number">10</span>)         <span class="comment"># 返回一个 0~9 之间的整数</span></span><br><span class="line">random.randrange(<span class="number">0</span>,<span class="number">10</span>,<span class="number">2</span>)     <span class="comment"># 第三个参数是 step，默认值是 1</span></span><br><span class="line"></span><br><span class="line">random.random()              <span class="comment"># 返回一个 0~1 之间的浮点数</span></span><br><span class="line">random.uniform(<span class="number">0</span>,<span class="number">10</span>)         <span class="comment"># 返回一个 0~9 之间的浮点数</span></span><br></pre></td></tr></table></figure>
+</details>
+
+
+
+
+
+
+</li>
+</ol>
 ]]></content>
+      <tags>
+        <tag>CheatSheet</tag>
+      </tags>
   </entry>
   <entry>
     <title>Machine Learning CheatSheet</title>
     <url>/2020/03/26/ml-cheatsheet/</url>
-    <content><![CDATA[<p>（小注：集成学习部分答案未考究）<br>七月在线 - BAT机器学习面试1000题系列</p>
+    <content><![CDATA[<p><em><font color='gray'>来源：七月在线-BAT机器学习面试1000题系列，还有一些杂七杂八的link。</font></em><br>100</p>
 <h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><ol>
 <li><p>KNN中的K如何选取的？</p>
  <details>
@@ -369,27 +483,57 @@ age 16</code></pre> </details>
  <summary><u>答案：</u></summary>
 
 <p> 在工业界，很少直接将连续值作为逻辑回归模型的特征输入，而是将连续特征离散化为一系列0、1特征交给逻辑回归模型，这样做的优势有以下几点：</p>
-<ol start="0">
-<li><p>离散特征的增加和减少都很容易，易于模型的快速迭代；</p>
-</li>
-<li><p>稀疏向量内积乘法运算速度快，计算结果方便存储，容易扩展；</p>
-</li>
-<li><p>离散化后的特征对异常数据有很强的鲁棒性：比如一个特征是年龄&gt;30是1，否则0。如果特征没有离散化，一个异常数据“年龄300岁”会给模型造成很大的干扰；</p>
-</li>
-<li><p>逻辑回归属于广义线性模型，表达能力受限；单变量离散化为N个后，每个变量有单独的权重，相当于为模型引入了非线性，能够提升模型表达能力，加大拟合；</p>
-</li>
-<li><p>离散化后可以进行特征交叉，由M+N个变量变为M*N个变量，进一步引入非线性，提升表达能力；</p>
-</li>
-<li><p>特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20-30作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问；</p>
-</li>
-<li><p>特征离散化以后，起到了简化了逻辑回归模型的作用，降低了模型过拟合的风险。</p>
-<p>李沐曾经说过：模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。就看是喜欢折腾特征还是折腾模型了。通常来说，前者容易，而且可以n个人一起并行做，有成功经验；后者目前看很赞，能走多远还须拭目以待。</p>
-</details>
+ <ol>
+ <li>离散特征的增加和减少都很容易，易于模型的快速迭代；
+ <li>稀疏向量内积乘法运算速度快，计算结果方便存储，容易扩展；
+ <li>离散化后的特征对异常数据有很强的鲁棒性：比如一个特征是年龄>30是1，否则0。如果特征没有离散化，一个异常数据“年龄300岁”会给模型造成很大的干扰；
+ <li>逻辑回归属于广义线性模型，表达能力受限；单变量离散化为N个后，每个变量有单独的权重，相当于为模型引入了非线性，能够提升模型表达能力，加大拟合；
+ <li>离散化后可以进行特征交叉，由M+N个变量变为M*N个变量，进一步引入非线性，提升表达能力；
+ <li>特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20-30作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间是门学问；
+ <li>特征离散化以后，起到了简化了逻辑回归模型的作用，降低了模型过拟合的风险。
+ </ol>
+
+<p> 李沐曾经说过：模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。就看是喜欢折腾特征还是折腾模型了。通常来说，前者容易，而且可以n个人一起并行做，有成功经验；后者目前看很赞，能走多远还须拭目以待。</p>
+ </details>
 
 
 
 </li>
 </ol>
+<ol start="2">
+<li><p>简单介绍下logistics回归？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> $n$ 个样本：$\left( \mathbf{x}_1,y_1 \right) ,\cdots ,\left( \mathbf{x}_n,y_n \right)$<br> x 有p个特征：$\mathbf{x}_i=\left( x_{i}^{\left( 1 \right)},\cdots ,x_{i}^{\left( p \right)} \right) ,\ i=1,\cdots ,n$<br> y 只有两种取值0和1：$y_i=\left\{ 0,1 \right\}$ </p>
+<p> Sigmoid函数：$$\sigma(z)=\frac{1}{1+e^{-z}}=\frac{e^z}{1+e^z}$$</p>
+<p> 逻辑回归，就是在线性回归的基础上，用sigmoid函数做非线性变换，使得预测值在0~1之间，作为分类 $y=1$ 的概率值。<br> $$\begin{aligned}\hat{y}_i&amp;=\mathbb{P}\left( y_i=1\ |\ \mathbf{x}_i \right) =\frac{1}{1+e^{-\mathbf{x}_i\boldsymbol{\beta }}}\\1-\hat{y}_i&amp;=\mathbb{P}\left( y_i=0\ |\ \mathbf{x}_i \right) =\frac{e^{-\mathbf{x}_i\boldsymbol{\beta }}}{1+e^{-\mathbf{x}_i\boldsymbol{\beta }}}\end{aligned}$$</p>
+<p> Loss function $$L\left( \hat{y}_i,y_i \right) =-\left( y_i\log \hat{y}_i+\left( 1-y_i \right) \log \left( 1-\hat{y}_i \right) \right)$$</p>
+<p> Cost function $$\begin{aligned}J\left( \boldsymbol{\beta } \right) &amp;=\frac{1}{n}\sum_{i=1}^n{L\left( \hat{y}_i,y_i \right)}\\\<br> &amp;=-\frac{1}{n}\sum_{i=1}^n{\left( y_i\log \hat{y}_i+\left( 1-y_i \right) \log \left( 1-\hat{y}_i \right) \right)}\\\<br> &amp;=-\frac{1}{n}\sum_{i=1}^n{\left( y_i\left( \mathbf{x}_i\boldsymbol{\beta } \right) -\log \left( 1+e^{\mathbf{x}_i\boldsymbol{\beta }} \right) \right)}\end{aligned}$$</p>
+<p> 梯度下降法 $$\boldsymbol{\beta} ^{\left[ j+1 \right]}=\boldsymbol{\beta} ^{\left[ j \right]}-\alpha \nabla _{\boldsymbol{\beta }}J\left( \boldsymbol{\beta } \right)$$ $$\nabla _{\boldsymbol{\beta }}J\left( \boldsymbol{\beta } \right) =\frac{1}{n}\boldsymbol{X}^T\left( \sigma \left( \boldsymbol{X\beta } \right) -\mathbf{y} \right)$$</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>关于逻辑回归和 SVM 不正确的是<br> A. 逻辑回归目标函数是最小化后验概率<br> B. 逻辑回归可以用于预测事件发生概率的大小<br> C. SVM目标是结构风险最小化<br> D. SVM可以有效避免模型过拟合</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选A。<br> 逻辑回归目标是似然函数最大化，并不是后验概率最大化，加上正则项的逻辑回归才可以看作是后验概率最大化。<br> SVM的软间隔相当于是在经验风险最小化的基础上添加了正则化项，所以SVM应该是结构风险最小化。</p>
+<ul>
+<li>经验风险最小化（empirical risk minimization, ERM）$$\min_{f\in F}\frac{1}{n}\sum^n_{i=1}L(y_i,f(x_i))$$</li>
+<li>结构风险最小化（structural minimization, SRM）$$\min_{f\in F}\left[\frac{1}{n}\sum^n_{i=1}L(y_i,f(x_i))+\lambda J(f)\right]$$</details>
+
+
+
+
+
+
+</li>
+</ul>
 </li>
 </ol>
 <h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><ol>
@@ -420,10 +564,24 @@ age 16</code></pre> </details>
 
 
 
-
-
 </li>
 </ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>关于支持向量机SVM，下列说法错误的是<br> A. L2正则项，作用是最大化分类间隔，使得分类器拥有更强的泛化能力<br> B. Hinge 损失函数，作用是最小化经验分类错误<br> C. 分类间隔为 $1/\lVert w\rVert$，$\lVert w\rVert$ 代表向量的模<br> D. 当参数C越小时，分类间隔越大，分类错误越多，趋于欠学习</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选C。间隔是 $2/\lVert w\rVert$<br> A. 软间隔，有更强的泛化能力。<br> D. 软间隔加的正则项惩罚系数C（下图的 $\lambda$），即对误差的宽容度。C越高，说明越不能容忍出现误差，容易过拟合。C越小，容易欠拟合。</p>
+ <img src="https://pic.downk.cc/item/5e8e87b8504f4bcb04e0e87d.png">
+ </details>
+
+
+
+
+
+
 </li>
 </ol>
 <h2 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h2><ol>
@@ -464,21 +622,37 @@ age 16</code></pre> </details>
 
 
 
-
-
-
-
-
-
-
-
 </li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h2 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h2><ol>
+<ol start="4">
+<li><p>Naive Bayes是一种特殊的Bayes分类器，特征变量是X，类别标签是C，它的一个假定是:<br> A. 各类别的先验概率P(C)是相等的<br> B. 以0为均值，sqr(2)/2为标准差的正态分布<br> C. 特征变量X的各个维度是类别条件独立随机变量<br> D. P(X|C)是高斯分布</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选C。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>假定某同学使用Naive Bayesian（NB）分类模型时，不小心将训练数据的两个维度搞重复了，那么关于NB的说法中正确的是：<br> A. 这个被重复的特征在模型中的决定作用会被加强<br> B. 模型效果相比无重复特征的情况下精确度会降低<br> C. 如果所有特征都被重复一遍，得到的模型预测结果相对于不重复的情况下的模型预测结果一样。<br> D. 当两列特征高度相关时，无法用两列特征相同时所得到的结论来分析问题<br> E. NB可以用来做最小二乘回归<br> F. 以上说法都不正确</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选BD。NB的核心在于它假设向量的所有特征之间是独立的。重复特征破坏了这个假设，使得模型变差。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h2 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习 (*)"></a>集成学习 (*)</h2><ol>
 <li><p>随机森林、Boosting、AdaBoost、GBDT和XGBoost的区别。</p>
  <details>
  <summary><u>答案：</u></summary>
@@ -577,11 +751,33 @@ age 16</code></pre> </details>
 
 
 
+</li>
+</ol>
+<ol start="3">
+<li><p>K-means的复杂度？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> K-means算法：</p>
+<blockquote>
+<p>选择K个点作为初始质心<br> repeat：<br> $\hspace{2em}$将每个点指派到最近的质心，形成K个簇<br> $\hspace{2em}$重新计算每个簇的质心<br> until 簇不发生变化或达到最大迭代次数</p>
+</blockquote>
+<p> 时间复杂度：$O(tKmn)$，其中 t 为迭代次数，K 为簇的数目，m 为样本数，n 为维数<br> 空间复杂度：$O\left((m+K)n\right)$，其中 K 为簇的数目，m 为样本数，n 为维数</p>
+<p> 关于时间复杂度和空间复杂度：<a href="https://zhuanlan.zhihu.com/p/50479555" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/50479555</a></p>
+ </details>
+
 
 
 </li>
 </ol>
-<h2 id="监督，回归，分类"><a href="#监督，回归，分类" class="headerlink" title="监督，回归，分类"></a>监督，回归，分类</h2><ol>
+<ol start="4">
+<li> <details>
+ <summary><u>答案：</u></summary>
+
+
+</li>
+</ol>
+<pre><code>&lt;/details&gt;</code></pre><h2 id="监督，回归，分类"><a href="#监督，回归，分类" class="headerlink" title="监督，回归，分类"></a>监督，回归，分类</h2><ol>
 <li>下列算法中，均为监督学习算法的为：<br> A. CRF，SVM，Logistic Regression<br> B. K-Means，KNN，决策树<br> C. 决策树，KNN，朴素贝叶斯<br> D. K-Means，SVM，朴素贝叶斯 <details>
  <summary><u>答案：</u></summary>
  选AC。聚类是对无类别的数据进行聚类，不使用已经标记好的数据。
@@ -626,6 +822,40 @@ age 16</code></pre> </details>
 
 
 
+</li>
+</ol>
+<ol start="5">
+<li><p>以下哪些方法不可以直接来对文本分类？<br> A. Kmeans<br> B. 决策树<br> C. 支持向量机<br> D. KNN</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选A。A是聚类，其他都是分类算法。</p>
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="6">
+<li><p>在统计模式分类问题中，当先验概率未知时，可以使用 (*)<br> A. 最小最大损失准则<br> B. 最小误判概率准则<br> C. 最小损失准则<br> D. N-P判决</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 选AD。</p>
+<p> 先验概率未知，也就是说不能用生成模型，只能用判别模型。</p>
+<p> A. <strong>最小最大损失准则</strong><br> 考虑p(wi)变化的条件下，是风险最小。</p>
+<p> B. <strong>最小误判概率准则</strong><br> 判断p(w1|x)和p(w2|x)哪个大，x为特征向量，w1和w2为两分类，根据贝叶斯公式，需要用到先验知识。</p>
+<p> C. <strong>最小损失准则</strong><br> 在B的基础之上，还要求出p(w1|x)和p(w2|x)的期望损失，因为B需要先验概率，所以C也需要先验概率。</p>
+<p> D. <strong>N-P判决</strong><br> 限定一类错误率条件下使另一类错误率为最小的两类别决策，即在一类错误率固定的条件下，求另一类错误率的极小值的问题，直接计算p(x|w1)和p(x|w2)的比值，不需要用到贝叶斯公式。<br> 在贝叶斯决策中，对于先验概率p(y)，分为已知和未知两种情况。 </p>
+<ol>
+<li>p(y)已知，直接使用贝叶斯公式求后验概率即可； </li>
+<li>p(y)未知，可以使用聂曼-皮尔逊决策(N-P决策)来计算决策面。</details>
+
+
+
+
+</li>
+</ol>
 </li>
 </ol>
 <h2 id="过拟合，正则化"><a href="#过拟合，正则化" class="headerlink" title="过拟合，正则化"></a>过拟合，正则化</h2><ol>
@@ -1038,6 +1268,131 @@ age 16</code></pre> </details>
 
 
 
+</li>
+</ol>
+<ol start="19">
+<li><p>快速排序算法。</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>算法原理参考：<a href="https://wiki.jikexueyuan.com/project/easy-learn-algorithm/fast-sort.html" target="_blank" rel="noopener">https://wiki.jikexueyuan.com/project/easy-learn-algorithm/fast-sort.html</a> （选第一个元素做pivot）<br>代码参考：<a href="https://www.geeksforgeeks.org/python-program-for-quicksort/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/python-program-for-quicksort/</a> （选最后一个元素做pivot）</p>
+<p>快排是把一个序列分为较小和较大的2个子序列，然后递归地排序两个子序列。步骤是：</p>
+<ol>
+<li>挑选基准值：从数列中挑出一个元素，称为“基准”（pivot）；
+<li>分割（partition）：重新排序数列，所有比基准值小的元素摆放在基准前面，所有比基准值大的元素摆在基准后面（与基准值相等的数可以到任何一边）。在这个分割结束之后，对基准值的排序就已经完成；
+<li>递归排序子序列：递归地将小于基准值元素的子序列和大于基准值元素的子序列排序。
+</ol>
+
+<p>选择基准的方式有几种：</p>
+<ul>
+<li>第一个元素
+<li>最后一个元素
+<li>随机选择一个元素
+<li>中位数
+</ul>    
+
+<p>假如选第一个元素作为pivot：</p>
+<img src="https://pic.downk.cc/item/5e8d3e67504f4bcb04d5906a.png" width=350>
+<img src="https://pic.downk.cc/item/5e8d3e8f504f4bcb04d5a708.png" width=300>
+<img src="https://pic.downk.cc/item/5e8d3e9f504f4bcb04d5b03c.png" width=300>
+<img src="https://pic.downk.cc/item/5e8d3eab504f4bcb04d5b750.png" width=300>
+<img src="https://pic.downk.cc/item/5e8d3eba504f4bcb04d5c098.png" width=300>
+<img src="https://pic.downk.cc/item/5e8d3ec8504f4bcb04d5c976.png" width=300>
+<img src="https://pic.downk.cc/item/5e8d3ed4504f4bcb04d5d0bf.png" width=300>
+<img src="https://pic.downk.cc/item/5e8d3edf504f4bcb04d5d751.png" width=300>
+
+<p>伪代码：</p>
+<pre><code>// low --&gt; Starting index, high --&gt; Ending index
+quickSort(arr[], low, high)
+{
+    if (low &lt; high)
+    {
+        // pi is partitioning index, arr[pi] is now at right place
+        pi = partition(arr, low, high);
+
+        quickSort(arr, low, pi - 1);    // Before pi
+        quickSort(arr, pi + 1, high);   // After pi
+    }
+}</code></pre><p>* 其实Python的<code>sorted</code>函数就可以排序，快得一批。</p>
+</details>
+
+
+
+</li>
+</ol>
+<ol start="20">
+<li><p>说说常见的损失函数。</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<ol>
+<li><b>0-1 损失函数</b>$$ L\left(Y,f(X)\right)=\left\{
+\begin{aligned}
+&1, && Y\ne f(X)\\\\
+&0, && Y=f(X)
+\end{aligned}\right.$$ 0-1 损失是用在分类问题上，也就是分类对了损失为零，分类错了损失为1，但它是非凸函数，难以求解，不太适用。
+
+<li><b>绝对值损失函数</b>$$L\left(y,f(X)\right)=\lvert y-f(X)\rvert$$ 这个也是非凸函数，用得比较少。<br>
+绝对平均误差（Mean Absolute Error, MAE）$$\text{MAE}=\frac{1}{n}\sum^n_{i=1}\lvert y_i-f(X_i)\rvert$$ 对异常值的敏感度较低，最小化MAE得到是y的中位数。
+
+<li><b>平方损失函数</b>$$L\left(y,f(X)\right)=\left(y-f(X)\right) ^2$$ 这个是凸函数，在回归模型比较常用。<br>
+均方误差（Mean Squared Error, MSE）$$\text{MSE}=\frac{1}{n}\sum^n_{i=1}\left(y_i-f(X_i)\right)^2$$ 最小化MSE得到的是y的均值。
+
+<li><b>log对数损失函数（交叉熵）</b>$$L\left(y,P(y|X)\right)=-\log P(y|X)$$ log损失适用于表示概率分布，适用于分类问题，相对Hinge损失它会对噪声更敏感。逻辑回归的损失函数就是交叉熵 $$\text{cross entropy}=\frac{1}{n}\sum^n_{i=1}\left\{-y_i\log{f(X_i)}-(1-y_i)\log(1-f(X_i))\right\}$$
+
+<li><b>Hinge损失函数</b>$$L\left(y,f(X))\right)=\max(0,1-yf(X))$$ Hinge损失适用于分类问题，如果分类正确损失为0，分类错误损失为 $1-yf(X)$。SVM的损失函数就是用的这个。    
+</ol>
+</details>
+
+
+
+</li>
+</ol>
+<ol start="21">
+<li><p>交叉熵函数与最大似然函数的联系和区别？</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>区别：交叉熵函数使用来描述模型预测值和真实值的差距大小，越大代表越不相近；似然函数的本质就是衡量在某个参数下，整体的估计和真实的情况一样的概率，越大代表越相近。</p>
+<p>联系：交叉熵函数可以由最大似然函数在伯努利分布的条件下推导出来，或者说<strong>最小化交叉熵函数的本质就是对数似然函数的最大化。</strong><br>给一个服从Bernoulli分布变量 $X\sim\mathcal{B}(p)$ $$\begin{aligned}&amp;P(X=1)=p\\&amp;P(X=0)=1-p\end{aligned}$$ $$P(X)=p^X(1-p)^{1-X}$$ 假设我们有数据样本 $D$，最大化下面的对数似然函数 $$\begin{aligned}\log P(D)&amp;=\log \prod^N_i P(D_i)=\sum_i\log p(D_i)\\&amp;=\sum_i(D_i\log p+(1-D_i)\log(1-p))\end{aligned}$$ 所以我们是要 $\max\left\{ D_i\log p+(1-D_i)\log(1-p)\right\}$，等同于 $\min\left\{-\left(D_i\log p+(1-D_i)\log(1-p)\right)\right\}$，那就是最小化交叉熵损失函数咯。</p>
+</details>
+
+
+
+</li>
+</ol>
+<ol start="22">
+<li><p>计算三个稠密矩阵 A、B、C 的乘积 ABC，假定三个矩阵的尺寸分别为 m*n, n*p,p*q，且 m&lt;n&lt;p&lt;q，以下计算效率最高的是<br>A. (AB)C<br>B. A(BC)<br>C. (AC)B<br>D. (BC)A</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>选A。首先C和D是错误的，乘不了的。<br><strong>选项A的计算量</strong><br>(AB)：A的行（每行n个数）乘以B的列（每列n个数）–&gt; n次乘法，相加 –&gt; n-1次加法，总共 2n-1 次运算。然后A的m行乘B的p列，(AB)的运算次数总共是 mp(2n-1)。<br>(AB)得到一个 m*p 的矩阵，再乘C，运算次数是 mq(2p-1)。选项A的计算量是 <strong>mp(2n-1)+mq(2p-1)</strong>。<br><strong>选项B的计算量</strong><br>(BC)的计算量是 nq(2p-1)，得到 n*q 矩阵，与A相乘，计算量是 mq(2n-1)。选项B的计算量是 <strong>nq(2p-1)+mq(2n-1)</strong>。</p>
+<p>对比一下，选项B的计算量比较大【mp(2n-1)&lt;mq(2n-1)，mq(2p-1)&lt;nq(2p-1)】，所以选A。</p>
+</details>
+
+
+
+</li>
+</ol>
+<ol start="23">
+<li><p>已知一组数据的协方差矩阵P，下面关于主分量说法错误的是<br>A. 主分量分析的最佳准则是对一组数据进行按一组正交基分解，在只取相同数量分量的条件下，以均方误差计算截尾误差最小<br>B. 在经主分量分解后，协方差矩阵成为对角矩阵<br>C. 主分量分析就是K-L变换<br>D. 主分量是通过求协方差矩阵的特征值得到</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>选C。K-L变换与PCA变换是不同的概念，PCA的变换矩阵是协方差矩阵，K-L变换的变换矩阵可以有很多种（二阶矩阵、协方差矩阵、总类内离散度矩阵等等）。当K-L变换矩阵为协方差矩阵时，等同于PCA。KLT是一种对于连续或离散的随机过程都可进行的变换，PCA则是KLT处理离散情况的算法；定义上KLT比PCA广泛，而实际上PCA比KLT实用。</p>
+</details>
+
+
+
+</li>
+</ol>
+<ol start="24">
+<li><p>模式识别中，马式距离较之于欧式距离的优点是<br>A. 平移不变性<br>B. 旋转不变性<br>C. 尺度不变性<br>D. 考虑了模式的分布</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>选CD。<br>欧式距离特性有：平移不变性、旋转不变性。$$d_E(\mathbf{x},\mathbf{y})=\sqrt{(\mathbf{x}-\mathbf{y})^T(\mathbf{x}-\mathbf{y})}$$<br>马式距离特性有：平移不变性、旋转不变性、尺度缩放不变性、不受量纲影响、考虑了模式的分布。$$d_M(\mathbf{x},\mathbf{y})=\sqrt{(\mathbf{x}-\mathbf{y})^T\Sigma^{-1}(\mathbf{x}-\mathbf{y})}$$ $\Sigma$是$\mathbf{x}$和$\mathbf{y}$协方差矩阵。</p>
+</details>
 
 
 
@@ -1048,9 +1403,7 @@ age 16</code></pre> </details>
         <category>ML</category>
       </categories>
       <tags>
-        <tag>SVM</tag>
-        <tag>分类</tag>
-        <tag>聚类</tag>
+        <tag>CheatSheet</tag>
       </tags>
   </entry>
   <entry>
@@ -1684,6 +2037,9 @@ B.
 </details></li>
 </ol>
 ]]></content>
+      <tags>
+        <tag>CheatSheet</tag>
+      </tags>
   </entry>
   <entry>
     <title>矩阵的一些事：满秩矩阵、正定矩阵和可逆矩阵</title>
