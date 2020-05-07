@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.9k字</span>
+            <span class="post-count">4k字</span>
         </span>
     </span>
 
@@ -127,6 +127,16 @@
 
 <p> 一般我们所说的最小二乘法，指的是普通最小二乘法（Ordinary Least Squares），只适用于线性回归问题。通过求解目标函数对参数的偏导函数，使得偏导函数为零，求出使得残差平方和最小化的最优解 $$\hat{\beta}^{\text{OLS}}=(X^TX)^{-1}X^Ty$$ 只有符合线性回归假设的问题才能用OLS求解。</p>
  </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>以下关于最小二乘法正确的是<br> A. 最小二乘估计是线性有偏估计中方差最小的<br> B. 最小二乘估计是线性无偏估计中方差最小的<br> C. 最小二乘估计是线性有偏估计中方差最大的<br> D. 最小二乘估计是线性无偏估计中方差最大的 <details>
+ <summary><u>答案：</u></summary>
+ B.
+ </details>   
 
 
 
@@ -509,9 +519,20 @@
 
 
 
-
 </li>
 </ol>
+</li>
+</ol>
+<ol start="7">
+<li>以下不属于非监督学习的为<br> A. 关联规则<br> B. Kmeans<br> C. Word2vec<br> D. KNN <details>
+ <summary><u>答案：</u></summary>
+ 选D。
+ </details>
+
+
+
+
+
 </li>
 </ol>
 <h2 id="过拟合，正则化"><a href="#过拟合，正则化" class="headerlink" title="过拟合，正则化"></a>过拟合，正则化</h2><ol>
@@ -791,23 +812,12 @@
 
 
 
+
 </li>
 </ul>
 </li>
 </ol>
 <ol start="7">
-<li><p>对于树形结构为什么不需要归一化？</p>
- <details>
- <summary><u>答案：</u></summary>
-
-<p> 数值缩放，不影响分裂点位置。因为第一步都是按照特征值进行排序的，排序的顺序不变，那么所属的分支以及分裂点就不会有不同。<br> 另外注意树模型是不能进行梯度下降的，因为树模型是阶跃的，阶跃点是不可导的，并且求导没意义，所以树模型（回归树）寻找最优点是通过寻找最优分裂点完成的。</p>
- </details>
-
-
-
-</li>
-</ol>
-<ol start="8">
 <li><p>什么是分布式数据库？</p>
  <details>
  <summary><u>答案：</u></summary>
@@ -819,7 +829,7 @@
 
 </li>
 </ol>
-<ol start="9">
+<ol start="8">
 <li><p>#include和#include“filename.h”有什么区别？</p>
  <details>
  <summary><u>答案：</u></summary>
@@ -831,17 +841,17 @@
 
 </li>
 </ol>
-<ol start="10">
-<li>某超市研究销售纪录数据后发现，买啤酒的人很大概率也会购买尿布，这种属于数据挖掘的哪类问题？<br>A. 关联规则发现<br>B. 聚类<br>C. 分类<br>D. 自然语言处理<details>
-<summary><u>答案：</u></summary>
-选A。
-</details>
+<ol start="9">
+<li>某超市研究销售纪录数据后发现，买啤酒的人很大概率也会购买尿布，这种属于数据挖掘的哪类问题？<br> A. 关联规则发现<br> B. 聚类<br> C. 分类<br> D. 自然语言处理 <details>
+ <summary><u>答案：</u></summary>
+ 选A。
+ </details>
 
 
 
 </li>
 </ol>
-<ol start="11">
+<ol start="10">
 <li>将原始数据进行集成、变换、维度规约、数值规约是在以下哪个步骤的任务？<br>A. 频繁模式挖掘<br>B. 分类和预测<br>C. 数据预处理<br>D. 数据流挖掘<details>
 <summary><u>答案：</u></summary>
 选C。
@@ -851,7 +861,7 @@
 
 </li>
 </ol>
-<ol start="12">
+<ol start="11">
 <li>下面哪种不属于数据预处理的方法？<br>A. 变量代换<br>B. 离散化<br>C. 聚集<br>D. 估计遗漏值<details>
 <summary><u>答案：</u></summary>
 选D。
@@ -861,7 +871,7 @@
 
 </li>
 </ol>
-<ol start="13">
+<ol start="12">
 <li>什么是KDD？<br>A. 数据挖掘与知识发现<br>B. 领域知识发现<br>C. 文档知识发现<br>D. 动态知识发现<details>
 <summary><u>答案：</u></summary>
 选A。
@@ -871,7 +881,7 @@
 
 </li>
 </ol>
-<ol start="14">
+<ol start="13">
 <li>当不知道数据所带标签时，可以使用哪种技术促使带同类标签的数据与带其他标签的数据相分离？<br>A. 分类<br>B. 聚类<br>C. 关联分析<br>D. 隐马尔可夫链<details>
 <summary><u>答案：</u></summary>
 选A。
@@ -881,7 +891,7 @@
 
 </li>
 </ol>
-<ol start="15">
+<ol start="14">
 <li>建立一个模型，通过这个模型根据已知的变量值来预测其他某个变量值属于数据挖掘的哪一类任务？<br>A. 根据内容检索<br>B. 建模描述<br>C. 预测建模<br>D. 寻找模式和规则<details>
 <summary><u>答案：</u></summary>
 选C。
@@ -891,7 +901,7 @@
 
 </li>
 </ol>
-<ol start="16">
+<ol start="15">
 <li>以下哪种方法不属于特征选择的标准方法：<br>A. 嵌入<br>B. 过滤<br>C. 包装<br>D. 抽样<details>
 <summary><u>答案：</u></summary>
 选D。
@@ -901,7 +911,7 @@
 
 </li>
 </ol>
-<ol start="17">
+<ol start="16">
 <li><p>说下红黑树的五个性质。</p>
 <details>
 <summary><u>答案：</u></summary>
@@ -914,7 +924,7 @@
 
 </li>
 </ol>
-<ol start="18">
+<ol start="17">
 <li><p>简述下什么是生成对抗网络。（*）</p>
 <details>
 <summary><u>答案：</u></summary>
@@ -926,7 +936,7 @@
 
 </li>
 </ol>
-<ol start="19">
+<ol start="18">
 <li><p>快速排序算法。</p>
 <details>
 <summary><u>答案：</u></summary>
@@ -976,7 +986,7 @@ quickSort(arr[], low, high)
 
 </li>
 </ol>
-<ol start="20">
+<ol start="19">
 <li><p>说说常见的损失函数。</p>
 <details>
 <summary><u>答案：</u></summary>
@@ -1004,7 +1014,7 @@ quickSort(arr[], low, high)
 
 </li>
 </ol>
-<ol start="21">
+<ol start="20">
 <li><p>交叉熵函数与最大似然函数的联系和区别？</p>
 <details>
 <summary><u>答案：</u></summary>
@@ -1017,7 +1027,7 @@ quickSort(arr[], low, high)
 
 </li>
 </ol>
-<ol start="22">
+<ol start="21">
 <li><p>计算三个稠密矩阵 A、B、C 的乘积 ABC，假定三个矩阵的尺寸分别为 m*n, n*p,p*q，且 m&lt;n&lt;p&lt;q，以下计算效率最高的是<br>A. (AB)C<br>B. A(BC)<br>C. (AC)B<br>D. (BC)A</p>
 <details>
 <summary><u>答案：</u></summary>
@@ -1030,7 +1040,7 @@ quickSort(arr[], low, high)
 
 </li>
 </ol>
-<ol start="23">
+<ol start="22">
 <li><p>已知一组数据的协方差矩阵P，下面关于主分量说法错误的是<br>A. 主分量分析的最佳准则是对一组数据进行按一组正交基分解，在只取相同数量分量的条件下，以均方误差计算截尾误差最小<br>B. 在经主分量分解后，协方差矩阵成为对角矩阵<br>C. 主分量分析就是K-L变换<br>D. 主分量是通过求协方差矩阵的特征值得到</p>
 <details>
 <summary><u>答案：</u></summary>
@@ -1042,7 +1052,7 @@ quickSort(arr[], low, high)
 
 </li>
 </ol>
-<ol start="24">
+<ol start="23">
 <li><p>模式识别中，马式距离较之于欧式距离的优点是<br>A. 平移不变性<br>B. 旋转不变性<br>C. 尺度不变性<br>D. 考虑了模式的分布</p>
 <details>
 <summary><u>答案：</u></summary>
@@ -1050,6 +1060,57 @@ quickSort(arr[], low, high)
 <p>选CD。<br>欧式距离特性有：平移不变性、旋转不变性。$$d_E(\mathbf{x},\mathbf{y})=\sqrt{(\mathbf{x}-\mathbf{y})^T(\mathbf{x}-\mathbf{y})}$$<br>马式距离特性有：平移不变性、旋转不变性、尺度缩放不变性、不受量纲影响、考虑了模式的分布。$$d_M(\mathbf{x},\mathbf{y})=\sqrt{(\mathbf{x}-\mathbf{y})^T\Sigma^{-1}(\mathbf{x}-\mathbf{y})}$$ $\Sigma$是$\mathbf{x}$和$\mathbf{y}$协方差矩阵。</p>
 </details>
 
+
+
+</li>
+</ol>
+<ol start="24">
+<li><p>下面程序的功能是输出数组的全排列,选择正确的选项,完成其功能。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">perm</span><span class="params">(<span class="keyword">int</span> <span class="built_in">list</span>[], <span class="keyword">int</span> k, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (▊▊▊)</span><br><span class="line">&#123;</span><br><span class="line">    copy(<span class="built_in">list</span>,<span class="built_in">list</span>+m,ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">cout</span>,<span class="string">" "</span>));</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=k; i&lt;=m; i++)</span><br><span class="line">&#123;</span><br><span class="line">    swap(&amp;<span class="built_in">list</span>[k],&amp;<span class="built_in">list</span>[i]);</span><br><span class="line">    (▊▊▊);</span><br><span class="line">    swap(&amp;<span class="built_in">list</span>[k],&amp;<span class="built_in">list</span>[i]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>A. k!=m 和 perm(list,k+1,m)<br>B. k==m 和 perm(list,k+1,m)<br>C. k!=m 和 perm(list,k,m)<br>D. k==m 和 perm(list,k,m)</p>
+<details>
+<summary><u>答案：</u></summary>
+选B。k输入时为0，递归直到k=m结束。
+第一个swap是依次将第k个元素和k~m个元素交换，交换完后进入递归，再全排列其子数组。递归调用，之所以从k+1开始，是因为如果传入的是k的话，递归传进去的参数不变，递归将永无止境的递归下去，因为k永远不会等于m。
+第二个swap是将该层交换完后的数组再还原，目的是为了使递归返回后不改变上一层的数组元素顺序，方便下一次交换。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="25">
+<li>若有33个长度不等的初始归并段，做7路平衡归并排序，为组织最佳归并树，应增加长度为0的初始归并段的个数是<strong>____</strong>。<br>A. 0<br>B. 2<br>C. 4<br>D. 6<details>
+<summary><u>答案：</u></summary>
+(33+2)/7=5;
+(5+2)/7=1;
+2+2=4.选C
+</details>
+
+
+
+</li>
+</ol>
+<ol start="26">
+<li>将一个整数序列整理为升序，两趟处理后序列变为10,12,21,9,7,3,4,25，则采用的排序算法可能是<strong>____</strong>。<br>A. 插入排序<br>B. 选择排序<br>C. 快速排序<br>D. 堆排序<details>
+<summary><u>答案：</u></summary>
+选A。
+B错，排两次应该前两个数最小。
+C错，快排每次选一个“基准”，左边全部小于基准，右边全部大于基准。
+D错，第一趟就应该使得第一个非叶子节点len/2-1=3 (9) 比 2*3+1=7 (25) 大。
+第一个非叶子节点 i=len/2-1，与它的子节点 2i+1, 2i+2 对比。
+</details>
+
+
+
+</li>
+</ol>
+<ol start="27">
+<li>在机器学习任务中经常假设矩阵为n×n的对称矩阵A， 则以下说法正确的是<br>A. 对称矩阵为满秩矩阵<br>B. 对称矩阵的列向量之间正交<br>C. 对应于A的不同特征值的特征向量之间正交<br>D. 对应于A的相同特征值得特征向量之间正交<details>
+<summary><u>答案：</u></summary>
+选C。
+</details>
 
 
 </li>
@@ -1283,7 +1344,7 @@ quickSort(arr[], low, high)
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/categories/Math">数学相关</a>
+      <a class="nav-item-link" href="/categories/Math">数 · 统</a>
     </li>
     
     <li class="nav-item">

@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    『地平线上这个世界』 |  Dream d&#39;Orange
+    概率 &amp; 统计 &amp; 逻辑 &amp; 数据结构 |  Dream d&#39;Orange
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -31,7 +31,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-voyage-blog0" class="article article-type-post" itemscope
+  <article id="post-math-logique" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -39,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  『地平线上这个世界』
+  概率 &amp; 统计 &amp; 逻辑 &amp; 数据结构
 </h1>
   
 
@@ -48,12 +48,12 @@
 
     
     <div class="article-meta">
-      <a href="/2020/04/06/voyage-blog0/" class="article-date">
-  <time datetime="2020-04-06T15:47:59.000Z" itemprop="datePublished">2020-04-06</time>
+      <a href="/2020/05/05/math-logique/" class="article-date">
+  <time datetime="2020-05-05T07:05:36.000Z" itemprop="datePublished">2020-05-05</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Voyage/">Voyage</a>
+    <a class="article-category-link" href="/categories/Math/">Math</a>
   </div>
 
       
@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0字</span>
+            <span class="post-count">1.1k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1分钟</span>
+            <span class="post-count">4分钟</span>
         </span>
     </span>
 </div>
@@ -97,7 +97,67 @@
       
 
       
-      
+      <ol>
+<li><p><strong>N个人中有两个人是同一天生日的概率。（一年365天，N&lt;365）</strong></p>
+<ul>
+<li><p>每个人的生日都有365个可能：$365^N$</p>
+</li>
+<li><p>每一个人的生日都不重复：</p>
+<ul>
+<li>第一个人：365种选择</li>
+<li>第二个人：除去第一个人的生日，有364种选择</li>
+<li>第三个人：除去前面两个人的生日，有363种选择</li>
+</ul>
+<p>共 $365\times364\times\cdots\times(365-(N-1))$个可能</p>
+</li>
+<li><p>至少有两个人是同一天生日的概率：$\displaystyle 1-\frac{365\times364\times\cdots\times(365-(N-1))}{365^N}$</p>
+</li>
+<li><p>仅有两个人是同一天生日：</p>
+<ul>
+<li>前N-1个人生日都不同：$365\times364\times\cdots\times(365-(N-2))$种</li>
+<li>最后一个人生日同前面某个人：$N-1$种</li>
+</ul>
+<p>概率：$\displaystyle \frac{365\times364\times\cdots\times(365-(N-2))(N-1)}{365^N}$</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p><strong>有2堆宝石，A和B一起玩游戏，假设俩人足够聪明，规则是每个人只能从一堆选走1个或2个或3个宝石，最后全部取玩的人获胜，假设2堆宝石的数目为12和13，请问A怎么可以必胜？<br> A. 让A先取<br> B. 让B先取<br> C. 没有策略能够让A必胜<br> D. 说法都不正确</strong></p>
+<p> 让A先取，先把13取走一个，让两堆数量相同。B再在哪堆取，A就在同一堆取：如果B取1个，A在同堆取3个；如果B取2个，A取同堆2个；如果B取3个，A取同堆1个。如此保证A每次取完后每堆剩余的数目一直是4的倍数，B无法全部取走。</p>
+</li>
+</ol>
+<ol start="3">
+<li><p><strong>从数字集合{1,2,3,4,… ,20}中选出3个数字的子集，如果不允许两个相连的数字出现在同一集合中，那么能够形成多少个这种子集？<br> A. 816<br> B. 220<br> C. 340<br> D. 620</strong></p>
+<p> 插空法，把3个球插入17个球中间，就是有18个空位来放这3个球：$C^3_{18}=816$，选A。</p>
+</li>
+</ol>
+<ol start="4">
+<li><p><strong>将3个不一样的球随机放入4个杯子中，则杯子中球的最大个数为2的概率是?<br> A. 9/16<br> B. 3/4<br> C. 3/8<br> D. 3/16</strong></p>
+<p> 所有的情况，每个球都有4种方法：$4\times 4\times 4=64$<br> 选2个放在其中一个杯子$C^2_3$，这个杯子有$C^1_4$个选择，剩1个球放在其他三个杯子之一$C^1_3$：$C^2_3\times 4\times 3=36$<br> 最终概率为：$36/64 = 9/16$，选A。</p>
+</li>
+</ol>
+<ol start="5">
+<li><p><strong>在数理统计中， 一般通过增加抽样次数取平均来使得预估误差减小， 在机器学习中也有类似的模型处理， 如随机森林， 通过引入随机样本并且增加决策树的数据，对于随机森林主要降低预估的哪个方面值<br> A. 预估偏差<br> B. 预估方差<br> C. 噪音<br> D. 全部</strong></p>
+<p> 选B。增加数据是降低由数据的不稳定性所带来的方差，增加模型复杂度是降低偏差，另外噪音是无法避免的。</p>
+</li>
+</ol>
+<ol start="6">
+<li><p><strong>一个快递公司对同一年龄段的员工，进行汽车，三轮车，二轮车平均送件量的比较，结果给出sig.=0.034，说明<br> A. 三类交通工具送件量有差别的可能性是0.034<br> B. 三类交通工具送件量没有差别的可能性是0.034<br> C. 交通工具对送件量没影响。<br> D. 按照0.05显著性水平，拒绝H0，说明三类交通工具送件量有显著差异</strong></p>
+<p> 选D。</p>
+<p> SIG.=significance，显著性，后面的值就是统计出的P值：</p>
+<ul>
+<li>如果$p&lt;\alpha$，则在显著性水平为$\alpha$下拒绝$H_0$。</li>
+<li>如果$p&gt;\alpha$，则在显著性水平为$\alpha$下接受$H_0$。</li>
+</ul>
+</li>
+</ol>
+<ol start="7">
+<li><p><strong>小明在一次班干部二人竞选中，支持率为百分之五十五，而置信水平0.95以上的置信区间为百分之五十到百分之六十，请问小明未当选的可能性有可能是<br> A. 40%<br> B. 50%<br> C. 5%<br> D. 3%</strong></p>
+<p> 这里小明在一次班干部二人竞选中，支持率为55%（真实支持率），而置信水平0.95以上的置信区间为50%到60%。也就是说他的真实支持率只有95%的几率落在50%到60%，因此它的真实支持率不足一半的可能性小于5%。这里是两人竞选，未当选也就是支持率不足一半，因此小明未当选的可能性是小于5%的，可能是3%。</p>
+</li>
+</ol>
+
       
       <!-- reward -->
       
@@ -166,7 +226,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/04/06/voyage-blog0/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/05/math-logique/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -182,19 +242,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/04/29/pca-and-fa/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            主成分分析 (PCA) 和因子分析 (FA)
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/04/03/nlp-cheatsheet/" class="article-nav-link">
+      <a href="/2020/05/01/mysql-notes/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">NLP CheatSheet</div>
+        <div class="article-nav-title">MySQL学习笔记</div>
       </a>
     
   </nav>

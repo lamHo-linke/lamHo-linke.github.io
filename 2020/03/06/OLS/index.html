@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    白痴版普通最小二乘法OLS的求解过程 |  Dream d&#39;Orange
+    普通最小二乘法OLS的手把手求解 |  Dream d&#39;Orange
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -31,7 +31,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-白痴版普通最小二乘法OLS的求解过程" class="article article-type-post" itemscope
+  <article id="post-OLS" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -39,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  白痴版普通最小二乘法OLS的求解过程
+  普通最小二乘法OLS的手把手求解
 </h1>
   
 
@@ -48,7 +48,7 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/06/%E7%99%BD%E7%97%B4%E7%89%88%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/" class="article-date">
+      <a href="/2020/03/06/OLS/" class="article-date">
   <time datetime="2020-03-05T16:32:32.000Z" itemprop="datePublished">2020-03-06</time>
 </a>
       
@@ -130,8 +130,8 @@
 <p>约掉2，然后两边都乘$\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}$（需要$\boldsymbol{X}^T\boldsymbol{X}$可逆）<br>$$<br>\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}\boldsymbol{X}^T\boldsymbol{X\beta }=\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}\boldsymbol{X}^T\mathbf{y}<br>$$</p>
 <p>$\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}\left( \boldsymbol{X}^T\boldsymbol{X} \right) =\boldsymbol{I}$，$\boldsymbol{I}$是一个pxp的单位矩阵，那么$\boldsymbol{I\beta }=\boldsymbol{\beta }$，所以求出来<br>$$<br>\hat{\beta}_{OLS}=\left( \boldsymbol{X}^T\boldsymbol{X} \right) ^{-1}\boldsymbol{X}^T\mathbf{y}<br>$$</p>
 <p>Done！</p>
-<h2 id="3-再补充点说明"><a href="#3-再补充点说明" class="headerlink" title="3. 再补充点说明"></a>3. 再补充点说明</h2><h3 id="3-1-Q1：什么函数能找到它的最小值？"><a href="#3-1-Q1：什么函数能找到它的最小值？" class="headerlink" title="3.1 Q1：什么函数能找到它的最小值？"></a>3.1 Q1：什么函数能找到它的最小值？</h3><p>令偏导为零能找到最小值？<br>对于残差平方和这个函数$L(\boldsymbol{\beta})$是的，这是一个凸函数。<br>一元函数$f\left( x \right) =\left( x-4 \right) ^2+3$，我们求一阶导数$f’\left( x \right) =2\left( x-4 \right)$，再求二阶导数$f’’\left( x \right) =2$，<font color='red'>二阶导大于零</font>，所以这个函数是凸函数，可以在导数等于零的时候找到最小值。<br>多元函数$L(\boldsymbol{\beta})$，一阶导刚才我们求出来，是$\displaystyle\frac{\partial L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }}=-2\boldsymbol{X}^T\mathbf{y}+2\boldsymbol{X}^T\boldsymbol{X\beta }$，继续求二阶导$\displaystyle\frac{\partial ^2L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }^2}=2\boldsymbol{X}^T\boldsymbol{X}$，求出来这个二阶导是个矩阵。跟一元函数类似的，<font color='red'>二阶导如果是一个正定矩阵（类比正实数）</font>，那么这个函数是凸函数，可以找到最小值。而$2\boldsymbol{X}^T\boldsymbol{X}$是一个正定矩阵，因为$\boldsymbol{X}$是满秩的（基于各变量X相互独立的基本假设）。</p>
-<h3 id="3-2-Q2：-boldsymbol-X-T-boldsymbol-X-可逆？"><a href="#3-2-Q2：-boldsymbol-X-T-boldsymbol-X-可逆？" class="headerlink" title="3.2 Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？"></a>3.2 Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？</h3><p>$\boldsymbol{X}^T\boldsymbol{X}$可逆？<br>$\boldsymbol{X}^T\boldsymbol{X}$是正定矩阵  $\Longrightarrow\boldsymbol{X}^T\boldsymbol{X}$的行列式大于零<br>行列式$\ne 0\Longrightarrow$ 可逆</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="Q1：什么函数能找到它的最小值？"><a href="#Q1：什么函数能找到它的最小值？" class="headerlink" title="Q1：什么函数能找到它的最小值？"></a>Q1：什么函数能找到它的最小值？</h3><p>令偏导为零能找到最小值？<br>对于残差平方和这个函数$L(\boldsymbol{\beta})$是的，这是一个凸函数。<br>一元函数$f\left( x \right) =\left( x-4 \right) ^2+3$，我们求一阶导数$f’\left( x \right) =2\left( x-4 \right)$，再求二阶导数$f’’\left( x \right) =2$，<font color='red'>二阶导大于零</font>，所以这个函数是凸函数，可以在导数等于零的时候找到最小值。<br>多元函数$L(\boldsymbol{\beta})$，一阶导刚才我们求出来，是$\displaystyle\frac{\partial L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }}=-2\boldsymbol{X}^T\mathbf{y}+2\boldsymbol{X}^T\boldsymbol{X\beta }$，继续求二阶导$\displaystyle\frac{\partial ^2L\left( \boldsymbol{\beta } \right)}{\partial \boldsymbol{\beta }^2}=2\boldsymbol{X}^T\boldsymbol{X}$，求出来这个二阶导是个矩阵。跟一元函数类似的，<font color='red'>二阶导如果是一个正定矩阵（类比正实数）</font>，那么这个函数是凸函数，可以找到最小值。而$2\boldsymbol{X}^T\boldsymbol{X}$是一个正定矩阵，因为$\boldsymbol{X}$是满秩的（基于各变量X相互独立的基本假设）。</p>
+<h3 id="Q2：-boldsymbol-X-T-boldsymbol-X-可逆？"><a href="#Q2：-boldsymbol-X-T-boldsymbol-X-可逆？" class="headerlink" title="Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？"></a>Q2：$\boldsymbol{X}^T\boldsymbol{X}$可逆？</h3><p>$\boldsymbol{X}^T\boldsymbol{X}$可逆？<br>$\boldsymbol{X}^T\boldsymbol{X}$是正定矩阵  $\Longrightarrow\boldsymbol{X}^T\boldsymbol{X}$的行列式大于零<br>行列式$\ne 0\Longrightarrow$ 可逆</p>
 <p>这些问题在「<a href="/2020/03/08/%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BA%8B/" title="矩阵的一些事：满秩矩阵、正定矩阵和可逆矩阵">矩阵的一些事：满秩矩阵、正定矩阵和可逆矩阵</a>」这篇文章有详解，这里一两句话说不完。</p>
 <p>$$ ===== Fin =====$$</p>
 <p>参考资料：</p>
@@ -207,7 +207,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/06/%E7%99%BD%E7%97%B4%E7%89%88%E6%99%AE%E9%80%9A%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95OLS%E7%9A%84%E6%B1%82%E8%A7%A3%E8%BF%87%E7%A8%8B/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/06/OLS/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -234,11 +234,6 @@
         </div>
       </a>
     
-    
-      <a href="/2020/03/05/2020%E6%98%A5%EF%BC%8C%E6%98%AF%E4%B8%96%E7%95%8C%E6%9C%AB%E6%97%A5%E7%9A%84%E5%BC%80%E7%AB%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E9%BB%8E%E6%98%8E%E5%89%8D%E7%9A%84%E9%BB%91%E6%9A%97/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">2020春，是世界末日的开端，还是黎明前的黑暗</div>
-      </a>
     
   </nav>
 
@@ -367,7 +362,7 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/categories/Math">数学相关</a>
+      <a class="nav-item-link" href="/categories/Math">数 · 统</a>
     </li>
     
     <li class="nav-item">

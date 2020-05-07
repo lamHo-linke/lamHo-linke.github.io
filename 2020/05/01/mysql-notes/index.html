@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    MySQL学习笔记 |  Dream d&#39;Orange
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/orange-favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<script src="/js/pace.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-mysql-notes" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  MySQL学习笔记
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/01/mysql-notes/" class="article-date">
+  <time datetime="2020-05-01T14:26:50.000Z" itemprop="datePublished">2020-05-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Data/">Data</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.3k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><ol>
+<li><strong>更改数据库名字。</strong><br> 例如 db_1 想要改成 db_2：<br> 在Navicat打开数据库db_1，右键-&gt;转储SQL文件-&gt;结构和数据，选择存储的文件夹位置，存为db_1.sql文件；<br> 记事本打开db_1.sql，更改<code>Source Database: db_1</code>为<code>Source Database: db_2</code><br> 在Navicat新建数据库db_2，右键-&gt;运行SQL文件，选择刚才的db_1.sql文件，运行可copy刚才db_1的数据，完成后删除db_1即可。</li>
+</ol>
+<ol start="2">
+<li><strong>导入csv文件，选了utf8编码依然显示乱码。</strong><br> 将csv文件用记事本打开另存为utf8编码，或者是用Excel打开另存为csv的utf8编码格式，再导入即可解决。</li>
+</ol>
+<ol start="3">
+<li><strong>从客户端拖拽导入大量级的数据文件很慢。</strong><br> 在MySQL终端用coding导入更快。 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; load data local infile &#39;G:\\practice01\\order_info_utf.csv&#39; into table practice01.</span><br><span class="line">orderinfo</span><br><span class="line">    -&gt; fields terminated by &#39;,&#39;;</span><br><span class="line">Query OK, 539414 rows affected, 65535 warnings (34.19 sec)</span><br><span class="line">Records: 539414  Deleted: 0  Skipped: 0  Warnings: 77610</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><strong>在开始菜单点击MySQL的终端（MySQL 8.0 Command Line Client -  Unicode），运行以上语句导入数据报错：<br> ERROR 3948 (42000): Loading local data is disabled; this must be enabled on both the client and server sides</strong><br> 在cmd进入MySQL的bin文件夹，运行MySQL，设置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set global local_infile&#x3D;on;</span><br></pre></td></tr></table></figure>
+ 可用。</li>
+</ol>
+<ol start="5">
+<li><p><strong>时间函数</strong><br> <code>DATE(data)</code>：返回日期<br> <code>DATE_FORMAT(date,format)</code>：返回自定义format的日期</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%Y</td>
+<td>年，4 位</td>
+</tr>
+<tr>
+<td>%y</td>
+<td>年，2 位</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>月名，March之类</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月，数值(00-12)</td>
+</tr>
+</tbody></table>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> paidTime, <span class="built_in">DATE</span>(paidTime), <span class="keyword">DATE_FORMAT</span>(paidTime,<span class="string">'%Y-%m'</span>) <span class="keyword">FROM</span> orderinfo</span><br></pre></td></tr></table></figure>
+ <img src='https://pic.downk.cc/item/5eac3968c2a9a83be5afed3d.png'>
+
+<p> <code>DATE_ADD(data,INTERVAL 1 DAY)</code>：数字+DAY/WEEK/MONTH/YEAR</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> paidTime, <span class="keyword">DATE_ADD</span>(paidTime,<span class="built_in">INTERVAL</span> <span class="number">1</span> <span class="keyword">DAY</span>) <span class="keyword">FROM</span> orderinfo</span><br></pre></td></tr></table></figure>
+ <img src='https://pic.downk.cc/item/5eac475dc2a9a83be5c00beb.png'>
+
+
+
+</li>
+</ol>
+<ol start="6">
+<li><strong>IF函数</strong><br> <code>IF(expr,value1,value2)</code>：如果expr是True，返回value1，否则返回value2</li>
+</ol>
+<ol start="7">
+<li><strong>COUNT函数</strong><br> <code>COUNT(expr)</code><br> 或者 <code>COUNT(1)</code> <code>COUNT(*)</code>，默认对行进行计数</li>
+</ol>
+<ol start="8">
+<li><strong>LIMIT</strong><br> 限制提取的数据量<br> <code>LIMIT 5</code>：0<del>4<br> <code>LIMIT 5,10</code>：6</del>15<br> <code>LIMIT 50,-1</code>：51~最后</li>
+</ol>
+<hr>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ol>
+<li>哪个不是DDL(数据库定义语言)语句？<br> A. ALTER<br> B. CREATE<br> C. RENAME<br> D. GRANT <details>
+ <summary><u>答案：</u></summary>
+ D.
+ DDL（Data Denifition Language）：数据定义语言关键字：create、drop、alter、rename创建、删除、更改表结构、rename table 旧表名 to 新表名
+ DML（Data Manipulation Language）：数据操作语言关键字：insert、delete、update插入、删除、更改数据
+ DQL（Data Query Language）：数据查询语言关键字：select查询数据
+ TCL（Trasactional Conrtol Language）：事务控制语言关键字：commit、rollback用来提交和回滚事务
+ DCL（Data Conrtol Language）：数据控制语言关键字：grant、revoke用来设置或更改数据库用户或角色权限
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li>对于SQL语句select * from t where a=100 and b=200，哪个索引可以使用到？<br> A. 索引idx_b(b)<br> B. 索引idx_b_a(b,a)<br> C. 索引idx_a_b(a,b)<br> D. 都可以 <details>
+ <summary><u>答案：</u></summary>
+ D.
+ </details>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li>若要在员工信息表EMP中增加一列WANGYI_NO（网易id），可用（ ）。<br> A. ADD TABLE EMP (WANGYI_NO CHAR (10))<br> B. ADD TABLE EMP ALTER (WANGYI_NO CHAR (10))<br> C. ALTER TABLE EMP ADD (WANGYI_NO CHAR (10))<br> D. ALTER TABLE EMP (ADD WANGYI_NO CHAR (10)) <details>
+ <summary><u>答案：</u></summary>
+ C.
+ </details>
+
+
+
+
+
+
+</li>
+</ol>
+<hr>
+<h2 id="Practice01"><a href="#Practice01" class="headerlink" title="Practice01"></a>Practice01</h2><ol>
+<li>统计不同月份的下单人数 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DATE_FORMAT</span>(paidTime,<span class="string">'%Y-%m'</span>), <span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> userId) <span class="keyword">FROM</span> orderinfo</span><br><span class="line"><span class="keyword">WHERE</span> isPaid = <span class="string">'已支付'</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">DATE_FORMAT</span>(paidTime,<span class="string">'%Y-%m'</span>)</span><br></pre></td></tr></table></figure>
+ <img src='https://pic.downk.cc/item/5eacd5c8c2a9a83be5396f02.png'>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>统计用户三月份的复购率和回购率<br> <strong>衡量用户的消费欲望的指标</strong><br> 复购率：一段时间内多次消费的用户占总消费用户的比率。如，4月有1000位用户消费，其中500位消费了两次以上，复购率为50%。衡量较高频的消费欲望，如外卖。<br> 回购率：一段时间内消费过的用户，在下一段时间内仍旧消费的占比。如，4月的消费用户数1000位，其中600位在5月继续消费，回购率为60%。衡量较中频的消费欲望，如本月购买，下月再会购买。</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(num_user), <span class="keyword">COUNT</span>(<span class="keyword">IF</span>(num_user&gt;<span class="number">1</span>,<span class="number">1</span>,<span class="literal">NULL</span>)) <span class="keyword">FROM</span></span><br><span class="line">    <span class="comment"># COUNT(num_user): 全部的用户数</span></span><br><span class="line">    (<span class="keyword">SELECT</span> userId, <span class="keyword">COUNT</span>(userId) <span class="keyword">AS</span> num_user <span class="keyword">FROM</span> orderinfo</span><br><span class="line">        <span class="keyword">WHERE</span>	isPaid = <span class="string">'已支付'</span></span><br><span class="line">        <span class="keyword">AND</span> <span class="keyword">DATE_FORMAT</span>(paidTime, <span class="string">'%Y-%m'</span>) = <span class="string">'2016-03'</span></span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> userId) t</span><br></pre></td></tr></table></figure>
+ <img src='https://pic.downk.cc/item/5eace1d0c2a9a83be546560c.png'>
+ 复购率：16916/54799=30.87%
+
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t1.mon, <span class="keyword">COUNT</span>(t1.mon), <span class="keyword">COUNT</span>(t2.mon) <span class="keyword">FROM</span></span><br><span class="line">    (<span class="keyword">SELECT</span> userId, <span class="keyword">DATE_FORMAT</span>(paidTime,<span class="string">'%Y-%m-01'</span>) <span class="keyword">AS</span> mon <span class="keyword">FROM</span> orderinfo</span><br><span class="line">    <span class="keyword">WHERE</span> isPaid = <span class="string">'已支付'</span></span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> userId, <span class="keyword">DATE_FORMAT</span>(paidTime,<span class="string">'%Y-%m-01'</span>)) t1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span></span><br><span class="line">    (<span class="keyword">SELECT</span> userId, <span class="keyword">DATE_FORMAT</span>(paidTime,<span class="string">'%Y-%m-01'</span>) <span class="keyword">AS</span> mon <span class="keyword">FROM</span> orderinfo</span><br><span class="line">    <span class="keyword">WHERE</span> isPaid = <span class="string">'已支付'</span></span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> userId, <span class="keyword">DATE_FORMAT</span>(paidTime,<span class="string">'%Y-%m-01'</span>)) t2</span><br><span class="line"><span class="keyword">ON</span> t1.userId=t2.userId <span class="keyword">AND</span> t1.mon=<span class="keyword">DATE_SUB</span>(t2.mon, <span class="built_in">INTERVAL</span> <span class="number">1</span> <span class="keyword">MONTH</span>)</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> t1.mon</span><br></pre></td></tr></table></figure>
+ <img src='https://pic.downk.cc/item/5ead291cc2a9a83be58e68d5.png'>
+
+<p> 说明：self join 得到的结果</p>
+ <img src='https://pic.downk.cc/item/5ead28bfc2a9a83be58e25a7.png'>
+ 如果t2中减去一个月的日期没和t1匹配上，是NULL，那就表示本月用户在上月并没有消费。
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li>统计男女用户的消费频次是否有差异 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> sex, <span class="keyword">AVG</span>(<span class="keyword">num</span>) <span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> o.userId,sex,<span class="keyword">COUNT</span>(<span class="number">1</span>) <span class="keyword">AS</span> <span class="keyword">num</span> <span class="keyword">FROM</span> orderinfo o</span><br><span class="line">    <span class="keyword">JOIN</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> userinfo</span><br><span class="line">        <span class="keyword">WHERE</span> sex &lt;&gt; <span class="string">''</span>) u</span><br><span class="line">    <span class="keyword">ON</span> o.userId=u.userId</span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> o.userId, sex </span><br><span class="line">    <span class="comment"># 同一用户存在多次消费，所以先group by userId</span></span><br><span class="line">) t</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> sex</span><br></pre></td></tr></table></figure>
+ <img src='https://pic.downk.cc/item/5ead2d5bc2a9a83be5916241.png'>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li>统计多次消费的用户，第一次和最后一次消费间隔是多少 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> userId, <span class="keyword">DATEDIFF</span>(<span class="keyword">max</span>(paidTime),<span class="keyword">min</span>(paidTime)) <span class="keyword">AS</span> <span class="keyword">DAYS</span> <span class="keyword">FROM</span> orderinfo</span><br><span class="line"><span class="keyword">WHERE</span> isPaid = <span class="string">'已支付'</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> userId</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(<span class="number">1</span>)&gt;<span class="number">1</span></span><br></pre></td></tr></table></figure>
+ <img src='https://pic.downk.cc/item/5ead321bc2a9a83be5954cfc.png'>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li>统计不同年龄段，用户的消费金额是否有差异 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> age, <span class="keyword">AVG</span>(price) <span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> o.userId,age, price <span class="keyword">FROM</span> orderinfo o</span><br><span class="line">    <span class="keyword">JOIN</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> userId, <span class="keyword">CEIL</span>((<span class="keyword">YEAR</span>(<span class="keyword">NOW</span>())-<span class="keyword">YEAR</span>(birth))/<span class="number">10</span>) <span class="keyword">AS</span> age <span class="keyword">FROM</span> userinfo</span><br><span class="line">        <span class="keyword">WHERE</span> birth&gt;<span class="string">'1901-00-00'</span></span><br><span class="line">    ) u</span><br><span class="line">    <span class="keyword">ON</span> o.userId=u.userId</span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> o.userId, age</span><br><span class="line">    <span class="keyword">WHERE</span> isPaid = <span class="string">'已支付'</span></span><br><span class="line">) t</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> age</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> age</span><br></pre></td></tr></table></figure>
+ <img src='https://pic.downk.cc/item/5ead3a1fc2a9a83be59dfeaa.png'>
+
+
+
+</li>
+</ol>
+<ol start="6">
+<li><p>统计消费的二八法则，消费的top20%用户，贡献了多少额度<br> 有多少用户：</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(userId),<span class="keyword">SUM</span>(total) <span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> userId, <span class="keyword">SUM</span>(price) <span class="keyword">AS</span> total <span class="keyword">FROM</span> orderinfo</span><br><span class="line">    <span class="keyword">WHERE</span> isPaid=<span class="string">'已支付'</span></span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> userId</span><br><span class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span> total <span class="keyword">DESC</span></span><br><span class="line">) t</span><br></pre></td></tr></table></figure>
+
+ <imr src='https://pic.downk.cc/item/5ead3dfec2a9a83be5a1ebd7.png'>
+
+<p> 85649*20%=17130，加多个LIMIT限制只取前20%：</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(userId),<span class="keyword">SUM</span>(total) <span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> userId, <span class="keyword">SUM</span>(price) <span class="keyword">AS</span> total <span class="keyword">FROM</span> orderinfo</span><br><span class="line">    <span class="keyword">WHERE</span> isPaid=<span class="string">'已支付'</span></span><br><span class="line">    <span class="keyword">GROUP</span> <span class="keyword">BY</span> userId</span><br><span class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span> total <span class="keyword">DESC</span></span><br><span class="line">    <span class="keyword">LIMIT</span> <span class="number">17130</span></span><br><span class="line">) t</span><br></pre></td></tr></table></figure>
+
+ <img src='https://pic.downk.cc/item/5ead3ed0c2a9a83be5a2a97d.png'></li>
+</ol>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong s>
+              本博客所有文章除特别声明外，均采用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 许可协议。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/01/mysql-notes/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CheatSheet/" rel="tag">CheatSheet</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/05/05/math-logique/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            概率 &amp; 统计 &amp; 逻辑 &amp; 数据结构
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/04/29/pca-and-fa/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">主成分分析 (PCA) 和因子分析 (FA)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: 'IWtOhB4nNoD1F4BDWzQYMALe-gzGzoHsz',
+        app_key: 'k0iOFayd99sSBGuohToahHe3',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '有任何意见可以留言告诉我哦(〃^▽^〃) 也可以点侧边栏的 Me° 通过email联系我~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        an 橘
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/orange_logo.png" alt="Dream d&#39;Orange"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">· 起 始 ·</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/ML">机器学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Math">数 · 统</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">Tags</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Voyage">地平线上这个世界</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2020">Me°</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>走过路过赏杯奶茶呗~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['砥砺名行，不疾不徐','',''],
+    startDelay: 0,
+    typeSpeed: 300,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+    
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+
+</html>
