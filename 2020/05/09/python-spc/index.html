@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    用Python实现SPC统计过程控制 |  Dream d&#39;Orange
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/orange-favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<script src="/js/pace.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-python-spc" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  用Python实现SPC统计过程控制
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/09/python-spc/" class="article-date">
+  <time datetime="2020-05-09T13:57:43.000Z" itemprop="datePublished">2020-05-09</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.1k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">15分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="SPC与六西格玛"><a href="#SPC与六西格玛" class="headerlink" title="SPC与六西格玛"></a>SPC与六西格玛</h2><p>SPC (Statistical Process Control) 统计过程控制，是六西格玛工业管理理论的其中一个重要模块。SPC的控制图 (control chart) 是数据可视化的一个重要手段。而控制图的选择应该根据实际需求来，这里不展开讲控制图，关于控制图的细节可以查找其他资料。（7 种控制图，8 个判异准则。）</p>
+<img src='https://pic.downk.cc/item/5eb7b506c2a9a83be53b8e1e.png'>
+
+<p>简单介绍一下六西格玛，就是 6 sigma 的音译，sigma 是什么？接触过统计的人应该会有印象，$\sigma$ 这个符号就是 sigma，一般代表偏差。</p>
+<p>先介绍一下生产质量控制中常用的一个概念 DPMO (Defects Per Million Opportunities)，就是在生产过程中每 100 万个机会中出现的缺陷数。比如在 100 万个焊点里，出现了 1 个缺陷，那么 DPMO 就等于 1。可见 DPMO 是越小越好，最好是为 0。当然在大量的生产过程中这种理想状态出现的几率是非常非常小的。DPMO 的取值会作为衡量生产质量的一个重要指标，下面是 DPMO 对应 sigma 水平的对照表。</p>
+<table>
+<thead>
+<tr>
+<th align="center">sigma level</th>
+<th align="center">DPMO</th>
+<th align="center">yield</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">6</td>
+<td align="center">3.4</td>
+<td align="center">99.99966%</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">230</td>
+<td align="center">99.977%</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">6210</td>
+<td align="center">99.38%</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">66800</td>
+<td align="center">93.32%</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">308000</td>
+<td align="center">69.15%</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">690000</td>
+<td align="center">30.85%</td>
+</tr>
+</tbody></table>
+<p>如果 DPMO 为 3.4 ，对应的 sigma 水平是 6，也就是可以达到 99.99966% 的合格率。所以 sigma 水平就可以作为生产质量的一个评判标准，达到 6 sigma 水平的生产就是非常牛逼的水准了！</p>
+<img src='https://pic.downk.cc/item/5eb7cc68c2a9a83be56d120e.jpg' width=600>
+
+<p>6 个 $\sigma$ 的介绍就到这里，不过六西格玛管理理论远不止于此，除了统计学的知识，大部分是关于精益生产管理。</p>
+<h2 id="U-Chart-案例"><a href="#U-Chart-案例" class="headerlink" title="U Chart 案例"></a>U Chart 案例</h2><p>这是当时工作中遇到的实际需求，要观察生产产品的单位缺陷数。拿到检测机器的测试记录，包括每天检测的产品编号、检测时间、残次件的维修时间、维修人员等等。冗余信息非常多，用 Excel 处理，只提取检测的产品数量和缺陷件数量，按月份统计整理。（现在看回头当时为什么会弄了两个表示时间的列也是百思不得其解。。。。）n 列表示当月检测的产品数量，c 列表示当月的缺陷数。</p>
+<img src='https://pic.downk.cc/item/5eb81213c2a9a83be51b1811.png'>
+
+<p>因为每个月的产品数量是不同的，所以采用用于可变样本量的 U-chart。如果每个月的产品数量相同，用 C-chart。</p>
+<p>Defects per unit: $$u=\frac{c}{n}$$</p>
+<p>Central Limit: $$CL=\bar{u}=\frac{\sum c_i}{\sum n_i}$$</p>
+<p>Upper Central Limit: $$UCL=\bar{u}+3\sqrt{\frac{\bar{u}}{n_i}}$$</p>
+<p>（开方里的是 $\bar{u}$，好像叠起来看不见了）本来还应该算下界的，但是因为 u 肯定是大于 0，且越小越好，所以下界不需要考虑。</p>
+<p>用 pandas 导入整理好的数据命名为 defect_test。计算好3个需要展示的数据：u，CL，UCL。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">time = defect_test[<span class="string">'Month'</span>]</span><br><span class="line">u = defect_test[<span class="string">'c'</span>]/defect_test[<span class="string">'n'</span>]</span><br><span class="line">cl = sum(defect_test[<span class="string">'c'</span>])/sum(defect_test[<span class="string">'n'</span>])</span><br><span class="line">ucl = cl + <span class="number">3</span>*np.sqrt(cl/defect_test[<span class="string">'n'</span>])</span><br></pre></td></tr></table></figure>
+
+<p>用 matplotlib 可视化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cl_s = np.ones(<span class="number">12</span>)*cl</span><br><span class="line">plt.style.use(<span class="string">'ggplot'</span>)</span><br><span class="line">plt.figure(figsize=(<span class="number">15</span>,<span class="number">6</span>))</span><br><span class="line">plt.plot(time,u,<span class="string">'k'</span>,marker=<span class="string">'o'</span>,markersize=<span class="number">10</span>,lw=<span class="number">3</span>,label=<span class="string">'u=c/n'</span>)</span><br><span class="line">plt.plot(time,cl_s,<span class="string">'r'</span>,label=<span class="string">'CL'</span>)</span><br><span class="line">plt.plot(time,ucl,<span class="string">'b--'</span>,label=<span class="string">'UCL'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">'U chart'</span>);</span><br></pre></td></tr></table></figure>
+
+<img src='https://pic.downk.cc/item/5eb81fc3c2a9a83be53e6989.png'>
+
+<p>从上图可以看出，缺陷数u一直在CL附近波动。大部分的u都在UCL以下，但是有两个月是在控制以外 (out of control)，二月和三月。二月份的u值是0.005277，三月份的是0.006198。对应的DPMO值5277和6198，对应了4 sigma的水平，对应Cpk值（工程能力，要求达到1.33以上）是1.33。总而来说，在二月和三月，缺陷数在控制以外，但Cpk还是达到了应有的期望值1.33。整一年生产过程是达到要求的，但是还是需要注意质量控制，需要保持所有的缺陷数在控制范围内。</p>
+<p>对于超出上界限UCL的点判断为异常，在图表上显示出来：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uchart_test</span><span class="params">(c,n,time)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">    </span><br><span class="line">    u = c/n</span><br><span class="line">    cl = sum(c)/sum(n)</span><br><span class="line">    ucl = cl + <span class="number">3</span> * np.sqrt(cl/n)</span><br><span class="line">    cl_s = np.ones(len(time))*cl</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># out of control points</span></span><br><span class="line">    ofc = u[u &gt;= ucl]</span><br><span class="line">    ofc_ind = list(ofc.index)</span><br><span class="line">    ofc_time = time[ofc_ind]</span><br><span class="line">    print(<span class="string">"Out of Control:"</span>)</span><br><span class="line">    <span class="keyword">if</span> len(ofc) == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"All under control."</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> i,j <span class="keyword">in</span> zip(ofc_ind,range(len(ofc))):</span><br><span class="line">            print(str(j+<span class="number">1</span>) + <span class="string">" - "</span> + str(ofc_time[i]) + <span class="string">", "</span> + str(ofc[i]))</span><br><span class="line"></span><br><span class="line">    plt.style.use(<span class="string">'ggplot'</span>)</span><br><span class="line">    plt.figure(figsize=(<span class="number">15</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># plot out of control points</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> ofc_ind:</span><br><span class="line">        plt.scatter(ofc_time[i],ofc[i],c=<span class="string">'r'</span>,s=<span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># plot u chart</span></span><br><span class="line">    plt.plot(time,u,<span class="string">'k'</span>,marker=<span class="string">'o'</span>,markersize=<span class="number">8</span>,lw=<span class="number">3</span>,label=<span class="string">'u=c/n'</span>)</span><br><span class="line">    plt.plot(time,cl_s,<span class="string">'g'</span>,label=<span class="string">'CL'</span>)</span><br><span class="line">    plt.plot(time,ucl,<span class="string">'b--'</span>,label=<span class="string">'UCL'</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.ylim((<span class="number">0</span>,max(u)+<span class="number">0.001</span>))</span><br><span class="line">    plt.title(<span class="string">'U chart'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>用定义好的函数 <code>uchart_test</code>，输入残缺件数c，总件数n，时间time，就可以画出 U chart，并且找出异常点：</p>
+<img src='https://pic.downk.cc/item/5eb8c0d7c2a9a83be577e9e3.png'>
+
+<h2 id="I-MR-Chart-案例"><a href="#I-MR-Chart-案例" class="headerlink" title="I-MR Chart 案例"></a>I-MR Chart 案例</h2><p>使用 I-MR 控制图 可以在拥有连续数据且这些数据是不属于子组的单个观测值的情况下监视过程的均值和变异。使用此控制图可以监视过程在一段时间内的稳定性，以便您可以标识和更正过程中的不稳定性。</p>
+<p>例如，一家医院的管理员想确定门诊疝气手术所用的时间是否稳定，以及手术时间的变异性是否稳定。由于数据不是以子组形式收集的，因此管理员使用 I-MR 控制图监视手术时间的均值和变异性。</p>
+<p>实际看看下面这个数据案例：<br><img src='https://pic.downk.cc/item/5eb8c4fec2a9a83be57efa77.png'></p>
+<p>I-MR Chart 是有两个图：一个是 I Chart (Individual Chart)，一个是 MR Chart (Moving Range Chart)。<br><img src='https://pic.downk.cc/item/5eb8c67fc2a9a83be5822731.png'></p>
+<p>和所有控制图一样，重点是找到 CL，UCL，LCL。</p>
+<p><strong>Tabular values for X and range charts</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Subgroup Size</th>
+<th align="center">E2</th>
+<th align="center">D4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">2.660</td>
+<td align="center">3.268</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">2.660</td>
+<td align="center">3.268</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">1.772</td>
+<td align="center">2.574</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">1.457</td>
+<td align="center">2.282</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">1.290</td>
+<td align="center">2.114</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">1.184</td>
+<td align="center">2.004</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">1.109</td>
+<td align="center">1.924</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">1.054</td>
+<td align="center">1.864</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">1.010</td>
+<td align="center">1.816</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">0.975</td>
+<td align="center">1.777</td>
+</tr>
+</tbody></table>
+<p>subgroup 的大小可以调整，这里我们默认选 1。</p>
+<p>I Chart：$X$</p>
+<p>$$CL_X=\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i$$</p>
+<p>$$UCL_X=\bar{X}+E_2\times \bar{MR}$$</p>
+<p>$$LCL_X=\bar{X}-E_2\times \bar{MR}$$</p>
+<p>MR Chart：$MR=|X_i-X_{i-1}|$ （维度比 X 少 1）</p>
+<p>$$CL_{MR}=\frac{1}{n-1}\sum_{i=2}^n (X_i-X_{i-1})$$</p>
+<p>$$UCL_{MR}=D_4\times \bar{MR}$$</p>
+<p>$$LCL_{MR}=0$$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">xs = data.iloc[:,[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]]</span><br><span class="line">observation = data.iloc[:,[<span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>]]</span><br><span class="line">x = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(xs.shape[<span class="number">1</span>]):</span><br><span class="line">    x.extend(xs.iloc[:,i])</span><br><span class="line">x = np.array(x)</span><br><span class="line">    </span><br><span class="line">obs = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(observation.shape[<span class="number">1</span>]):</span><br><span class="line">    obs.extend(observation.iloc[:,i])</span><br><span class="line">obs = np.array(obs)</span><br><span class="line"></span><br><span class="line">x_bar = x.mean()</span><br><span class="line"></span><br><span class="line"><span class="comment"># move range</span></span><br><span class="line">x_1 = x[:<span class="number">-1</span>]</span><br><span class="line">x_2 = x[<span class="number">1</span>:]</span><br><span class="line">mr = np.array(np.array(list(abs(v - u) <span class="keyword">for</span> u, v <span class="keyword">in</span> zip(x, x[<span class="number">1</span>:]))))</span><br><span class="line"></span><br><span class="line">mr_bar = mr.mean()</span><br><span class="line"></span><br><span class="line"><span class="comment"># E2 = 2.660</span></span><br><span class="line">x_ucl = x_bar + <span class="number">2.660</span> * mr_bar</span><br><span class="line">x_ucl_c = x_bar + <span class="number">2.660</span> * mr_bar * (<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">x_ucl_b = x_bar + <span class="number">2.660</span> * mr_bar * (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line">x_lcl = x_bar - <span class="number">2.660</span> * mr_bar</span><br><span class="line">x_lcl_c = x_bar - <span class="number">2.660</span> * mr_bar * (<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">x_lcl_b = x_bar - <span class="number">2.660</span> * mr_bar * (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># D4 = 3.268</span></span><br><span class="line">mr_ucl = <span class="number">3.268</span> * mr_bar</span><br><span class="line">mr_ucl_c = mr_bar + (mr_ucl - mr_bar) * (<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">mr_ucl_b = mr_bar + (mr_ucl - mr_bar) * (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line">mr_lcl = <span class="number">0</span></span><br><span class="line">mr_lcl_c = mr_bar - (mr_ucl - mr_bar) * (<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">mr_lcl_b = mr_bar - (mr_ucl - mr_bar) * (<span class="number">2</span>/<span class="number">3</span>)   <span class="comment"># &lt;0</span></span><br><span class="line"></span><br><span class="line">n = len(x)</span><br><span class="line"></span><br><span class="line">x_ucl = np.ones(n)*x_ucl</span><br><span class="line">x_ucl_c = np.ones(n)*x_ucl_c</span><br><span class="line">x_ucl_b = np.ones(n)*x_ucl_b</span><br><span class="line">x_lcl = np.ones(n)*x_lcl</span><br><span class="line">x_lcl_c = np.ones(n)*x_lcl_c</span><br><span class="line">x_lcl_b = np.ones(n)*x_lcl_b</span><br><span class="line"></span><br><span class="line">plt.style.use(<span class="string">'ggplot'</span>)</span><br><span class="line">plt.figure(figsize=(<span class="number">15</span>,<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">plt.plot(obs,x, <span class="string">'k'</span>,marker=<span class="string">'o'</span>,markersize=<span class="number">5</span>,lw=<span class="number">2</span>,label=<span class="string">'X'</span>)</span><br><span class="line">plt.plot(obs,np.ones(n)*x_bar,<span class="string">'r'</span>,label=<span class="string">'CL'</span>)</span><br><span class="line">plt.plot(obs,x_ucl,<span class="string">'b'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs,x_ucl_c,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs,x_ucl_b,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs,x_lcl,<span class="string">'b'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs,x_lcl_c,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs,x_lcl_b,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">'I chart'</span>)</span><br><span class="line"></span><br><span class="line">mr_ucl = np.ones(n<span class="number">-1</span>)*mr_ucl</span><br><span class="line">mr_ucl_c = np.ones(n<span class="number">-1</span>)*mr_ucl_c</span><br><span class="line">mr_ucl_b = np.ones(n<span class="number">-1</span>)*mr_ucl_b</span><br><span class="line">mr_lcl = np.ones(n<span class="number">-1</span>)*mr_lcl</span><br><span class="line">mr_lcl_c = np.ones(n<span class="number">-1</span>)*mr_lcl_c</span><br><span class="line">mr_lcl_b = np.ones(n<span class="number">-1</span>)*mr_lcl_b</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">plt.plot(obs[<span class="number">1</span>:],mr, <span class="string">'k'</span>,marker=<span class="string">'o'</span>,markersize=<span class="number">5</span>,lw=<span class="number">2</span>,label=<span class="string">'MR'</span>)</span><br><span class="line">plt.plot(obs[<span class="number">1</span>:],np.ones(n<span class="number">-1</span>)*mr_bar,<span class="string">'r'</span>,label=<span class="string">'CL'</span>)</span><br><span class="line">plt.plot(obs[<span class="number">1</span>:],mr_ucl,<span class="string">'b'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs[<span class="number">1</span>:],mr_ucl_c,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs[<span class="number">1</span>:],mr_ucl_b,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs[<span class="number">1</span>:],mr_lcl,<span class="string">'b'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.plot(obs[<span class="number">1</span>:],mr_lcl_c,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">'MR chart'</span>);</span><br></pre></td></tr></table></figure>
+
+<img src='https://pic.downk.cc/item/5eb9122fc2a9a83be5183c86.png'>
+
+<p>判异的规则有 8 条：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Rule</th>
+<th align="center">Rule Name</th>
+<th align="left">Pattern</th>
+<th>&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Example&emsp; &emsp; &emsp; &emsp; &emsp; &emsp;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Beyond Limits</td>
+<td align="left">1个点落在A区外</td>
+<td><img src='https://upload.wikimedia.org/wikipedia/commons/a/a0/Rule_1_-_Control_Charts_for_Nelson_Rules.svg'></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Zone A</td>
+<td align="left">连续3点中有2点落在中心线同一侧的Zone B以外</td>
+<td><img src='https://upload.wikimedia.org/wikipedia/commons/2/20/Rule_5_-_Control_Charts_for_Nelson_Rules.svg'></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Zone B</td>
+<td align="left">连续5点有4点落在中心线同一侧的Zone C以外</td>
+<td><img src='https://upload.wikimedia.org/wikipedia/commons/7/7b/Rule_6_-_Control_Charts_for_Nelson_Rules.svg'></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Zone C</td>
+<td align="left">连续9个以上的点落在中心线同一侧（Zone C或以外）</td>
+<td><img src='https://upload.wikimedia.org/wikipedia/commons/0/0e/Rule_2_-_Control_Charts_for_Nelson_Rules.svg'></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Trend</td>
+<td align="left">连续7点递增或递减</td>
+<td><img src='https://upload.wikimedia.org/wikipedia/commons/e/e0/Rule_3_-_Control_Charts_for_Nelson_Rules.svg'></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">Mixture</td>
+<td align="left">连续8点无一点落在Zone C</td>
+<td><img src='https://upload.wikimedia.org/wikipedia/commons/b/b7/Rule_8_-_Control_Charts_for_Nelson_Rules.svg'></td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">Stratification</td>
+<td align="left">连续15点落在中心线两侧的Zone C内</td>
+<td><img src='https://upload.wikimedia.org/wikipedia/commons/a/ae/Rule_7_-_Control_Charts_for_Nelson_Rules.svg'></td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">Over-control</td>
+<td align="left">连续14点相邻交替上下</td>
+<td><img src='https://upload.wikimedia.org/wikipedia/commons/3/35/Rule_4_-_Control_Charts_for_Nelson_Rules.svg'></td>
+</tr>
+</tbody></table>
+<p>加入8条判异规则：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rules</span><span class="params">(data, obs, cl, ucl, ucl_b, ucl_c, lcl, lcl_b, lcl_c)</span>:</span></span><br><span class="line">    n = len(data)</span><br><span class="line">    ind = np.array(range(n))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># rule 1</span></span><br><span class="line">    ofc1 = data[(data &gt; ucl) | (data &lt; lcl)]</span><br><span class="line">    ofc1_obs = obs[(data &gt; ucl) | (data &lt; lcl)]    </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># rule 2</span></span><br><span class="line">    ofc2_ind = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-2</span>):</span><br><span class="line">        d = data[i:i+<span class="number">3</span>]</span><br><span class="line">        index = ind[i:i+<span class="number">3</span>]</span><br><span class="line">        <span class="keyword">if</span> ((d&gt;ucl_b).sum()==<span class="number">2</span>) | ((d&lt;lcl_b).sum()==<span class="number">2</span>):</span><br><span class="line">            ofc2_ind.extend(index[(d&gt;ucl_b) | (d&lt;lcl_b)])</span><br><span class="line">    ofc2_ind = list(sorted(set(ofc2_ind)))</span><br><span class="line">    ofc2 = data[ofc2_ind]</span><br><span class="line">    ofc2_obs = obs[ofc2_ind]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># rule 3</span></span><br><span class="line">    ofc3_ind = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-4</span>):</span><br><span class="line">        d = data[i:i+<span class="number">5</span>]</span><br><span class="line">        index = ind[i:i+<span class="number">5</span>]</span><br><span class="line">        <span class="keyword">if</span> ((d&gt;ucl_c).sum()==<span class="number">4</span>) | ((d&lt;lcl_c).sum()==<span class="number">4</span>):</span><br><span class="line">            ofc3_ind.extend(index[(d&gt;ucl_c) | (d&lt;lcl_c)])</span><br><span class="line">    ofc3_ind = list(sorted(set(ofc3_ind)))</span><br><span class="line">    ofc3 = data[ofc3_ind]</span><br><span class="line">    ofc3_obs = obs[ofc3_ind]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># rule 4</span></span><br><span class="line">    ofc4_ind = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-8</span>):</span><br><span class="line">        d = data[i:i+<span class="number">9</span>]</span><br><span class="line">        index = ind[i:i+<span class="number">9</span>]</span><br><span class="line">        <span class="keyword">if</span> ((d&gt;cl).sum()==<span class="number">9</span>) | ((d&lt;cl).sum()==<span class="number">9</span>):</span><br><span class="line">            ofc4_ind.extend(index)</span><br><span class="line">    ofc4_ind = list(sorted(set(ofc4_ind)))</span><br><span class="line">    ofc4 = data[ofc4_ind]</span><br><span class="line">    ofc4_obs = obs[ofc4_ind]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># rule 5</span></span><br><span class="line">    ofc5_ind = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-6</span>):</span><br><span class="line">        d = data[i:i+<span class="number">7</span>]</span><br><span class="line">        index = ind[i:i+<span class="number">7</span>]</span><br><span class="line">        <span class="keyword">if</span> all(u &lt;= v <span class="keyword">for</span> u, v <span class="keyword">in</span> zip(d, d[<span class="number">1</span>:])) | all(u &gt;= v <span class="keyword">for</span> u, v <span class="keyword">in</span> zip(d, d[<span class="number">1</span>:])):</span><br><span class="line">            ofc5_ind.extend(index)</span><br><span class="line">    ofc5_ind = list(sorted(set(ofc5_ind)))</span><br><span class="line">    ofc5 = data[ofc5_ind]</span><br><span class="line">    ofc5_obs = obs[ofc5_ind]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># rule 6</span></span><br><span class="line">    ofc6_ind = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-7</span>):</span><br><span class="line">        d = data[i:i+<span class="number">8</span>]</span><br><span class="line">        index = ind[i:i+<span class="number">8</span>]</span><br><span class="line">        <span class="keyword">if</span> (all(d&gt;ucl_c) | all(d&lt;lcl_c)):</span><br><span class="line">            ofc6_ind.extend(index)</span><br><span class="line">    ofc6_ind = list(sorted(set(ofc6_ind)))</span><br><span class="line">    ofc6 = data[ofc6_ind]</span><br><span class="line">    ofc6_obs = obs[ofc6_ind]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># rule 7</span></span><br><span class="line">    ofc7_ind = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-14</span>):</span><br><span class="line">        d = data[i:i+<span class="number">15</span>]</span><br><span class="line">        index = ind[i:i+<span class="number">15</span>]</span><br><span class="line">        <span class="keyword">if</span> all(lcl_c&lt;d) <span class="keyword">and</span> all(d&lt;ucl_c):</span><br><span class="line">            ofc7_ind.extend(index)</span><br><span class="line">    ofc7_ind = list(sorted(set(ofc7_ind)))</span><br><span class="line">    ofc7 = data[ofc7_ind]</span><br><span class="line">    ofc7_obs = obs[ofc7_ind]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># rule 8</span></span><br><span class="line">    ofc8_ind = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-13</span>):</span><br><span class="line">        d = data[i:i+<span class="number">14</span>]</span><br><span class="line">        index = ind[i:i+<span class="number">14</span>]</span><br><span class="line">        diff = list(v - u <span class="keyword">for</span> u, v <span class="keyword">in</span> zip(d, d[<span class="number">1</span>:]))</span><br><span class="line">        <span class="keyword">if</span> all(u*v&lt;<span class="number">0</span> <span class="keyword">for</span> u,v <span class="keyword">in</span> zip(diff,diff[<span class="number">1</span>:])):</span><br><span class="line">            ofc8_ind.extend(index)</span><br><span class="line">    ofc8_ind = list(sorted(set(ofc8_ind)))</span><br><span class="line">    ofc8 = data[ofc8_ind]</span><br><span class="line">    ofc8_obs = obs[ofc8_ind]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ofc1, ofc1_obs, ofc2, ofc2_obs, ofc3, ofc3_obs, ofc4, ofc4_obs, ofc5, ofc5_obs,ofc6, ofc6_obs, ofc7, ofc7_obs, ofc8, ofc8_obs</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">imrchart_test</span><span class="params">(obs,x,subgroup=<span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">    <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># depend on subgroup value</span></span><br><span class="line">    E2 = [<span class="number">2.660</span>, <span class="number">2.660</span>, <span class="number">1.772</span>, <span class="number">1.457</span>, <span class="number">1.290</span>, <span class="number">1.184</span>, <span class="number">1.109</span>, <span class="number">1.054</span>, <span class="number">1.010</span>, <span class="number">0.975</span>]</span><br><span class="line">    D4 = [<span class="number">3.268</span>, <span class="number">3.268</span>, <span class="number">2.574</span>, <span class="number">2.282</span>, <span class="number">2.114</span>, <span class="number">2.004</span>, <span class="number">1.924</span>, <span class="number">1.864</span>, <span class="number">1.816</span>, <span class="number">1.777</span>]</span><br><span class="line">    e2 = E2[subgroup<span class="number">-1</span>]</span><br><span class="line">    d4 = D4[subgroup<span class="number">-1</span>]</span><br><span class="line">    </span><br><span class="line">    n = len(x)</span><br><span class="line">    </span><br><span class="line">    x_bar = x.mean()</span><br><span class="line">    mr = np.array(list(abs(v - u) <span class="keyword">for</span> u, v <span class="keyword">in</span> zip(x, x[<span class="number">1</span>:])))</span><br><span class="line">    mr_bar = mr.mean()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># I chart</span></span><br><span class="line">    x_ucl = x_bar + e2 * mr_bar</span><br><span class="line">    x_ucl_c = x_bar + e2 * mr_bar * (<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">    x_ucl_b = x_bar + e2 * mr_bar * (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line">    x_lcl = x_bar - e2 * mr_bar</span><br><span class="line">    x_lcl_c = x_bar - e2 * mr_bar * (<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">    x_lcl_b = x_bar - e2 * mr_bar * (<span class="number">2</span>/<span class="number">3</span>) </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># MR chart</span></span><br><span class="line">    mr_ucl = d4 * mr_bar</span><br><span class="line">    mr_ucl_c = mr_bar + (mr_ucl - mr_bar) * (<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">    mr_ucl_b = mr_bar + (mr_ucl - mr_bar) * (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line">    mr_lcl = <span class="number">0</span></span><br><span class="line">    mr_lcl_c = mr_bar - (mr_ucl - mr_bar) * (<span class="number">1</span>/<span class="number">3</span>)</span><br><span class="line">    mr_lcl_b = mr_bar - (mr_ucl - mr_bar) * (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">if</span> mr_lcl_c &lt; <span class="number">0</span>: mr_lcl_c = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> mr_lcl_b &lt; <span class="number">0</span>: mr_lcl_b = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 8 rules</span></span><br><span class="line">    x_ofc = rules(x, obs, x_bar, x_ucl, x_ucl_b, x_ucl_c, x_lcl, x_lcl_b, x_lcl_c)</span><br><span class="line">    print(<span class="string">"========== I chart test =========="</span>)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        print(<span class="string">"Against Rule %d:"</span> %(r+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">if</span> len(x_ofc[r*<span class="number">2</span>]) == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"None."</span>)</span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            <span class="keyword">for</span> num,i,j <span class="keyword">in</span> zip(range(len(x_ofc[r*<span class="number">2</span>])), x_ofc[r*<span class="number">2</span>+<span class="number">1</span>], x_ofc[r*<span class="number">2</span>]):</span><br><span class="line">                print(<span class="string">"\t%d -&gt; %s, %f"</span> %(num+<span class="number">1</span>, str(i), j))</span><br><span class="line">    </span><br><span class="line">    mr_ofc = rules(mr, obs[<span class="number">1</span>:], mr_bar, mr_ucl, mr_ucl_b, mr_ucl_c, mr_lcl, mr_lcl_b, mr_lcl_c)</span><br><span class="line">    print(<span class="string">"========== MR chart test =========="</span>)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        print(<span class="string">"Against Rule %d:"</span> %(r+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">if</span> len(mr_ofc[r*<span class="number">2</span>]) == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"None."</span>)</span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            <span class="keyword">for</span> num,i,j <span class="keyword">in</span> zip(range(len(mr_ofc[r*<span class="number">2</span>])), mr_ofc[r*<span class="number">2</span>+<span class="number">1</span>], mr_ofc[r*<span class="number">2</span>]):</span><br><span class="line">                print(<span class="string">"\t%d -&gt; %s, %f"</span> %(num+<span class="number">1</span>, str(i), j))      </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># plot</span></span><br><span class="line">    plt.style.use(<span class="string">'ggplot'</span>)</span><br><span class="line">    plt.figure(figsize=(<span class="number">15</span>,<span class="number">8</span>))</span><br><span class="line"></span><br><span class="line">    plt.subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs,x, <span class="string">'k'</span>,marker=<span class="string">'o'</span>,markersize=<span class="number">5</span>,lw=<span class="number">2</span>,label=<span class="string">'X'</span>)</span><br><span class="line">    plt.plot(obs,np.ones(n)*x_bar,<span class="string">'r'</span>,label=<span class="string">'CL'</span>)</span><br><span class="line">    plt.plot(obs,np.ones(n)*x_ucl,<span class="string">'b'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs,np.ones(n)*x_ucl_c,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs,np.ones(n)*x_ucl_b,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs,np.ones(n)*x_lcl,<span class="string">'b'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs,np.ones(n)*x_lcl_c,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs,np.ones(n)*x_lcl_b,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(x_ofc[r*<span class="number">2</span>])):</span><br><span class="line">            plt.scatter(x_ofc[r*<span class="number">2</span>+<span class="number">1</span>][i],x_ofc[r*<span class="number">2</span>][i],c=<span class="string">'r'</span>,s=<span class="number">70</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.title(<span class="string">'I chart'</span>)</span><br><span class="line"></span><br><span class="line">    plt.subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">    plt.plot(obs[<span class="number">1</span>:],mr, <span class="string">'k'</span>,marker=<span class="string">'o'</span>,markersize=<span class="number">5</span>,lw=<span class="number">2</span>,label=<span class="string">'MR'</span>)</span><br><span class="line">    plt.plot(obs[<span class="number">1</span>:],np.ones(n<span class="number">-1</span>)*mr_bar,<span class="string">'r'</span>,label=<span class="string">'CL'</span>)</span><br><span class="line">    plt.plot(obs[<span class="number">1</span>:],np.ones(n<span class="number">-1</span>)*mr_ucl,<span class="string">'b'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs[<span class="number">1</span>:],np.ones(n<span class="number">-1</span>)*mr_ucl_c,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs[<span class="number">1</span>:],np.ones(n<span class="number">-1</span>)*mr_ucl_b,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs[<span class="number">1</span>:],np.ones(n<span class="number">-1</span>)*mr_lcl,<span class="string">'b'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    plt.plot(obs[<span class="number">1</span>:],np.ones(n<span class="number">-1</span>)*mr_lcl_c,<span class="string">'b-.'</span>,lw=<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> r <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(mr_ofc[r*<span class="number">2</span>])):</span><br><span class="line">            plt.scatter(mr_ofc[r*<span class="number">2</span>+<span class="number">1</span>][i],mr_ofc[r*<span class="number">2</span>][i],c=<span class="string">'r'</span>,s=<span class="number">70</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    plt.title(<span class="string">'MR chart'</span>);</span><br><span class="line"></span><br><span class="line">imrchart_test(obs,x)</span><br></pre></td></tr></table></figure>
+
+<img src='https://pic.downk.cc/item/5eb9699dc2a9a83be5dcf194.png'>
+<img src='https://pic.downk.cc/item/5eb96a11c2a9a83be5de1c15.png'>
+<img src='https://pic.downk.cc/item/5eb9693cc2a9a83be5dbf8ef.png'>
+
+<p>针对每个控制图，按照计算公式编写对应的代码，确定上下界和判异规则，将异常点在图上用红点表示出来。</p>
+
+      
+      <!-- reward -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong s>
+              本博客所有文章除特别声明外，均采用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
+                target="_blank">Apache License 2.0</a> 许可协议。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/09/python-spc/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Projet/" rel="tag">Projet</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/05/05/math-logique/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">概率 &amp; 统计 &amp; 逻辑 &amp; 数据结构</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: 'IWtOhB4nNoD1F4BDWzQYMALe-gzGzoHsz',
+        app_key: 'k0iOFayd99sSBGuohToahHe3',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'mp',
+        placeholder: '有任何意见可以留言告诉我哦(〃^▽^〃) 也可以点侧边栏的 Me° 通过email联系我~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2020
+        an 橘
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/orange_logo.png" alt="Dream d&#39;Orange"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">· 起 始 ·</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/ML">机器学习</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Math">数 · 统</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">Tags</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/Voyage">地平线上这个世界</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2020">Me°</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>走过路过赏杯奶茶呗~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.png">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<script src="/js/share.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['砥砺名行，不疾不徐','',''],
+    startDelay: 0,
+    typeSpeed: 300,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+
+<script src="/js/ayer.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+    
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+
+</html>

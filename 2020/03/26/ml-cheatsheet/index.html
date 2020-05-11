@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4k字</span>
+            <span class="post-count">3.9k字</span>
         </span>
     </span>
 
@@ -99,8 +99,7 @@
       
 
       
-      <p><em><font color='gray'>来源：七月在线-BAT机器学习面试1000题系列，还有一些杂七杂八的link。</font></em><br>100</p>
-<h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><ol>
+      <h2 id="KNN"><a href="#KNN" class="headerlink" title="KNN"></a>KNN</h2><ol>
 <li><p>KNN中的K如何选取的？</p>
  <details>
  <summary><u>答案：</u></summary>
@@ -434,16 +433,22 @@
 
 
 
+
 </li>
 </ol>
-<ol start="4">
-<li> <details>
+<h2 id="关联规则"><a href="#关联规则" class="headerlink" title="关联规则"></a>关联规则</h2><ol>
+<li><p>通常可以通过关联规则挖掘来发现啤酒和尿布的关系， 那么如果对于一条规则A →B, 如果同时购买A和B的顾客比例是4/7, 而购买A的顾客当中也购买了B的顾客比例是1/2, 而购买B的顾客当中也购买了A的顾客比例是1/3,则以下对于规则A →B的支持度(support)和置信度(confidence)分别是多少？<br> A. 4/7，1/3<br> B. 3/7，1/2<br> C. 4/7，1/2<br> D. 4/7，2/3</p>
+ <details>
  <summary><u>答案：</u></summary>
 
+<p> 选C。A-&gt;B<br> support = P(AB)<br> confidence = P(B|A)<br> lift = P(B|A)/P(B)</p>
+ </details>
+
+
 
 </li>
 </ol>
-<pre><code>&lt;/details&gt;</code></pre><h2 id="监督，回归，分类"><a href="#监督，回归，分类" class="headerlink" title="监督，回归，分类"></a>监督，回归，分类</h2><ol>
+<h2 id="监督，回归，分类"><a href="#监督，回归，分类" class="headerlink" title="监督，回归，分类"></a>监督，回归，分类</h2><ol>
 <li>下列算法中，均为监督学习算法的为：<br> A. CRF，SVM，Logistic Regression<br> B. K-Means，KNN，决策树<br> C. 决策树，KNN，朴素贝叶斯<br> D. K-Means，SVM，朴素贝叶斯 <details>
  <summary><u>答案：</u></summary>
  选AC。聚类是对无类别的数据进行聚类，不使用已经标记好的数据。
@@ -1111,6 +1116,92 @@ D错，第一趟就应该使得第一个非叶子节点len/2-1=3 (9) 比 2*3+1=7
 <summary><u>答案：</u></summary>
 选C。
 </details>
+
+
+
+</li>
+</ol>
+<ol start="28">
+<li>有一类二叉树用三叉链表来存储的时候除了带有指向左右孩子节点的两个指针，还有指向父节点的指针，那么这样一棵二叉树有2个节点，那么有多少指针指向NULL（注：根节点的父指针指向NULL，对于不存在的节点表示为NULL）？<br>A. 1<br>B. 2<br>C. 3<br>D. 4<details>
+<summary><u>答案：</u></summary>
+选D。
+<img src='https://pic.downk.cc/item/5eb55c59c2a9a83be5b85ede.png' width=400>
+</details>
+
+
+
+</li>
+</ol>
+<ol start="29">
+<li>下列最短路径算法的叙述中正确的是（）<br>A. Dijkstra算法通常用于求每一对顶点间的最短路径；<br>B. Dijkstra算法不允许图中带有负权值的边，而Floyd算法则可以适用；<br>C. Floyd算法通常用于求某一顶点到其他各顶点的最短路径；<br>D. Floyd算法允许有包含负权值的边组成的回路，而Dijkstra算法不允许；<details>
+<summary><u>答案：</u></summary>
+选B。
+Dijkstra算法是计算图中的一个点到其它点的最小路径.
+Floyd算法计算图中任意一对点的最短路径.
+</details>
+
+
+
+</li>
+</ol>
+<ol start="30">
+<li><p>判断一个数组或序列是正序,倒序还是乱序,需要我们将这个数组完整的遍历一遍通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应的位置并插入的排序算法是（ ）<br>A. 选择排序<br>B. 希尔排序<br>C. 插入排序<br>D. 归并排序</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>选C。<br>选择排序：每次从数组中选出一个最小数（最大数）放到数组最前面，存放在序列的起始位置，直到全部待排序的数据元素排完。<br>希尔排序：设置增量分割数组，逐步进行直接插入排序，增量逐趟减少，并最后使得整个数组基本有序，再对整体进行直接插入排序。<br>插入排序：构建有序序列，未排序数据依次从已排序数据按从后往前比较，插入到合适的位置。<br>归并排序：把序列分成两个长度为n/2的子序列，对这两个子序列分别归并排序（循环将两个数组的第一个值比较，并弹出第一个值，直到数组长度都不存在），将两个排序好的子序列合并成一个最终的排序序列。</p>
+</details>
+
+
+
+</li>
+</ol>
+<ol start="31">
+<li><p>字符串有5个字符q,w,e,r,t，出现的频率分别为1,2,3,4,5，如果采用Huffman编码对字符串编码，则每个字符编码的平均长度是（）?<br>A. 2.2<br>B. 2.4<br>C. 2.6<br>D. 2.8<br>E. 3.0</p>
+<details>
+<summary><u>答案：</u></summary>
+
+<p>选B。</p>
+<img src='https://pic.downk.cc/item/5eb6b5a3c2a9a83be5273cb8.png' width=250>
+
+<table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">编码</th>
+<th align="center">长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">q</td>
+<td align="center">010</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">w</td>
+<td align="center">011</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">e</td>
+<td align="center">00</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">r</td>
+<td align="center">10</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">t</td>
+<td align="center">11</td>
+<td align="center">2</td>
+</tr>
+</tbody></table>
+<p>(3+3+2+2+2)/5=2.4</p>
+</details>
+
+
 
 
 </li>
