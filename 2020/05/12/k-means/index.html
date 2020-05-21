@@ -6,7 +6,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Support Vector Machine (SVM) |  Dream d&#39;Orange
+    聚类：K-means &amp; K-modes &amp; K-prototypes |  Dream d&#39;Orange
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -31,7 +31,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="app">
     <main class="content">
       <section class="outer">
-  <article id="post-SVM" class="article article-type-post" itemscope
+  <article id="post-k-means" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -39,7 +39,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Support Vector Machine (SVM)
+  聚类：K-means &amp; K-modes &amp; K-prototypes
 </h1>
   
 
@@ -48,8 +48,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/03/24/SVM/" class="article-date">
-  <time datetime="2020-03-24T12:57:07.000Z" itemprop="datePublished">2020-03-24</time>
+      <a href="/2020/05/12/k-means/" class="article-date">
+  <time datetime="2020-05-12T03:28:20.000Z" itemprop="datePublished">2020-05-12</time>
 </a>
       
   <div class="article-category">
@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">0字</span>
+            <span class="post-count">243字</span>
         </span>
     </span>
 
@@ -83,6 +83,8 @@
 
     
     
+    <div class="tocbot"></div>
+
 
 
 
@@ -97,7 +99,25 @@
       
 
       
-      
+      <h2 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h2><h2 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h2><h2 id="K值选择"><a href="#K值选择" class="headerlink" title="K值选择"></a>K值选择</h2><h3 id="手肘法"><a href="#手肘法" class="headerlink" title="手肘法"></a>手肘法</h3><h3 id="轮廓系数-silhouette-score"><a href="#轮廓系数-silhouette-score" class="headerlink" title="轮廓系数 (silhouette score)"></a>轮廓系数 (silhouette score)</h3><p>$$S(i)=\frac{b(i)-a(i)}{\max \{a(i),b(i)\}}$$</p>
+<img src='https://pic.downk.cc/item/5eba9558101ccd402ba5be64.png' width=400>
+
+
+
+<h2 id="K-modes"><a href="#K-modes" class="headerlink" title="K-modes"></a>K-modes</h2><h2 id="K-prototypes"><a href="#K-prototypes" class="headerlink" title="K-prototypes"></a>K-prototypes</h2><p>K-prototypes = K-means (numerical) + K-modes (categorical)</p>
+<p>cost function: $$E=\sum^K_{l=1}\sum^n_{i=1}y_{il}\ \text{d}(X_i,Q_l)$$</p>
+<p>$X_i=\{x_{i1},x_{i2},\cdots,x_{im}\},\ Q_l=\{q_{l1},q_{l2},\cdots,q_{lm}\}$</p>
+<img src='https://pic.downk.cc/item/5ebabc3fc2a9a83be5b1dd4b.png' width=500>
+
+<p>$y_{il}\in \{0,1\}$，1 表示样例 $X_i$ 分在 $l$ 簇。$\displaystyle \sum^K_{l=1}y_{il}=1 \ (\forall i=1,\cdots,n).$</p>
+<p>把样例分派给第 $l$ 簇的损失：</p>
+<p>$$E_l=\sum^n_{i=1}y_{il}\ \text{d}(X_i,Q_l)$$</p>
+<p>当 $\displaystyle q_{lj}=\frac{1}{n_l}\sum^n_{i=1}y_{il}\ x_{ij}$ 时，$E_l$ 最小。</p>
+<p>$$\begin{aligned}<br>\text{d}(X_i,Q_l)&amp;=\sum^{m_r}_{j=1}(x^r_{ij}-q^r_{lj})^2+\gamma_l\sum^{m_c}_{j=1}\delta(x^c_{ij},q^c_{lj})\\\<br>                 &amp;=E^r_l+E^c_l\end{aligned}$$</p>
+<p>$$\delta(x,q)=\left\{\begin{array}{l}<br>    1, \ x\neq q\\\<br>    0, \ x=q<br>    \end{array}\right.$$</p>
+<p>$E^r_l$ 是 numerical variables 的损失，$E^c_l$ 是 categorical variables 的损失。</p>
+<p>$\gamma_l$ 的取值，一般是根据所在簇的 numerical variables 的标准差 $\sigma$来定，$\gamma\in [1/3\sigma,2/3\sigma]$。</p>
+
       
       <!-- reward -->
       
@@ -166,7 +186,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/03/24/SVM/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/12/k-means/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -184,19 +204,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/03/24/Lagrange-Multipliers/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Lagrange_Multipliers
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/03/20/2020%E6%98%A5%EF%BC%8C%E6%98%AF%E4%B8%96%E7%95%8C%E6%9C%AB%E6%97%A5%E7%9A%84%E5%BC%80%E7%AB%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E9%BB%8E%E6%98%8E%E5%89%8D%E7%9A%84%E9%BB%91%E6%9A%97/" class="article-nav-link">
+      <a href="/2020/05/09/python-spc/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">2020春，是世界末日的开端，还是黎明前的黑暗</div>
+        <div class="article-nav-title">用Python实现SPC统计过程控制</div>
       </a>
     
   </nav>

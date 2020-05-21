@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.5k字</span>
+            <span class="post-count">2.4k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">6分钟</span>
+            <span class="post-count">9分钟</span>
         </span>
     </span>
 </div>
@@ -158,8 +158,8 @@
 </li>
 </ol>
 <ol start="8">
-<li><p>**设${x_n}$服从独立同分布，$E[x_n] = 0, Var(x_n)=1$，则当n趋向于无穷大时，下式值为：$$\frac{x_1^2+x_2x_3+x_4^2+x_5x_6+\cdots+x_{3n-2}^2+x_{3n-1}x_{3n}}{n}$$</p>
-<p> A. 无穷大<br> B. 0<br> C. 1<br> D. 2**</p>
+<li><p><strong>设${x_n}$服从独立同分布，$E[x_n] = 0, Var(x_n)=1$，则当n趋向于无穷大时，下式值为：</strong>$$\frac{x_1^2+x_2x_3+x_4^2+x_5x_6+\cdots+x_{3n-2}^2+x_{3n-1}x_{3n}}{n}$$</p>
+<p> <strong>A. 无穷大<br> B. 0<br> C. 1<br> D. 2</strong></p>
 <p> 选C。分两部分用大数定律：<br> $$\frac{x_1^2+x_4^2+\cdots}{n}\longrightarrow E(x_1^2)=Var(x_1)+E(x_1)^2=1$$</p>
 <p> $$\frac{x_2x_3+x_5x_6+\cdots}{n}\longrightarrow E(x_2x_3)=E(x_2)E(x_3)=0$$</p>
 </li>
@@ -177,6 +177,81 @@
 <li>选中两个不同的字母，放回不变概率是0.5：$8\times 0.5$</li>
 </ul>
 <p>$$\frac{2+4}{10}=3/5$$</p>
+</li>
+</ol>
+<ol start="11">
+<li><p><strong>某国家非常重男轻女，若一户人家生了一个女孩，便再要一个，直到生下男孩为止，假设生男生女概率相等，请问平均每户人家有<strong>____</strong>个女孩。<br>A. 0.5<br>B. 2/3<br>C. 1<br>D. 4/3</strong></p>
+<p>选C，几何分布的其中一种，在得到第一次成功之前所经历的失败次数，取值从0开始，期望是$(1-p)/p$。</p>
+<table>
+<thead>
+<tr>
+<th>几何分布(1)</th>
+<th>几何分布(2)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在伯努利试验中，得到一次成功所需要的试验次数</td>
+<td>在得到第一次成功之前所经历的失败次数</td>
+</tr>
+<tr>
+<td>$X\in\{1,2,3\cdots\}$</td>
+<td>$X\in\{0,1,2\cdots\}$</td>
+</tr>
+<tr>
+<td>$P(X=k)=(1-p)^{k-1}p$</td>
+<td>$P(X=k)=(1-p)^kp$</td>
+</tr>
+<tr>
+<td>$\displaystyle\mathbb{E}(X)=\frac{1}{p}$</td>
+<td>$\displaystyle\mathbb{E}(X)=\frac{1-p}{p}$</td>
+</tr>
+<tr>
+<td>$\displaystyle Var(X)=\frac{1-p}{p^2}$</td>
+<td>$\displaystyle Var(X)=\frac{1-p}{p^2}$</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<ol start="12">
+<li><p><strong>在一个夜晚，同时有4人需要过一桥，一次最多只能通过两个人，且只有一只手电筒，而且每人的速度不同。甲、乙、丙、丁需要时间分别为：2，3，6，12分钟。问：4人过河的最短时间<br>A. 19<br>B. 21<br>C. 23<br>D.25</strong></p>
+<p>选C。</p>
+<p>Step 1:  甲 乙 过去，3 分钟<br>Step 2:  乙回来， 3 分钟<br>Step 3:  丙丁过去，12 分钟<br>Step 4:  甲回来， 2 分钟<br>Step 5: 甲乙过去, 3 分钟<br>总共： 23分钟<br>(1) 丙丁最慢，所以他们一起走最合适。<br>(2) 必须要回来两个人，甲乙最快，所以甲乙回来。</p>
+</li>
+</ol>
+<ol start="13">
+<li><p><strong>爸爸去哪儿中的3对父子站成一排，各自父子之间不能相邻，比如石头不能和郭涛挨着，以此类推，共有几种站法？<br>A. 120<br>B. 48<br>C. 240<br>D. 144</strong></p>
+<p>选C。<br>容斥原理：$A\cup B\cup C = A+B+C - A\cap B - B\cap C - C\cap A + A\cap B\cap C$</p>
+<img src='https://pic.downk.cc/item/5ec3a3e9c2a9a83be5fabd01.png'>
+
+<p>这里我们算所有排列（$A^6_6=720$种）减去父子相邻的所有情况$A\cup B\cup C$（ABC分别表示每对父子相邻）</p>
+<p>$A+B+C$（至少有一对父子相邻）：$C^1_3A^5_5A^2_2=720$</p>
+<p>$A\cap B + B\cap C + C\cap A$（至少有两对父子相邻）：$C^2_3A^4_4A^2_2A^2_2=288$</p>
+<p>$A\cap B\cap C$（三对父子都相邻）：$A^3_3A^2_2A^2_2A^2_2=48$</p>
+<p>最终：$720-720+288-48=240$</p>
+</li>
+</ol>
+<ol start="14">
+<li><p><strong>下列有关ARMA模型的说法正确的是<br>A. MA(q)模型偏自相关系数拖尾<br>B. AR(p)模型偏自相关系数拖尾<br>C. ARMA(p,q)模型自相关系数截尾<br>D. ARMA(p,q)模型偏自相关系数截尾</strong></p>
+<p>选A。时间序列模型</p>
+</li>
+</ol>
+<ol start="15">
+<li><p><strong>盒子里面有11个苹果，每天至少吃一个，最多不做限制，直到吃完为止，一共有多少种不同的吃法？<br>A. 144<br>B. 512<br>C. 1024<br>D. 2048</strong></p>
+<p>选C。在10个间隔放N块板：$C^n_{10}$（11个苹果n+1天吃完）<br>$\displaystyle\sum^{10}_{n=0}C^n_{10}=1024$</p>
+</li>
+</ol>
+<ol start="16">
+<li><p><strong>下列函数中只有（ ）才可能是一个随机变量的分布密度</strong></p>
+<img src='https://pic.downk.cc/item/5ec3ce37c2a9a83be536754c.png'>
+
+<p>选B。</p>
+<p>概率密度在定义域内大于0，且积分等于1。</p>
+<p>$\displaystyle\begin{aligned}\int^{\pi/6}_{-\pi/6}\cos x \ \text{d}x &amp;= \left[\sin x\right]^{\pi/6}_{-\pi/6}=\sin \left(\frac{\pi}{6}\right)-\sin \left(-\frac{\pi}{6}\right)\\\<br>&amp;=\sin \left(\frac{\pi}{6}\right)+\sin \left(\frac{\pi}{6}\right)=2\sin 30^\circ=1\end{aligned}$</p>
+</li>
+</ol>
+<ol start="17">
+<li><p><strong>一个三角形， 三个端点上有三只蚂蚁，蚂蚁可以绕任意边走，问蚂蚁不相撞的概率是多少?</strong></p>
+<p>与长度无关，每只蚂蚁有2个方向可走，共有8种可能<br>只有当所有蚂蚁都逆时针，或都顺时针走时才符合要求<br>2/8=1/4</p>
 </li>
 </ol>
 

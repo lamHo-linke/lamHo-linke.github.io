@@ -59,7 +59,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.1k字</span>
+            <span class="post-count">3.3k字</span>
         </span>
     </span>
 
@@ -68,7 +68,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">15分钟</span>
+            <span class="post-count">16分钟</span>
         </span>
     </span>
 </div>
@@ -310,7 +310,21 @@
 <img src='https://pic.downk.cc/item/5eb96a11c2a9a83be5de1c15.png'>
 <img src='https://pic.downk.cc/item/5eb9693cc2a9a83be5dbf8ef.png'>
 
-<p>针对每个控制图，按照计算公式编写对应的代码，确定上下界和判异规则，将异常点在图上用红点表示出来。</p>
+<p>观察 I chart，对照输出的具体异常点：</p>
+<ul>
+<li>Rule 1 - 第76个观测值32，在A区以外，比UCL大；</li>
+<li>Rule 2 - 第19,20,64,65,76,77，连续三个点中有两个落在同一侧的B区以外；（76已经是Rule1异常）</li>
+<li>Rule 3 - 第13,14,15,17,18,19,20,76,77,78,79，连续五个点中有四个落在同一侧的C区外；（19,20,76,77已经是Rule1和Rule2异常）</li>
+<li>Rule 4 - 第8至20，连续九个点落在中心线同一侧；（13,14,15,17,18,19,20已经在前面的Rule检测到）</li>
+<li>Rule 5 至 8 均未发现异常。</li>
+</ul>
+<p>观察 MR chart，对照输出的具体异常点：</p>
+<ul>
+<li>Rule 1 - 第46,66,71,76,91异常，在UCL以外；</li>
+<li>其余Rule均未发现异常。</li>
+</ul>
+<hr>
+<p>针对不同的场景选择不同的控制图。每个控制图，按照计算公式编写对应的代码，确定上下界和判异规则，将异常点在图上用红点表示出来。</p>
 
       
       <!-- reward -->
@@ -397,6 +411,15 @@
   
   
   <nav class="article-nav">
+    
+      <a href="/2020/05/12/k-means/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            聚类：K-means &amp; K-modes &amp; K-prototypes
+          
+        </div>
+      </a>
     
     
       <a href="/2020/05/05/math-logique/" class="article-nav-link">

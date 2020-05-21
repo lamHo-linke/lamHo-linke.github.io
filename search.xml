@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>聚类：K-means &amp; K-modes &amp; K-prototypes</title>
+    <url>/2020/05/12/k-means/</url>
+    <content><![CDATA[<h2 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h2><h2 id="EM算法"><a href="#EM算法" class="headerlink" title="EM算法"></a>EM算法</h2><h2 id="K值选择"><a href="#K值选择" class="headerlink" title="K值选择"></a>K值选择</h2><h3 id="手肘法"><a href="#手肘法" class="headerlink" title="手肘法"></a>手肘法</h3><h3 id="轮廓系数-silhouette-score"><a href="#轮廓系数-silhouette-score" class="headerlink" title="轮廓系数 (silhouette score)"></a>轮廓系数 (silhouette score)</h3><p>$$S(i)=\frac{b(i)-a(i)}{\max \{a(i),b(i)\}}$$</p>
+<img src='https://pic.downk.cc/item/5eba9558101ccd402ba5be64.png' width=400>
+
+
+
+<h2 id="K-modes"><a href="#K-modes" class="headerlink" title="K-modes"></a>K-modes</h2><h2 id="K-prototypes"><a href="#K-prototypes" class="headerlink" title="K-prototypes"></a>K-prototypes</h2><p>K-prototypes = K-means (numerical) + K-modes (categorical)</p>
+<p>cost function: $$E=\sum^K_{l=1}\sum^n_{i=1}y_{il}\ \text{d}(X_i,Q_l)$$</p>
+<p>$X_i=\{x_{i1},x_{i2},\cdots,x_{im}\},\ Q_l=\{q_{l1},q_{l2},\cdots,q_{lm}\}$</p>
+<img src='https://pic.downk.cc/item/5ebabc3fc2a9a83be5b1dd4b.png' width=500>
+
+<p>$y_{il}\in \{0,1\}$，1 表示样例 $X_i$ 分在 $l$ 簇。$\displaystyle \sum^K_{l=1}y_{il}=1 \ (\forall i=1,\cdots,n).$</p>
+<p>把样例分派给第 $l$ 簇的损失：</p>
+<p>$$E_l=\sum^n_{i=1}y_{il}\ \text{d}(X_i,Q_l)$$</p>
+<p>当 $\displaystyle q_{lj}=\frac{1}{n_l}\sum^n_{i=1}y_{il}\ x_{ij}$ 时，$E_l$ 最小。</p>
+<p>$$\begin{aligned}<br>\text{d}(X_i,Q_l)&amp;=\sum^{m_r}_{j=1}(x^r_{ij}-q^r_{lj})^2+\gamma_l\sum^{m_c}_{j=1}\delta(x^c_{ij},q^c_{lj})\\\<br>                 &amp;=E^r_l+E^c_l\end{aligned}$$</p>
+<p>$$\delta(x,q)=\left\{\begin{array}{l}<br>    1, \ x\neq q\\\<br>    0, \ x=q<br>    \end{array}\right.$$</p>
+<p>$E^r_l$ 是 numerical variables 的损失，$E^c_l$ 是 categorical variables 的损失。</p>
+<p>$\gamma_l$ 的取值，一般是根据所在簇的 numerical variables 的标准差 $\sigma$来定，$\gamma\in [1/3\sigma,2/3\sigma]$。</p>
+]]></content>
+      <categories>
+        <category>ML</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>用Python实现SPC统计过程控制</title>
     <url>/2020/05/09/python-spc/</url>
     <content><![CDATA[<h2 id="SPC与六西格玛"><a href="#SPC与六西格玛" class="headerlink" title="SPC与六西格玛"></a>SPC与六西格玛</h2><p>SPC (Statistical Process Control) 统计过程控制，是六西格玛工业管理理论的其中一个重要模块。SPC的控制图 (control chart) 是数据可视化的一个重要手段。而控制图的选择应该根据实际需求来，这里不展开讲控制图，关于控制图的细节可以查找其他资料。（7 种控制图，8 个判异准则。）</p>
@@ -218,7 +247,21 @@
 <img src='https://pic.downk.cc/item/5eb96a11c2a9a83be5de1c15.png'>
 <img src='https://pic.downk.cc/item/5eb9693cc2a9a83be5dbf8ef.png'>
 
-<p>针对每个控制图，按照计算公式编写对应的代码，确定上下界和判异规则，将异常点在图上用红点表示出来。</p>
+<p>观察 I chart，对照输出的具体异常点：</p>
+<ul>
+<li>Rule 1 - 第76个观测值32，在A区以外，比UCL大；</li>
+<li>Rule 2 - 第19,20,64,65,76,77，连续三个点中有两个落在同一侧的B区以外；（76已经是Rule1异常）</li>
+<li>Rule 3 - 第13,14,15,17,18,19,20,76,77,78,79，连续五个点中有四个落在同一侧的C区外；（19,20,76,77已经是Rule1和Rule2异常）</li>
+<li>Rule 4 - 第8至20，连续九个点落在中心线同一侧；（13,14,15,17,18,19,20已经在前面的Rule检测到）</li>
+<li>Rule 5 至 8 均未发现异常。</li>
+</ul>
+<p>观察 MR chart，对照输出的具体异常点：</p>
+<ul>
+<li>Rule 1 - 第46,66,71,76,91异常，在UCL以外；</li>
+<li>其余Rule均未发现异常。</li>
+</ul>
+<hr>
+<p>针对不同的场景选择不同的控制图。每个控制图，按照计算公式编写对应的代码，确定上下界和判异规则，将异常点在图上用红点表示出来。</p>
 ]]></content>
       <tags>
         <tag>Projet</tag>
@@ -288,8 +331,8 @@
 </li>
 </ol>
 <ol start="8">
-<li><p>**设${x_n}$服从独立同分布，$E[x_n] = 0, Var(x_n)=1$，则当n趋向于无穷大时，下式值为：$$\frac{x_1^2+x_2x_3+x_4^2+x_5x_6+\cdots+x_{3n-2}^2+x_{3n-1}x_{3n}}{n}$$</p>
-<p> A. 无穷大<br> B. 0<br> C. 1<br> D. 2**</p>
+<li><p><strong>设${x_n}$服从独立同分布，$E[x_n] = 0, Var(x_n)=1$，则当n趋向于无穷大时，下式值为：</strong>$$\frac{x_1^2+x_2x_3+x_4^2+x_5x_6+\cdots+x_{3n-2}^2+x_{3n-1}x_{3n}}{n}$$</p>
+<p> <strong>A. 无穷大<br> B. 0<br> C. 1<br> D. 2</strong></p>
 <p> 选C。分两部分用大数定律：<br> $$\frac{x_1^2+x_4^2+\cdots}{n}\longrightarrow E(x_1^2)=Var(x_1)+E(x_1)^2=1$$</p>
 <p> $$\frac{x_2x_3+x_5x_6+\cdots}{n}\longrightarrow E(x_2x_3)=E(x_2)E(x_3)=0$$</p>
 </li>
@@ -307,6 +350,81 @@
 <li>选中两个不同的字母，放回不变概率是0.5：$8\times 0.5$</li>
 </ul>
 <p>$$\frac{2+4}{10}=3/5$$</p>
+</li>
+</ol>
+<ol start="11">
+<li><p><strong>某国家非常重男轻女，若一户人家生了一个女孩，便再要一个，直到生下男孩为止，假设生男生女概率相等，请问平均每户人家有<strong>____</strong>个女孩。<br>A. 0.5<br>B. 2/3<br>C. 1<br>D. 4/3</strong></p>
+<p>选C，几何分布的其中一种，在得到第一次成功之前所经历的失败次数，取值从0开始，期望是$(1-p)/p$。</p>
+<table>
+<thead>
+<tr>
+<th>几何分布(1)</th>
+<th>几何分布(2)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在伯努利试验中，得到一次成功所需要的试验次数</td>
+<td>在得到第一次成功之前所经历的失败次数</td>
+</tr>
+<tr>
+<td>$X\in\{1,2,3\cdots\}$</td>
+<td>$X\in\{0,1,2\cdots\}$</td>
+</tr>
+<tr>
+<td>$P(X=k)=(1-p)^{k-1}p$</td>
+<td>$P(X=k)=(1-p)^kp$</td>
+</tr>
+<tr>
+<td>$\displaystyle\mathbb{E}(X)=\frac{1}{p}$</td>
+<td>$\displaystyle\mathbb{E}(X)=\frac{1-p}{p}$</td>
+</tr>
+<tr>
+<td>$\displaystyle Var(X)=\frac{1-p}{p^2}$</td>
+<td>$\displaystyle Var(X)=\frac{1-p}{p^2}$</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<ol start="12">
+<li><p><strong>在一个夜晚，同时有4人需要过一桥，一次最多只能通过两个人，且只有一只手电筒，而且每人的速度不同。甲、乙、丙、丁需要时间分别为：2，3，6，12分钟。问：4人过河的最短时间<br>A. 19<br>B. 21<br>C. 23<br>D.25</strong></p>
+<p>选C。</p>
+<p>Step 1:  甲 乙 过去，3 分钟<br>Step 2:  乙回来， 3 分钟<br>Step 3:  丙丁过去，12 分钟<br>Step 4:  甲回来， 2 分钟<br>Step 5: 甲乙过去, 3 分钟<br>总共： 23分钟<br>(1) 丙丁最慢，所以他们一起走最合适。<br>(2) 必须要回来两个人，甲乙最快，所以甲乙回来。</p>
+</li>
+</ol>
+<ol start="13">
+<li><p><strong>爸爸去哪儿中的3对父子站成一排，各自父子之间不能相邻，比如石头不能和郭涛挨着，以此类推，共有几种站法？<br>A. 120<br>B. 48<br>C. 240<br>D. 144</strong></p>
+<p>选C。<br>容斥原理：$A\cup B\cup C = A+B+C - A\cap B - B\cap C - C\cap A + A\cap B\cap C$</p>
+<img src='https://pic.downk.cc/item/5ec3a3e9c2a9a83be5fabd01.png'>
+
+<p>这里我们算所有排列（$A^6_6=720$种）减去父子相邻的所有情况$A\cup B\cup C$（ABC分别表示每对父子相邻）</p>
+<p>$A+B+C$（至少有一对父子相邻）：$C^1_3A^5_5A^2_2=720$</p>
+<p>$A\cap B + B\cap C + C\cap A$（至少有两对父子相邻）：$C^2_3A^4_4A^2_2A^2_2=288$</p>
+<p>$A\cap B\cap C$（三对父子都相邻）：$A^3_3A^2_2A^2_2A^2_2=48$</p>
+<p>最终：$720-720+288-48=240$</p>
+</li>
+</ol>
+<ol start="14">
+<li><p><strong>下列有关ARMA模型的说法正确的是<br>A. MA(q)模型偏自相关系数拖尾<br>B. AR(p)模型偏自相关系数拖尾<br>C. ARMA(p,q)模型自相关系数截尾<br>D. ARMA(p,q)模型偏自相关系数截尾</strong></p>
+<p>选A。时间序列模型</p>
+</li>
+</ol>
+<ol start="15">
+<li><p><strong>盒子里面有11个苹果，每天至少吃一个，最多不做限制，直到吃完为止，一共有多少种不同的吃法？<br>A. 144<br>B. 512<br>C. 1024<br>D. 2048</strong></p>
+<p>选C。在10个间隔放N块板：$C^n_{10}$（11个苹果n+1天吃完）<br>$\displaystyle\sum^{10}_{n=0}C^n_{10}=1024$</p>
+</li>
+</ol>
+<ol start="16">
+<li><p><strong>下列函数中只有（ ）才可能是一个随机变量的分布密度</strong></p>
+<img src='https://pic.downk.cc/item/5ec3ce37c2a9a83be536754c.png'>
+
+<p>选B。</p>
+<p>概率密度在定义域内大于0，且积分等于1。</p>
+<p>$\displaystyle\begin{aligned}\int^{\pi/6}_{-\pi/6}\cos x \ \text{d}x &amp;= \left[\sin x\right]^{\pi/6}_{-\pi/6}=\sin \left(\frac{\pi}{6}\right)-\sin \left(-\frac{\pi}{6}\right)\\\<br>&amp;=\sin \left(\frac{\pi}{6}\right)+\sin \left(\frac{\pi}{6}\right)=2\sin 30^\circ=1\end{aligned}$</p>
+</li>
+</ol>
+<ol start="17">
+<li><p><strong>一个三角形， 三个端点上有三只蚂蚁，蚂蚁可以绕任意边走，问蚂蚁不相撞的概率是多少?</strong></p>
+<p>与长度无关，每只蚂蚁有2个方向可走，共有8种可能<br>只有当所有蚂蚁都逆时针，或都顺时针走时才符合要求<br>2/8=1/4</p>
 </li>
 </ol>
 ]]></content>
@@ -335,6 +453,13 @@
  可用。</li>
 </ol>
 <ol start="5">
+<li>进入MySQL终端，进入<code>database01</code>数据库 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql&gt; use database01;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="6">
 <li><p><strong>时间函数</strong><br> <code>DATE(data)</code>：返回日期<br> <code>DATE_FORMAT(date,format)</code>：返回自定义format的日期</p>
 <table>
 <thead>
@@ -371,14 +496,14 @@
 
 </li>
 </ol>
-<ol start="6">
+<ol start="7">
 <li><strong>IF函数</strong><br> <code>IF(expr,value1,value2)</code>：如果expr是True，返回value1，否则返回value2</li>
 </ol>
-<ol start="7">
+<ol start="8">
 <li><strong>COUNT函数</strong><br> <code>COUNT(expr)</code><br> 或者 <code>COUNT(1)</code> <code>COUNT(*)</code>，默认对行进行计数</li>
 </ol>
-<ol start="8">
-<li><strong>LIMIT</strong><br> 限制提取的数据量<br> <code>LIMIT 5</code>：0<del>4<br> <code>LIMIT 5,10</code>：6</del>15<br> <code>LIMIT 50,-1</code>：51~最后</li>
+<ol start="9">
+<li><strong>LIMIT</strong><br> 限制提取的数据量<br> <code>LIMIT 5</code>：0~4<br> <code>LIMIT 5,10</code>：6~15<br> <code>LIMIT 50,-1</code>：51~最后</li>
 </ol>
 <hr>
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ol>
@@ -635,8 +760,8 @@
         <category>Math</category>
       </categories>
       <tags>
-        <tag>主成分分析</tag>
-        <tag>因子分析</tag>
+        <tag>Math</tag>
+        <tag>Machine Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -1702,8 +1827,27 @@ D.
 
 
 
+</li>
+</ol>
+<h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><ol>
+<li><p>强化学习体系内的主要元素有哪些<br> A. 对象（Agent）<br> B. 环境（Environment）<br> C. 状态（State）<br> D. 动作(Actions)<br> E. 奖励 (Rewards)<br> F. 策略（Policy）</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> A B D E</p>
+ </details>
 
 
+
+</li>
+</ol>
+<ol start="2">
+<li><p>简述GAN的主要流程？</p>
+ <details>
+ <summary><u>答案：</u></summary>
+
+<p> 生成网络部分生成数据，通过训练使生成的虚拟数据不断拟合逼近真实数据，判别网络从不断的训练中学习，使判别真伪数据能力越来越强。通过生成部分和判别部分的对抗最终达到模型整体的收敛。</p>
+ </details>
 
 
 
@@ -2216,13 +2360,7 @@ Floyd算法计算图中任意一对点的最短路径.
         <category>ML</category>
       </categories>
       <tags>
-        <tag>数学计算</tag>
-        <tag>对偶问题</tag>
-        <tag>SVM</tag>
-        <tag>拉格朗日乘子法</tag>
-        <tag>KKT条件</tag>
-        <tag>硬间隔&amp;软间隔</tag>
-        <tag>核函数</tag>
+        <tag>Machine Learning</tag>
       </tags>
   </entry>
   <entry>
@@ -2944,11 +3082,10 @@ $$所以$\det \left( A \right) =\lambda _1\lambda _2\cdots \lambda _K$。
       </categories>
       <tags>
         <tag>Math</tag>
-        <tag>矩阵</tag>
       </tags>
   </entry>
   <entry>
-    <title>普通最小二乘法OLS的手把手求解</title>
+    <title>普通最小二乘法OLS的逐步求解</title>
     <url>/2020/03/06/OLS/</url>
     <content><![CDATA[<h2 id="1-一元线性回归"><a href="#1-一元线性回归" class="headerlink" title="1. 一元线性回归"></a>1. 一元线性回归</h2><p>模型：</p>
 <p>$$\mathbf{y}\approx\beta _0+\beta _1\mathbf{x}$$ </p>
@@ -2994,9 +3131,8 @@ $$所以$\det \left( A \right) =\lambda _1\lambda _2\cdots \lambda _K$。
         <category>Math</category>
       </categories>
       <tags>
-        <tag>OLS</tag>
-        <tag>线性回归</tag>
-        <tag>数学计算</tag>
+        <tag>Math</tag>
+        <tag>Machine Learning</tag>
       </tags>
   </entry>
 </search>
