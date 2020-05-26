@@ -59,7 +59,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.7k字</span>
+            <span class="post-count">9.4k字</span>
         </span>
     </span>
 
@@ -68,7 +68,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">16分钟</span>
+            <span class="post-count">40分钟</span>
         </span>
     </span>
 </div>
@@ -94,631 +94,909 @@
 
       
       <ol>
-<li><p>cron 后台常驻程序 (daemon) 用于：<br>A. 负责文件在网络中的共享<br>B. 管理打印子系统<br>C. 跟踪管理系统信息和错误<br>D. 管理系统日常任务的调度</p>
-<details>
-<summary><u>答案：</u></summary>
-D.
-</details>
-</li>
-<li><p>在大多数Linux发行版本中，以下哪个属于块设备 (block devices) ？<br>A. 串行口<br>B. 硬盘<br>C. 虚拟终端<br>D. 打印机</p>
-<details>
-<summary><u>答案：</u></summary>
-B.
-</details>
-</li>
-<li><p>下面哪个Linux命令可以一次显示一页内容？<br>A. pause<br>B. cat<br>C. more<br>D. grep</p>
-<details>
-<summary><u>答案：</u></summary>
-C.
-</details>
-
-
-</li>
+<li>cron 后台常驻程序 (daemon) 用于：<br>A. 负责文件在网络中的共享<br>B. 管理打印子系统<br>C. 跟踪管理系统信息和错误<br>D. 管理系统日常任务的调度</li>
+</ol>
+<p>D.</p>
+<ol start="2">
+<li>在大多数Linux发行版本中，以下哪个属于块设备 (block devices) ？<br>A. 串行口<br>B. 硬盘<br>C. 虚拟终端<br>D. 打印机</li>
+</ol>
+<p>B.</p>
+<ol start="3">
+<li>下面哪个Linux命令可以一次显示一页内容？<br>A. pause<br>B. cat<br>C. more<br>D. grep</li>
+</ol>
+<p>C.</p>
+<ol start="4">
+<li>怎样了解您在当前目录下还有多大空间？<br>A. Use df<br>B. Use du /<br>C. Use du .<br>D. Use df .</li>
+</ol>
+<p>C. </p>
+<ol start="5">
+<li>怎样更改一个文件的权限设置？<br>A. attrib<br>B. chmod<br>C. change<br>D. file</li>
+</ol>
+<p>B. </p>
+<ol start="6">
+<li>假如您需要找出 /etc/my.conf 文件属于哪个包 (package) ，您可以执行：<br>A. rpm -q /etc/my.conf<br>B. rpm -requires /etc/my.conf<br>C. rpm -qf /etc/my.conf<br>D. rpm -q | grep /etc/my.conf</li>
+</ol>
+<p>C. </p>
+<ol start="7">
+<li>假如当前系统是在 level 3 运行，怎样不重启系统就可转换到 level 5 运行？<br>A. Set level = 5<br>B. telinit 5<br>C. run 5<br>D. ALT-F7-5</li>
+</ol>
+<p>B. </p>
+<ol start="8">
+<li>那个命令用于改变 IDE 硬盘的设置？<br>A. hdparam<br>B. ideconfig<br>C. hdparm<br>D. hddparm</li>
+</ol>
+<p>C. </p>
+<ol start="9">
+<li>下面哪个命令可以列出定义在以后特定时间运行一次的所有任务？<br>A. atq<br>B. cron<br>C. batch<br>D. at</li>
+</ol>
+<p>A. </p>
+<ol start="10">
+<li>下面命令的作用是：set PS1=”[\u\w\t]\$“ ; export PS1<br>A. 改变错误信息提示<br>B. 改变命令提示符<br>C. 改变一些终端参数<br>D. 改变辅助命令提示符</li>
+</ol>
+<p>B. </p>
+<ol start="11">
+<li>作为一个管理员，你希望在每一个新用户的目录下放一个文件 .bashrc ，那么你应该在哪个目录下放这个文件，以便于新用户创建主目录时自动将这个文件复制到自己的目录下。<br>A. /etc/skel/<br>B. /etc/default/<br>C. /etc/defaults/<br>D. /etc/profile.d/</li>
+</ol>
+<p>A. </p>
+<ol start="12">
+<li>在bash中，export命令的作用是：<br>A. 在子shell中运行命令<br>B. 使在子shell中可以使用命令历史记录<br>C. 为其它应用程序设置环境变量<br>D. 提供NFS分区给网络中的其它系统使用</li>
+</ol>
+<p>C. </p>
+<ol start="13">
+<li>在使用了shadow口令的系统中，/etc/passwd和/etc/shadow两个文件的权限正确的是：<br>A. -rw-r—– , -r——–<br>B. -rw-r–r– , -r–r–r–<br>C. -rw-r–r– , -r——–<br>D. -rw-r–rw- , -r—–r–</li>
+</ol>
+<p>C. </p>
+<ol start="14">
+<li>下面哪个参数可以删除一个用户并同时删除用户的主目录？<br>A. rmuser -r<br>B. deluser -r<br>C. userdel -r<br>D. usermgr -r</li>
+</ol>
+<p>C. </p>
+<ol start="15">
+<li>有一个备份程序mybackup，需要在周一至周五下午1点和晚上8点各运行一次，下面哪条crontab的项可以完成这项工作？<br>A. 0 13,20 <em> </em> 1,5 mybackup<br>B. 0 13,20 <em> </em> 1,2,3,4,5 mybackup<br>C. <em> 13,20 </em> <em> 1,2,3,4,5 mybackup<br>D. 0 13,20 1,5 </em> * mybackup</li>
+</ol>
+<p>B. </p>
+<ol start="16">
+<li>如何从当前系统中卸载一个已装载的文件系统<br>A. umount<br>B. dismount<br>C. mount -u<br>D. 从 /etc/fstab 中删除这个文件系统项</li>
+</ol>
+<p>A. </p>
+<ol start="17">
+<li>如果你的umask设置为022，缺省的你创建的文件的权限为：<br>A. —-w–w-<br>B. -w–w—-<br>C. r-xr-x—<br>D. rw-r–r–</li>
+</ol>
+<p>D. </p>
+<ol start="18">
+<li>在一条命令中如何查找一个二进制命令 Xconfigurator 的路径？<br>A. apropos Xconfigurator<br>B. find Xconfigurator<br>C. where Xconfigurator<br>D. which Xconfigurator</li>
+</ol>
+<p>D. </p>
+<ol start="19">
+<li>哪一条命令用来装载所有在 /etc/fstab 中定义的文件系统？<br>A. amount<br>B. mount -a<br>C. fmount<br>D. mount -f</li>
+</ol>
+<p>B. </p>
+<ol start="20">
+<li>运行一个脚本，用户不需要什么样的权限？<br>A. read<br>B. write<br>C. execute<br>D. browse on the directory</li>
+</ol>
+<p>B. </p>
+<ol start="21">
+<li>在Linux中，如何标识接在IDE0上的slave硬盘的第2个扩展分区？<br>A. /dev/hdb2<br>B. /dev/hd1b2<br>C. /dev/hdb6<br>D. /dev/hd1b6</li>
+</ol>
+<p>C. </p>
+<ol start="22">
+<li>在应用程序起动时，如何设置进程的优先级？<br>A. priority<br>B. nice<br>C. renice<br>D. setpri</li>
+</ol>
+<p>B. </p>
+<ol start="23">
+<li>在 bash 中, 在一条命令后加入”1&gt;&amp;2” 意味着：<br>A. 标准错误输出重定向到标准输入<br>B. 标准输入重定向到标准错误输出<br>C. 标准输出重定向到标准错误输出<br>D. 标准输出重定向到标准输入</li>
+</ol>
+<p>C. </p>
+<ol start="24">
+<li>下面哪条命令可以把f1.txt复制为f2.txt?<br>A. cp f1.txt | f2.txt<br>B. cat f1.txt | f2.txt<br>C. cat f1.txt &gt; f2.txt<br>D. copy f1.txt | f2.txt</li>
+</ol>
+<p>C. </p>
+<ol start="25">
+<li>显示一个文件最后几行的命令是：<br>A. tac<br>B. tail<br>C. rear<br>D. last</li>
+</ol>
+<p>B. </p>
+<ol start="26">
+<li>如何快速切换到用户John的主目录下？<br>A. cd @John<br>B. cd #John<br>C. cd &amp;John<br>D. cd ~John</li>
+</ol>
+<p>D. 
+　</p>
+<ol start="27">
+<li>把一个流中所有字符转换成大写字符，可以使用下面哪个命令？<br>A. tr a-z A-Z<br>B. tac a-z A-Z<br>C.sed /a-z/A-Z<br>D. sed –toupper</li>
+</ol>
+<p>A. </p>
+<ol start="28">
+<li>使用什么命令可以查看Linux的启动信息？<br>A. mesg -d<br>B. dmesg<br>C. cat /etc/mesg<br>D. cat /var/mesg</li>
+</ol>
+<p>B. </p>
+<ol start="29">
+<li>运行级定义在：<br>A. in the kernel<br>B. in /etc/inittab<br>C. in /etc/runlevels<br>D. using the rl command</li>
+</ol>
+<p>B. </p>
+<ol start="30">
+<li>如何装载(mount)上在 /etc/fstab 文件中定义的所有文件系统？<br>A. mount -a<br>B. mount /mnt/*<br>C. mount<br>D. mount /etc/fstab</li>
+</ol>
+<p>A. </p>
+<ol start="31">
+<li>使用ln命令将生成了一个指向文件old的符号链接new，如果你将文件old删除，是否还能够访问文件中的数据？<br>A. 不可能再访问<br>B. 仍然可以访问<br>C. 能否访问取决于文件的所有者<br>D. 能否访问取决于文件的权限</li>
+</ol>
+<p>A. </p>
+<ol start="32">
+<li>xt2fs文件系统中，缺省的为root用户保留多大的空间？<br>A. 3%<br>B. 5%<br>C. 10%<br>D. 15%</li>
+</ol>
+<p>C. </p>
+<ol start="33">
+<li>哪个命令用来显示系统中各个分区中inode的使用情况？<br>A. df -i<br>B. df -H<br>C. free -b<br>D. du -a -c /</li>
+</ol>
+<p>A. 
+　</p>
+<ol start="34">
+<li>多数Linux发行版本中，图形方式的运行级定义为？<br>A. 1<br>B. 2<br>C. 3<br>D. 5</li>
+</ol>
+<p>D. </p>
+<ol start="35">
+<li>在系统文档中找到关于print这个单词的所有说明？<br>A. man print<br>B. which print<br>C. locate print<br>D. apropos print</li>
+</ol>
+<p>D. </p>
+<ol start="36">
+<li>man 5 passwd 含义是？<br>A. 显示 passwd 命令的使用方法<br>B. 显示 passwd 文件的结构<br>C. 显示 passwd 命令的说明的前五行<br>D. 显示关于passwd的前五处说明文档。</li>
+</ol>
+<p>B. </p>
+<ol start="37">
+<li>如何在文件中查找显示所有以”<em>“打头的行？<br>A. find \</em> file<br>B. wc -l <em> &lt; file<br>C. grep -n </em> file<br>D. grep ‘^*’ file</li>
+</ol>
+<p>D. </p>
+<ol start="38">
+<li>在ps命令中什么参数是用来显示所有用户的进程的？<br>A. a<br>B. b<br>C. u<br>D. x</li>
+</ol>
+<p>A. </p>
+<ol start="39">
+<li>显示二进制文件的命令是？<br>A. od<br>B. vil<br>C. view<br>D. binview</li>
+</ol>
+<p>A. </p>
+<ol start="40">
+<li>如何显示Linux系统中注册的用户数（包含系统用户）？<br>A. account -l<br>B. nl /etc/passwd |head<br>C. wc –users /etc/passwd<br>D. wc –lines /etc/passwd</li>
+</ol>
+<p>D. </p>
+<ol start="41">
+<li>在一行结束位置加上什么符号，表示未结束，下一行继续？<br>A. /<br>B. <br>C. ;<br>D. |</li>
+</ol>
+<p>B. </p>
+<ol start="42">
+<li>命令 kill 9 的含义是：<br>A. kills the process whose PID is 9.<br>B. kills all processes belonging to UID 9.<br>C. sends SIGKILL to the process whose PID is 9.<br>D. sends SIGTERM to the process whose PID IS 9.</li>
+</ol>
+<p>D. </p>
+<ol start="43">
+<li>如何删除一个非空子目录/tmp？<br>A. del /tmp/<em><br>B. rm -rf /tmp<br>C. rm -Ra /tmp/</em><br>D. rm -rf /tmp/*</li>
+</ol>
+<p>B. rm -rf * 删除当前目录下所有文件</p>
+<ol start="44">
+<li>使用什么命令可以在今天午夜运行命令 cmd1 ？<br>A. at midnight cmd1<br>B. cron -at “00:00” cmd1<br>C. batch -t “00:00” &lt; cmd1<br>D. echo “cmd1” | at midnight</li>
+</ol>
+<p>D. </p>
+<ol start="45">
+<li>你的系统使用增量备份策略，当需要恢复系统时，你需要按什么顺序恢复备份数据？<br>A. 最后一次全备份，然后从最早到最近的增量备份<br>B. 最后一次全备份，然后从最近到最早的增量备份<br>C. 最早到最近的增量备份，然后最后一次全备份<br>D. 最近到最早的增量备份，然后最后一次全备份</li>
+</ol>
+<p>B. </p>
+<ol start="46">
+<li>对所有用户的变量设置，应当放在哪个文件下？<br>A. /etc/bashrc<br>B. /etc/profile<br>C. ~/.bash_profile<br>D. /etc/skel/.bashrc</li>
+</ol>
+<p>B. </p>
+<ol start="47">
+<li>Linux系统中，一般把命令 ls 定义为 ls –color 的别名，以便以不同颜色来标识不同类型的文件。但是，如何能够使用原先的ls命令？<br>A. \ls<br>B. ;ls<br>C. ls $$<br>D. ls –noalias</li>
+</ol>
+<p>A. </p>
+<ol start="48">
+<li>在Linux系统中的脚本文件一般以什么开头？<br>A. $/bin/sh<br>B. #!/bin/sh<br>C. use /bin/sh<br>D. set shell=/bin/sh</li>
+</ol>
+<p>B. </p>
+<ol start="49">
+<li>下面哪种写法表示如果cmd1成功执行，则执行cmd2命令？<br>A. cmd1&amp;&amp;cmd2<br>B. cmd1|cmd2<br>C. cmd1;cmd2<br>D. cmd1||cmd2</li>
+</ol>
+<p>A. </p>
+<ol start="50">
+<li>在哪个文件中定义网卡的I/O地址？<br>A. cat /proc/modules<br>B. cat /proc/devices<br>C. cat /proc/ioports<br>D. cat /io/dma</li>
+</ol>
+<p>C. </p>
+<ol start="51">
+<li>Linux中，提供TCP/IP包过滤功能的软件叫什么？<br>A. rarp<br>B. route<br>C. iptables<br>D. filter</li>
+</ol>
+<p>C. </p>
+<ol start="52">
+<li>如何暂停一个打印队列？<br>A. lpr<br>B. lpq<br>C. lpc<br>D. lpd</li>
+</ol>
+<p>C. </p>
+<ol start="53">
+<li>在vi中退出不保存的命令是？<br>A. :q<br>B. :w<br>C. :wq<br>D. :q!</li>
+</ol>
+<p>D. A. :q 退出；B. :w 保存 C. :wq 保存并退出 D. :q! 强制退出</p>
+<ol start="54">
+<li>在 XFree86 3.x 中, 缺省的字体服务器为：<br>A. xfs<br>B. xfserv<br>C. fonts<br>D. xfstt</li>
+</ol>
+<p>A. </p>
+<ol start="55">
+<li>使用什么命令检测基本网络连接？<br>A. ping<br>B. route<br>C. netstat<br>D. ifconfig</li>
+</ol>
+<p>A. </p>
+<ol start="56">
+<li>下面哪个协议使用了二个以上的端口？<br>A. telnet<br>B. FTP<br>C. rsh<br>D. HTTP</li>
+</ol>
+<p>B. </p>
+<ol start="57">
+<li>在PPP协议中，哪个认证协议不以明文传递密码？<br>A. PAM<br>B. PAP<br>C. PGP<br>D. CHAP</li>
+</ol>
+<p>D. </p>
+<ol start="58">
+<li>下面哪个文件系统应该分配最大的空间？<br>A. /usr<br>B. /lib<br>C. /root<br>D. /bin</li>
+</ol>
+<p>A. </p>
+<ol start="59">
+<li>如何在Debian系统中安装rpm包？<br>A. alien pkgname.rpm<br>B. dpkg –rpm pkgname.rpm<br>C. dpkg –alien pkgname.rpm<br>D. alien pkganme.rpm ; dpkg -i pkganme.deb</li>
+</ol>
+<p>D. </p>
+<ol start="60">
+<li>在安装软件时下面哪一步需要root权限？<br>A. make<br>B. make deps<br>C. make config<br>D. make install</li>
+</ol>
+<p>D. </p>
+<ol start="61">
+<li>什么命令用来只更新已经安装过的rpm软件包？<br>A. rpm -U <em>.rpm<br>B. rpm -F </em>.rpm<br>C. rpm -e <em>.rpm<br>D. rpm -q </em>.rpm</li>
+</ol>
+<p>B. </p>
+<ol start="62">
+<li>在 windows 与 Linux 双起动的系统中，如果要让LILO 管理引导，则 LILO 应该放在：<br>A. MBR<br>B. /<br>C. root分区的首扇区<br>D. /LILO</li>
+</ol>
+<p>A. </p>
+<ol start="63">
+<li>ldconfig的配置文件是<br>A. /lib/ld.so<br>B. /etc/ld.so.conf<br>C. /etc/ld.so.cache<br>D. /etc/modules.conf</li>
+</ol>
+<p>B. </p>
+<ol start="64">
+<li>下面哪个命令可以压缩部分文件：<br>A. tar -dzvf filename.tgz <em><br>B. tar -tzvf filename.tgz </em><br>C. tar -czvf filename.tgz <em><br>D. tar -xzvf filename.tgz </em></li>
+</ol>
+<p>C. </p>
+<ol start="65">
+<li>网络服务的daemon是：<br>A. lpd<br>B. netd<br>C. httpd<br>D. inetd</li>
+</ol>
+<p>D. </p>
+<ol start="66">
+<li>Linux与windows 的网上领居互联，需要提供什么daemon?<br>A. bind<br>B. smbd<br>C. nmbd<br>D. shard</li>
+</ol>
+<p>B. </p>
+<ol start="67">
+<li>对于Apache服务器，提供的子进程的缺省的用户是：<br>A. root<br>B. apached<br>C. httpd<br>D. nobody</li>
+</ol>
+<p>D. </p>
+<ol start="68">
+<li>sendmail中缺省的未发出信件的存放位置是：<br>A. /var/mail/<br>B. /var/spool/mail/<br>C. /var/spool/mqueue/<br>D. /var/mail/deliver/</li>
+</ol>
+<p>C. </p>
+<ol start="69">
+<li>apache的主配置文件是：<br>A. httpd.conf<br>B. httpd.cfg<br>C. access.cfg<br>D. apache.conf</li>
+</ol>
+<p>A. </p>
+<ol start="70">
+<li>关于可装载的模块，装载时的参数，如I/O地址等的存放位置是：<br>A. /etc/conf.modules<br>B. /etc/lilo.conf<br>C. /boot/System.map<br>D. /etc/sysconfig</li>
+</ol>
+<p>A. </p>
+<ol start="71">
+<li>在 Linux 中，如何关闭邮件提示？<br>A. biff n<br>B. mesg n<br>C. notify off<br>D. set notify=off</li>
+</ol>
+<p>A. </p>
+<ol start="72">
+<li>在 bash shell 环境下，当一命令正在执行时，按下 control-Z 会：<br>A. 中止前台任务<br>B. 给当前文件加上 EOF.<br>C. 将前台任务转入后台<br>D. 注销当前用户</li>
+</ol>
+<p>C. </p>
+<ol start="73">
+<li>定义bash环境的用户文件是：<br>A. bash &amp; .bashrc<br>B. bashrc &amp; .bash_conf<br>C. bashrc &amp; bash_profile<br>D. .bashrc &amp; .bash_profile</li>
+</ol>
+<p>D. </p>
+<ol start="74">
+<li>下面哪条命令用来显示一个程序所使用的库文件？<br>A. ldd<br>B. ld so<br>C. modprobe<br>D. ldconfig</li>
+</ol>
+<p>A. </p>
+<ol start="75">
+<li>如何查看一个RPM软件的配置文件的存放位置？<br>A. rpm -qc rpm1<br>B. rpm -Vc rpm1<br>C. rpm –config rpm1<br>D. rpm -qa –config rpm1</li>
+</ol>
+<p>A. </p>
+<ol start="76">
+<li>如何查看一个RPM软件的修改记录？<br>A. rpm -Vc postfix<br>B. rpm -qpil postfix<br>C. rpm –changelog postfix<br>D. rpm -q –changelog postfix</li>
+</ol>
+<p>D. </p>
+<ol start="77">
+<li>通过Makefile来安装已编译过的代码的命令是：<br>A. make<br>B. install<br>C. make depend<br>D. make install</li>
+</ol>
+<p>D. </p>
+<ol start="78">
+<li>什么命令解压缩tar文件？<br>A. tar -czvf filename.tgz<br>B. tar -xzvf filename.tgz<br>C. tar -tzvf filename.tgz<br>D. tar -dzvf filename.tgz</li>
+</ol>
+<p>B. </p>
+<ol start="79">
+<li>在 XF86Config 配置文件中，哪个段用来设置字体文件？<br>A. The Fonts section.<br>B. The Files section.<br>C. The xfsCodes section.<br>D. The Graphics section.</li>
+</ol>
+<p>B. </p>
+<ol start="80">
+<li>8 bit color 指的是：<br>A. 64K colors<br>B. 16K colors<br>C. 256 colors<br>D. 16M colors</li>
+</ol>
+<p>C. </p>
+<ol start="81">
+<li>下面哪个文件用来设置 X window 的显示分辨率？<br>A. xinit<br>B. xinitrc<br>C. XF86Setup<br>D. XF86Config</li>
+</ol>
+<p>D. </p>
+<ol start="82">
+<li>哪个变量用来指定一个远程X应用程序将输出放到哪个X server上？<br>A. DISPLAY<br>B. TERM<br>C. ECHO<br>D. OUTPUT</li>
+</ol>
+<p>A. </p>
+<ol start="83">
+<li>在xdm的配置目录中，哪个文件用来设置在用户通过xdm登录后自动起动的应用程序？<br>A. The Xsession file<br>B. The Xsetup_0 file<br>C. The Xstart_up file<br>D. The GiveConsole file</li>
+</ol>
+<p>B. </p>
+<ol start="84">
+<li>命令 netstat -a 停了很长时间没有响应，这可能是哪里的问题？<br>A. NFS.<br>B. DNS.<br>C. NIS.<br>D. routing.</li>
+</ol>
+<p>B. </p>
+<ol start="85">
+<li>ping使用的协议是：<br>A. TCP<br>B. UDP<br>C. SMB<br>D. ICMP</li>
+</ol>
+<p>D. </p>
+<ol start="86">
+<li>下面哪个命令不是用来查看网络故障的？<br>A. ping<br>B. init<br>C. telnet<br>D. netstat</li>
+</ol>
+<p>B. </p>
+<ol start="87">
+<li>拨号上网使用的协议通常是：<br>A. PPP<br>B. UUCP<br>C. SLIP<br>D. Ethernet</li>
+</ol>
+<p>A. </p>
+<ol start="88">
+<li>TCP/IP中，哪个协议是用来进行IP自动分配的？<br>A. ARP<br>B. NFS<br>C. DHCP<br>D. DNS</li>
+</ol>
+<p>C. </p>
+<ol start="89">
+<li>下面哪个文件定义了网络服务的端口？<br>A. /etc/netport<br>B. /etc/services<br>C. /etc/server<br>D. /etc/netconf</li>
+</ol>
+<p>B. </p>
+<ol start="90">
+<li>下面哪个功能用来生成一个文件的校验码？<br>A. md5<br>B. tar<br>C. crypt<br>D. md5sum</li>
+</ol>
+<p>A. </p>
+<ol start="91">
+<li>缺省的，用户邮件放在：<br>A. ~/mail/<br>B. /var/mail/<br>C. /var/mail/spool/<br>D. /var/spool/mail/</li>
+</ol>
+<p>D. </p>
+<ol start="92">
+<li>下面哪个文件包含了供 NFS daemon 使用的目录列表？<br>A. /etc/nfs<br>B. /etc/nfs.conf<br>C. /etc/exports<br>D. /etc/netdir</li>
+</ol>
+<p>C. </p>
+<ol start="93">
+<li>如何停止一台机器的telnet服务？<br>A. Put NONE in /etc/telnet.allow<br>B. Put a line ‘ALL:ALL’ in /etc/hosts.deny<br>C. Comment the telnet entry in /etc/inittab<br>D. Comment the telnet entry in /etc/xinetd.conf</li>
+</ol>
+<p>D. </p>
+<ol start="94">
+<li>在哪个文件中保存了sendmail的别名？<br>A. /etc/aliases<br>B. /etc/mailaliases<br>C. /etc/sendmail.aliases<br>D. /etc/sendmail/aliases</li>
+</ol>
+<p>A. </p>
+<ol start="95">
+<li>smbd and nmbddaemons 的配置文件是：<br>A. /etc/exports<br>B. /etc/smb.conf<br>C. /etc/samba/config<br>D. /usr/local/samba.cfg</li>
+</ol>
+<p>B. </p>
+<ol start="96">
+<li>下面哪个命令用来卸载一个内核模块？<br>A. rmmod<br>B. unmod<br>C. delmod<br>D. modprobe</li>
+</ol>
+<p>A. </p>
+<ol start="97">
+<li>什么情况下必须运行lilo<br>A. once a day from cron<br>B. once a week from cron<br>C. after installing a new kernel<br>D. after installing a new module</li>
+</ol>
+<p>C. </p>
+<ol start="98">
+<li>什么命令显示所有装载的模块？<br>A. lsmod<br>B. dirmod<br>C. modules<br>D. modlist</li>
+</ol>
+<p>A. </p>
+<ol start="99">
+<li>下面哪个命令刷新打印机队列？<br>A. lpflush<br>B. lprm -<br>C. lpclear<br>D. lprm all</li>
+</ol>
+<p>B. </p>
+<ol start="100">
+<li>下面哪个命令可以查看网卡的中断？<br>A. cat /proc/ioports<br>B. cat /proc/interrupts<br>C. cat /proc/memoryinfo<br>D. which interrupts</li>
+</ol>
+<p>B. </p>
+<ol start="101">
+<li>将当前命令sh test.sh任务在后台执行，下列最优雅的的做法是<br>A. sh test.sh \&amp;amp;<br>B. nohup sh test.sh<br>C. nohup sh test.sh &amp;amp;<br>D. nohup sh test.sh &amp;amp;&amp;amp;</li>
+</ol>
+<p>C. nohup:表示不挂起，在你退出账户之后，进程继续在后台运行，一般形式为：nohup command &amp;</p>
+<ol start="102">
+<li>截取logfile文件中含有suc的行，并且只输出最后一列，下列操作正确的是:<br>A. grep -o ‘suc’ logfile | awk ‘{print $0}’<br>B. grep ‘suc’ logfile | awk ‘{print $0}’<br>C. grep ‘suc’ logfile | awk ‘{print $NF}’<br>D. grep -o ‘suc’ logfile | awk ‘{print $NF}’</li>
+</ol>
+<p>C.</p>
+<ol start="103">
+<li>创建一个用户指定用户的自家目录，参数为:<br>A. -d<br>B. -u<br>C. -g<br>D. -M</li>
+</ol>
+<p>A.</p>
+<ol start="104">
+<li>使用非root账号，shell中想要查看ip地址，使用如下哪个命令:<br>A. /etc/ifconfig<br>B. /sbin/ipconfig<br>C. ifconfig<br>D. ipconfig</li>
+</ol>
+<p>C.</p>
+<ol start="105">
+<li>下面哪个命令刷新打印机队列？<br>A. lprm -<br>B. lprm all<br>C. lpflush<br>D. lpclear</li>
+</ol>
+<p>A. lprm -</p>
+<ol start="106">
+<li>linux启动时最先运行的进程是哪一个？<br>A. initd<br>B. kernel<br>C. start<br>D. init</li>
+</ol>
+<p>D. init</p>
+<ol start="107">
+<li>crontab文件由六个域组成，每个域之间用空格分割，其排列是<br>A. MIN HOUR DAY MONTH YEAR COMMAND<br>B. MIN HOUR DAY MONTH DAYOFWEEK COMMAND<br>C. COMMAND YEAR MONTH DAY HOUR MIN<br>D. COMMAND HOUR DAY MONTH DAYOFWEEK</li>
+</ol>
+<p>B. MIN HOUR DAY MONTH DAYOFWEEK COMMAND</p>
+<ol start="108">
+<li>下列哪种方式可以最快捷地让一个普通用户变成root？<br>A. /etc/passwd 权限修改为 -rw-r–rw-<br>B. 具有/etc/inittab 文件写的权限<br>C. /etc/shadow 权限修改为 -rw-r–r-</li>
+</ol>
+<p>A. /etc/passwd 权限修改为 -rw-r–rw-</p>
+<ol start="109">
+<li>Linux的根分区的文件系统类型是（ ）<br>A. FAT16<br>B. NTFS<br>C. FAT32<br>D. ext3</li>
+</ol>
+<p>D. ext3</p>
+<ol start="110">
+<li>echo $((${a//.*/+1}))是什么意思<br>A. 将变量a加1<br>B. 等价于a+1<br>C. 数的向上取整<br>D. 将变量a中置空</li>
+</ol>
+<p>C. 数的向上取整</p>
+<ol start="111">
+<li>在LVM文件系统中，如果PE的大小是16MB，那么请问，该LVM中VG最大是多少？<br>A. 512G<br>B. 256G<br>C. 128G<br>D. 1T</li>
+</ol>
+<p>D. 1T</p>
+<ol start="112">
+<li>下列文件中，包含了主机名到IP地址的映射关系的文件是：<br>A. /etc/resolv.conf<br>B. /etc/networks<br>C. /etc/HOSTNAME<br>D. /etc/hosts</li>
+</ol>
+<p>D. /etc/hosts</p>
+<ol start="113">
+<li>ubuntu中升级系统的命令是那个？<br>A. apt-get dist-upgrade<br>B. apt-get up-install<br>C. apt-get update<br>D. apt-get gradeup</li>
+</ol>
+<p>A. apt-get dist-upgrade</p>
+<hr>
+<ol>
+<li>下面关于she11的说法，不正确的是（A）。<br>A.操作系统的外壳<br>B用户与 Linux内核之间的接口程序<br>C.一个命令语言解释器<br>D.一种和C类似的程序语言</li>
+</ol>
+<ol start="2">
+<li>以下 Linux内核版本中，属于稳定版本的是（CB）。<br>A.2.1.23<br>B.2.0.36<br>C.2.4.0<br>D.2.3.11</li>
+</ol>
+<ol start="3">
+<li>Red Hat Enterprise linux版本分为（ABD）。<br>A. Red Hat Enterprise Linux AS<br>B. Red Hat Enterprise Linux ES<br>C. Red Hat Enterprise Linux BS<br>D. Red Hat Enterprise Linux WS</li>
 </ol>
 <ol start="4">
-<li><p>怎样了解您在当前目录下还有多大空间？<br>A. Use df<br>B. Use du /<br>C. Use du .<br>D. Use df .</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>怎样更改一个文件的权限设置？<br>A. attrib<br>B. chmod<br>C. change<br>D. file</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>假如您需要找出 /etc/my.conf 文件属于哪个包 (package) ，您可以执行：<br>A. rpm -q /etc/my.conf<br>B. rpm -requires /etc/my.conf<br>C. rpm -qf /etc/my.conf<br>D. rpm -q | grep /etc/my.conf</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>假如当前系统是在 level 3 运行，怎样不重启系统就可转换到 level 5 运行？<br>A. Set level = 5<br>B. telinit 5<br>C. run 5<br>D. ALT-F7-5</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>那个命令用于改变 IDE 硬盘的设置？<br>A. hdparam<br>B. ideconfig<br>C. hdparm<br>D. hddparm</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>下面哪个命令可以列出定义在以后特定时间运行一次的所有任务？<br>A. atq<br>B. cron<br>C. batch<br>D. at</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>下面命令的作用是：set PS1=”[\u\w\t]\$“ ; export PS1<br>A. 改变错误信息提示<br>B. 改变命令提示符<br>C. 改变一些终端参数<br>D. 改变辅助命令提示符</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>作为一个管理员，你希望在每一个新用户的目录下放一个文件 .bashrc ，那么你应该在哪个目录下放这个文件，以便于新用户创建主目录时自动将这个文件复制到自己的目录下。<br>A. /etc/skel/<br>B. /etc/default/<br>C. /etc/defaults/<br>D. /etc/profile.d/</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>在bash中，export命令的作用是：<br>A. 在子shell中运行命令<br>B. 使在子shell中可以使用命令历史记录<br>C. 为其它应用程序设置环境变量<br>D. 提供NFS分区给网络中的其它系统使用</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>在使用了shadow口令的系统中，/etc/passwd和/etc/shadow两个文件的权限正确的是：<br>A. -rw-r—– , -r——–<br>B. -rw-r–r– , -r–r–r–<br>C. -rw-r–r– , -r——–<br>D. -rw-r–rw- , -r—–r–</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>下面哪个参数可以删除一个用户并同时删除用户的主目录？<br>A. rmuser -r<br>B. deluser -r<br>C. userdel -r<br>D. usermgr -r</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>有一个备份程序mybackup，需要在周一至周五下午1点和晚上8点各运行一次，下面哪条crontab的项可以完成这项工作？<br>A. 0 13,20 <em> </em> 1,5 mybackup<br>B. 0 13,20 <em> </em> 1,2,3,4,5 mybackup<br>C. <em> 13,20 </em> <em> 1,2,3,4,5 mybackup<br>D. 0 13,20 1,5 </em> * mybackup</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>如何从当前系统中卸载一个已装载的文件系统<br>A. umount<br>B. dismount<br>C. mount -u<br>D. 从 /etc/fstab 中删除这个文件系统项</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>如果你的umask设置为022，缺省的你创建的文件的权限为：<br>A. —-w–w-<br>B. -w–w—-<br>C. r-xr-x—<br>D. rw-r–r–</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>在一条命令中如何查找一个二进制命令 Xconfigurator 的路径？<br>A. apropos Xconfigurator<br>B. find Xconfigurator<br>C. where Xconfigurator<br>D. which Xconfigurator</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>哪一条命令用来装载所有在 /etc/fstab 中定义的文件系统？<br>A. amount<br>B. mount -a<br>C. fmount<br>D. mount -f</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>运行一个脚本，用户不需要什么样的权限？<br>A. read<br>B. write<br>C. execute<br>D. browse on the directory</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>在Linux中，如何标识接在IDE0上的slave硬盘的第2个扩展分区？<br>A. /dev/hdb2<br>B. /dev/hd1b2<br>C. /dev/hdb6<br>D. /dev/hd1b6</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>在应用程序起动时，如何设置进程的优先级？<br>A. priority<br>B. nice<br>C. renice<br>D. setpri</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>在 bash 中, 在一条命令后加入”1&gt;&amp;2” 意味着：<br>A. 标准错误输出重定向到标准输入<br>B. 标准输入重定向到标准错误输出<br>C. 标准输出重定向到标准错误输出<br>D. 标准输出重定向到标准输入</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>下面哪条命令可以把f1.txt复制为f2.txt?<br>A. cp f1.txt | f2.txt<br>B. cat f1.txt | f2.txt<br>C. cat f1.txt &gt; f2.txt<br>D. copy f1.txt | f2.txt</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>显示一个文件最后几行的命令是：<br>A. tac<br>B. tail<br>C. rear<br>D. last</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>如何快速切换到用户John的主目录下？<br>A. cd @John<br>B. cd #John<br>C. cd &amp;John<br>D. cd ~John</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>　
-</li>
-<li><p>把一个流中所有字符转换成大写字符，可以使用下面哪个命令？<br>A. tr a-z A-Z<br>B. tac a-z A-Z<br>C.sed /a-z/A-Z<br>D. sed –toupper</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>使用什么命令可以查看Linux的启动信息？<br>A. mesg -d<br>B. dmesg<br>C. cat /etc/mesg<br>D. cat /var/mesg</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>运行级定义在：<br>A. in the kernel<br>B. in /etc/inittab<br>C. in /etc/runlevels<br>D. using the rl command</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>如何装载(mount)上在 /etc/fstab 文件中定义的所有文件系统？<br>A. mount -a<br>B. mount /mnt/*<br>C. mount<br>D. mount /etc/fstab</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>使用ln命令将生成了一个指向文件old的符号链接new，如果你将文件old删除，是否还能够访问文件中的数据？<br>A. 不可能再访问<br>B. 仍然可以访问<br>C. 能否访问取决于文件的所有者<br>D. 能否访问取决于文件的权限</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>xt2fs文件系统中，缺省的为root用户保留多大的空间？<br>A. 3%<br>B. 5%<br>C. 10%<br>D. 15%</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>哪个命令用来显示系统中各个分区中inode的使用情况？<br>A. df -i<br>B. df -H<br>C. free -b<br>D. du -a -c /</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>　
-</li>
-<li><p>多数Linux发行版本中，图形方式的运行级定义为？<br>A. 1<br>B. 2<br>C. 3<br>D. 5</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>在系统文档中找到关于print这个单词的所有说明？<br>A. man print<br>B. which print<br>C. locate print<br>D. apropos print</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>man 5 passwd 含义是？<br>A. 显示 passwd 命令的使用方法<br>B. 显示 passwd 文件的结构<br>C. 显示 passwd 命令的说明的前五行<br>D. 显示关于passwd的前五处说明文档。</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>如何在文件中查找显示所有以”<em>“打头的行？<br>A. find \</em> file<br>B. wc -l <em> &lt; file<br>C. grep -n </em> file<br>D. grep ‘^*’ file</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>在ps命令中什么参数是用来显示所有用户的进程的？<br>A. a<br>B. b<br>C. u<br>D. x</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>显示二进制文件的命令是？<br>A. od<br>B. vil<br>C. view<br>D. binview</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>如何显示Linux系统中注册的用户数（包含系统用户）？<br>A. account -l<br>B. nl /etc/passwd |head<br>C. wc –users /etc/passwd<br>D. wc –lines /etc/passwd</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>在一行结束位置加上什么符号，表示未结束，下一行继续？<br>A. /<br>B. <br>C. ;<br>D. |</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>命令 kill 9 的含义是：<br>A. kills the process whose PID is 9.<br>B. kills all processes belonging to UID 9.<br>C. sends SIGKILL to the process whose PID is 9.<br>D. sends SIGTERM to the process whose PID IS 9.</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>如何删除一个非空子目录/tmp？<br>A. del /tmp/<em><br>B. rm -rf /tmp<br>C. rm -Ra /tmp/</em><br>D. rm -rf /tmp/*</p>
-<details>
-<summary><u>答案：</u></summary>
-B. rm -rf * 删除当前目录下所有文件
-</details>
-</li>
-<li><p>使用什么命令可以在今天午夜运行命令 cmd1 ？<br>A. at midnight cmd1<br>B. cron -at “00:00” cmd1<br>C. batch -t “00:00” &lt; cmd1<br>D. echo “cmd1” | at midnight</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>你的系统使用增量备份策略，当需要恢复系统时，你需要按什么顺序恢复备份数据？<br>A. 最后一次全备份，然后从最早到最近的增量备份<br>B. 最后一次全备份，然后从最近到最早的增量备份<br>C. 最早到最近的增量备份，然后最后一次全备份<br>D. 最近到最早的增量备份，然后最后一次全备份</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>对所有用户的变量设置，应当放在哪个文件下？<br>A. /etc/bashrc<br>B. /etc/profile<br>C. ~/.bash_profile<br>D. /etc/skel/.bashrc</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>Linux系统中，一般把命令 ls 定义为 ls –color 的别名，以便以不同颜色来标识不同类型的文件。但是，如何能够使用原先的ls命令？<br>A. \ls<br>B. ;ls<br>C. ls $$<br>D. ls –noalias</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>在Linux系统中的脚本文件一般以什么开头？<br>A. $/bin/sh<br>B. #!/bin/sh<br>C. use /bin/sh<br>D. set shell=/bin/sh</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>下面哪种写法表示如果cmd1成功执行，则执行cmd2命令？<br>A. cmd1&amp;&amp;cmd2<br>B. cmd1|cmd2<br>C. cmd1;cmd2<br>D. cmd1||cmd2</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>在哪个文件中定义网卡的I/O地址？<br>A. cat /proc/modules<br>B. cat /proc/devices<br>C. cat /proc/ioports<br>D. cat /io/dma</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>Linux中，提供TCP/IP包过滤功能的软件叫什么？<br>A. rarp<br>B. route<br>C. iptables<br>D. filter</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>如何暂停一个打印队列？<br>A. lpr<br>B. lpq<br>C. lpc<br>D. lpd</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>在vi中退出不保存的命令是？<br>A. :q<br>B. :w<br>C. :wq<br>D. :q!</p>
-<details>
-<summary><u>答案：</u></summary>
-D. A. :q 退出；B. :w 保存 C. :wq 保存并退出 D. :q! 强制退出
-</details>
-</li>
-<li><p>在 XFree86 3.x 中, 缺省的字体服务器为：<br>A. xfs<br>B. xfserv<br>C. fonts<br>D. xfstt</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>使用什么命令检测基本网络连接？<br>A. ping<br>B. route<br>C. netstat<br>D. ifconfig</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>下面哪个协议使用了二个以上的端口？<br>A. telnet<br>B. FTP<br>C. rsh<br>D. HTTP</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>在PPP协议中，哪个认证协议不以明文传递密码？<br>A. PAM<br>B. PAP<br>C. PGP<br>D. CHAP</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>下面哪个文件系统应该分配最大的空间？<br>A. /usr<br>B. /lib<br>C. /root<br>D. /bin</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>如何在Debian系统中安装rpm包？<br>A. alien pkgname.rpm<br>B. dpkg –rpm pkgname.rpm<br>C. dpkg –alien pkgname.rpm<br>D. alien pkganme.rpm ; dpkg -i pkganme.deb</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>在安装软件时下面哪一步需要root权限？<br>A. make<br>B. make deps<br>C. make config<br>D. make install</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>什么命令用来只更新已经安装过的rpm软件包？<br>A. rpm -U <em>.rpm<br>B. rpm -F </em>.rpm<br>C. rpm -e <em>.rpm<br>D. rpm -q </em>.rpm</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>在 windows 与 Linux 双起动的系统中，如果要让LILO 管理引导，则 LILO 应该放在：<br>A. MBR<br>B. /<br>C. root分区的首扇区<br>D. /LILO</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>ldconfig的配置文件是<br>A. /lib/ld.so<br>B. /etc/ld.so.conf<br>C. /etc/ld.so.cache<br>D. /etc/modules.conf</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>下面哪个命令可以压缩部分文件：<br>A. tar -dzvf filename.tgz <em><br>B. tar -tzvf filename.tgz </em><br>C. tar -czvf filename.tgz <em><br>D. tar -xzvf filename.tgz </em></p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>网络服务的daemon是：<br>A. lpd<br>B. netd<br>C. httpd<br>D. inetd</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>Linux与windows 的网上领居互联，需要提供什么daemon?<br>A. bind<br>B. smbd<br>C. nmbd<br>D. shard</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>对于Apache服务器，提供的子进程的缺省的用户是：<br>A. root<br>B. apached<br>C. httpd<br>D. nobody</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>sendmail中缺省的未发出信件的存放位置是：<br>A. /var/mail/<br>B. /var/spool/mail/<br>C. /var/spool/mqueue/<br>D. /var/mail/deliver/</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>apache的主配置文件是：<br>A. httpd.conf<br>B. httpd.cfg<br>C. access.cfg<br>D. apache.conf</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>关于可装载的模块，装载时的参数，如I/O地址等的存放位置是：<br>A. /etc/conf.modules<br>B. /etc/lilo.conf<br>C. /boot/System.map<br>D. /etc/sysconfig</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>在 Linux 中，如何关闭邮件提示？<br>A. biff n<br>B. mesg n<br>C. notify off<br>D. set notify=off</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>在 bash shell 环境下，当一命令正在执行时，按下 control-Z 会：<br>A. 中止前台任务<br>B. 给当前文件加上 EOF.<br>C. 将前台任务转入后台<br>D. 注销当前用户</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>定义bash环境的用户文件是：<br>A. bash &amp; .bashrc<br>B. bashrc &amp; .bash_conf<br>C. bashrc &amp; bash_profile<br>D. .bashrc &amp; .bash_profile</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>下面哪条命令用来显示一个程序所使用的库文件？<br>A. ldd<br>B. ld so<br>C. modprobe<br>D. ldconfig</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>如何查看一个RPM软件的配置文件的存放位置？<br>A. rpm -qc rpm1<br>B. rpm -Vc rpm1<br>C. rpm –config rpm1<br>D. rpm -qa –config rpm1</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>如何查看一个RPM软件的修改记录？<br>A. rpm -Vc postfix<br>B. rpm -qpil postfix<br>C. rpm –changelog postfix<br>D. rpm -q –changelog postfix</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>通过Makefile来安装已编译过的代码的命令是：<br>A. make<br>B. install<br>C. make depend<br>D. make install</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>什么命令解压缩tar文件？<br>A. tar -czvf filename.tgz<br>B. tar -xzvf filename.tgz<br>C. tar -tzvf filename.tgz<br>D. tar -dzvf filename.tgz</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>在 XF86Config 配置文件中，哪个段用来设置字体文件？<br>A. The Fonts section.<br>B. The Files section.<br>C. The xfsCodes section.<br>D. The Graphics section.</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>8 bit color 指的是：<br>A. 64K colors<br>B. 16K colors<br>C. 256 colors<br>D. 16M colors</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>下面哪个文件用来设置 X window 的显示分辨率？<br>A. xinit<br>B. xinitrc<br>C. XF86Setup<br>D. XF86Config</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>哪个变量用来指定一个远程X应用程序将输出放到哪个X server上？<br>A. DISPLAY<br>B. TERM<br>C. ECHO<br>D. OUTPUT</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>在xdm的配置目录中，哪个文件用来设置在用户通过xdm登录后自动起动的应用程序？<br>A. The Xsession file<br>B. The Xsetup_0 file<br>C. The Xstart_up file<br>D. The GiveConsole file</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>命令 netstat -a 停了很长时间没有响应，这可能是哪里的问题？<br>A. NFS.<br>B. DNS.<br>C. NIS.<br>D. routing.</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>ping使用的协议是：<br>A. TCP<br>B. UDP<br>C. SMB<br>D. ICMP</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>下面哪个命令不是用来查看网络故障的？<br>A. ping<br>B. init<br>C. telnet<br>D. netstat</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>拨号上网使用的协议通常是：<br>A. PPP<br>B. UUCP<br>C. SLIP<br>D. Ethernet</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>TCP/IP中，哪个协议是用来进行IP自动分配的？<br>A. ARP<br>B. NFS<br>C. DHCP<br>D. DNS</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>下面哪个文件定义了网络服务的端口？<br>A. /etc/netport<br>B. /etc/services<br>C. /etc/server<br>D. /etc/netconf</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>下面哪个功能用来生成一个文件的校验码？<br>A. md5<br>B. tar<br>C. crypt<br>D. md5sum</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>缺省的，用户邮件放在：<br>A. ~/mail/<br>B. /var/mail/<br>C. /var/mail/spool/<br>D. /var/spool/mail/</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>下面哪个文件包含了供 NFS daemon 使用的目录列表？<br>A. /etc/nfs<br>B. /etc/nfs.conf<br>C. /etc/exports<br>D. /etc/netdir</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>如何停止一台机器的telnet服务？<br>A. Put NONE in /etc/telnet.allow<br>B. Put a line ‘ALL:ALL’ in /etc/hosts.deny<br>C. Comment the telnet entry in /etc/inittab<br>D. Comment the telnet entry in /etc/xinetd.conf</p>
-<details>
-<summary><u>答案：</u></summary>
-D. 
-</details>
-</li>
-<li><p>在哪个文件中保存了sendmail的别名？<br>A. /etc/aliases<br>B. /etc/mailaliases<br>C. /etc/sendmail.aliases<br>D. /etc/sendmail/aliases</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>smbd and nmbddaemons 的配置文件是：<br>A. /etc/exports<br>B. /etc/smb.conf<br>C. /etc/samba/config<br>D. /usr/local/samba.cfg</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>下面哪个命令用来卸载一个内核模块？<br>A. rmmod<br>B. unmod<br>C. delmod<br>D. modprobe</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>什么情况下必须运行lilo<br>A. once a day from cron<br>B. once a week from cron<br>C. after installing a new kernel<br>D. after installing a new module</p>
-<details>
-<summary><u>答案：</u></summary>
-C. 
-</details>
-</li>
-<li><p>什么命令显示所有装载的模块？<br>A. lsmod<br>B. dirmod<br>C. modules<br>D. modlist</p>
-<details>
-<summary><u>答案：</u></summary>
-A. 
-</details>
-</li>
-<li><p>下面哪个命令刷新打印机队列？<br>A. lpflush<br>B. lprm -<br>C. lpclear<br>D. lprm all</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-</li>
-<li><p>下面哪个命令可以查看网卡的中断？<br>A. cat /proc/ioports<br>B. cat /proc/interrupts<br>C. cat /proc/memoryinfo<br>D. which interrupts</p>
-<details>
-<summary><u>答案：</u></summary>
-B. 
-</details>
-
-
-
-</li>
+<li>以下对Linuκx内核的说法正确的是（ACD）。<br>A.Linu内核是 Linux系统的核心部分。<br>B.Linu内核就是 Linux系统，一个内核就可以构成 Linux系统。<br>C.如今 Linux内核已发展到2.6.x版本。<br>D. Linuκ内核主要由内存管理程序、进程调度程序、虚拟文件系统构成</li>
 </ol>
-<ol start="101">
-<li>将当前命令sh test.sh任务在后台执行，下列最优雅的的做法是<br>A. sh test.sh \&amp;amp;<br>B. nohup sh test.sh<br>C. nohup sh test.sh &amp;amp;<br>D. nohup sh test.sh &amp;amp;&amp;amp;<details>
-<summary><u>答案：</u></summary>
-C. nohup:表示不挂起，在你退出账户之后，进程继续在后台运行，一般形式为：nohup command &
-</details>
-
-
-
-</li>
+<ol start="5">
+<li>在 Linux中把声卡当做何种设备？（B）<br>A.字符设备<br>B.输出设备<br>C.块设备<br>D.网络设备</li>
 </ol>
-<ol start="102">
-<li>截取logfile文件中含有suc的行，并且只输出最后一列，下列操作正确的是:<br>A. grep -o ‘suc’ logfile | awk ‘{print $0}’<br>B. grep ‘suc’ logfile | awk ‘{print $0}’<br>C. grep ‘suc’ logfile | awk ‘{print $NF}’<br>D. grep -o ‘suc’ logfile | awk ‘{print $NF}’<details>
-<summary><u>答案：</u></summary>
-C.
-</details>
-
-</li>
+<ol start="6">
+<li>Linu内核管理系统不包括的子系统是（D）。<br>A.进程管理子系统<br>B.内存管理子系统<br>C.文件管理子系统<br>D.硬件管理子系统</li>
+</ol>
+<ol start="7">
+<li>下列选项中，不是 Linux支持的是（B）<br>A.多用户<br>B.超进程<br>C.可移植<br>D.多进程</li>
+</ol>
+<ol start="8">
+<li>Linux是所谓的“ free software”，这个free的含义是（C）。<br>A. Linux不需要付费<br>B. Linux发行商不能向用户收费<br>C. Linux可自由修改和发布<br>D.只有 Linux作者才能向用户收</li>
+</ol>
+<ol start="9">
+<li>Linux系统各部分的组成部分中，（A）是基础<br>A.内核<br>B X Window<br>C shell<br>D gNOME</li>
+</ol>
+<ol>
+<li>Linux中充当虚拟内存的是（A）分区<br>A. swap<br>B. /<br>C. /boot<br>D. /home</li>
+</ol>
+<ol start="2">
+<li>Linux中第2个IDE接口硬盘可以表示为（B）。<br>A. /dev/hda<br>B. /dev/hdb<br>C. /dev/sdb<br>D/dev/sdc</li>
+</ol>
+<ol start="3">
+<li>以下是 Red hat linux支持的硬盘接口有（AB）。<br>A. IDE<br>B. SCSI<br>C. COM<br>D. PS/2</li>
+</ol>
+<ol start="4">
+<li>以下是 Red hat linux使用的 X Window软件有（BD）。<br>A. qamil B. GNOME C. x-free86 D. KDE</li>
+</ol>
+<ol start="5">
+<li>Red hat linux自带的两个引导装载软件是（AB）。<br>A.LILO<br>B. GRUB<br>C. Load<br>D. Bootinit</li>
+</ol>
+<ol start="6">
+<li>Linux分区类型默认的是（B）。<br>A. vfat<br>B. ext2<br>C. swap<br>D. DOS</li>
+</ol>
+<ol start="7">
+<li>Red hat linux9.0安装启动盘的映像文件名是（A）<br>A.bootdisk.img B.auto, bat C.config.sys D.pcmcia.img</li>
+</ol>
+<ol start="8">
+<li>在 Red hat linux9.0安装程序中自带的图形分区工具是（C）。<br>A.smart fdisk B.fdisk C.Disk druid D.disk man</li>
+</ol>
+<ol start="9">
+<li>安装 Red hat linux一般需要准备3个分区，他们是（ABD）<br>A./分区 B.boot分区 C./home分区 D.swap分区</li>
+</ol>
+<ol start="10">
+<li>可以从（ABCE）方式安装 Red hat linux9.0<br>A.光盘 B.硬盘 C.FTP服务器 D.邮件服务器E.NFS服务器</li>
+</ol>
+<ol start="11">
+<li>一般说来， Red hat linux内核的源程序可以在（B）目录下找到。<br>A./usr/local B./usr/src C./lib D./usr/share</li>
+</ol>
+<ol start="12">
+<li>管理员想在每天2:00让 Linux自动关机，请给出相应的命令。<br>Shut down -h o 22:008</li>
+</ol>
+<ol>
+<li>Linux中配置文件放在系统的（C）。<br>A./lib B./dev C./etc D./usr</li>
+</ol>
+<ol start="2">
+<li>Linux中图像文件属于（D）。<br>A.文本文件 B.连接文件 C.特殊文件 D.二进制文件</li>
+</ol>
+<ol start="3">
+<li>在默认情况下，使用Is- color命令显示当前目录下的所有文件时，对于可执行文件一般显示为（B）。<br>A.红 B.绿 C.黄 D.蓝</li>
+</ol>
+<ol start="4">
+<li>在使用ln建立文件符号链接时，为了跨越不同的文件系统，需要使用（C）<br>A.普通链接 B.硬链接 C.软链接 D.特殊链接</li>
+</ol>
+<ol start="5">
+<li>系统管理常用的二进制文件，一般放置在（A）目录下。<br>A./sbin B./root C./usr/sb D./boot</li>
+</ol>
+<ol start="6">
+<li>1s[abc]*表示（ABC）<br>A.显示a开头的文件 B.显示b开头的文件 C.显示c开头的文件 D.不显示abc开头的文件</li>
+</ol>
+<ol start="7">
+<li>用来显示文件内容的命令有（ABCD）。<br>A.cat B. more C. less D.head</li>
+</ol>
+<ol start="8">
+<li>使用8cd~命令后，我们会进入（A）目录。<br>A.用户的主目录 B./ C.~ D./root</li>
+</ol>
+<ol start="9">
+<li>建立一个新文件可以使用的命令为（ABD）<br>A.chmod B.more C.cp D.touch</li>
+</ol>
+<ol start="10">
+<li>删除文件命令为（D）。<br>A.mkdir B.rmdir C.mv D.rm</li>
+</ol>
+<ol start="11">
+<li>在给定文件中查找与设定条件相符字符串的命令为（A）<br>A.grep B.gzip C.find D.sort</li>
+</ol>
+<ol start="12">
+<li>下列命令中，不能显示文本文件内容的命令是（C）。<br>A. more B.less C.tail D.join</li>
+</ol>
+<ol>
+<li>vi的3钟工作模式是（ABC）。<br>A.末行模式 B.插入模式 C.命令模式 D.检查模式</li>
+</ol>
+<ol start="2">
+<li>vi编辑器的区域可以分为（BC）。<br>A.插入区 B.编辑区 C.命令区 D.显示区</li>
+</ol>
+<ol start="3">
+<li>vi的3种模式之间不能直接转换的是（C）。<br>A.命令模式——文本编辑模式 B.命令模式一一末行模式 C.文本编辑模式一一末行模式 D.任何模式之间都能直接转换</li>
+</ol>
+<ol start="4">
+<li>在vi编辑器中需要删除4~7行之间的内容，应在末行模式下使用（C）命<br>A.4,7m B.4,7co C.4,7d D.4,7s/*//g</li>
+</ol>
+<ol start="5">
+<li>在使用vi编辑器时，在命令模式下，以下（C）命令的结果是删除4个单<br>A.4xw B.wwwww C.4dw D.d4l</li>
+</ol>
+<ol start="6">
+<li>存盘并退出vi可用命令：wq，还可以用（B）命令<br>A.:q! B.:x C.exit D.:s</li>
+</ol>
+<ol>
+<li>要给所有的人读取权限，用数字表示（B）。<br>A.441<br>B.444<br>C.222<br>D.111</li>
+</ol>
+<ol start="2">
+<li>root用户的UID和GID为（B）。<br>A.2和0<br>B.0和0<br>C.1和0<br>D.500和500</li>
+</ol>
+<ol start="3">
+<li>创建一个用户指定用户的自家目录，参数为（B）<br>A. -u B.-d C.-g D.-M</li>
+</ol>
+<ol start="4">
+<li>为了修改文件test的许可模式，使其文件属主具有读、写和运行的权限，组和其他用户可以读和运行，可以采用的方法（A）<br>A. chmod 755 test B. chmod 700 te C. chmod ux+rwx test D. chmod g-w test</li>
+</ol>
+<ol start="5">
+<li>使用 chmod命令修改文件权限时，可以使用的有关用户的选项参数有（ABCD）。<br>A.g B.u C.a D.o</li>
+</ol>
+<ol start="6">
+<li>现在将/目录下的www文件权限改为只有主用户有执行的权限，其他人都没有<br>A. chmod 100 /www B. chmod 001 /www C. chmod u+x, g-x, 0-x /www D. chmod 0-x, g-x, u-x/www</li>
+</ol>
+<ol start="7">
+<li>/etc/passwd文件中包含的信息有（ABCD）<br>A.uid B.gid C.用户主目录 D.shell</li>
+</ol>
+<ol start="8">
+<li>如果现在要新增一个用户叫 china，则应用（AB）命令。<br>A.adduser china B.useradd china C.mkdir china D.vi china</li>
+</ol>
+<ol>
+<li>一个文件名字为rz，可以用来解压缩的命令是（D）<br>A.tar B.gzip C.compress D.Uncompress</li>
+</ol>
+<ol start="2">
+<li>（B）命令可以在Iinuⅸx的安全系统中完成文件向磁带备份的工作。<br>A.cp B.tar C.dir D.cpio</li>
+</ol>
+<ol start="3">
+<li>有关归档和压缩命令，下面描述正确的是（B）。<br>A. 用 uncompress命令解压缩由 compress命令生成的后缀zip的压缩文件<br>B. unzip命令和gzip命令可以解压缩相同类型的文件<br>C. tar归档且压缩的文件可以由gzjp命令解压缩<br>D. tar命令归档后的文件也是一种压缩文件</li>
+</ol>
+<ol start="4">
+<li>为了将当前目录下的归档文件 myfile. Tar. gz解压缩到/tmp目录下，可以使用（C）命令。<br>A. tar xzvf myfile tar. gz-C/tmp<br>B. tar xzvf myfile tar. gz-R/tmp<br>C. tar zvf myfile tar:gz-X /tmp<br>D. tar xzvf myfile tar:gz/tmp</li>
+</ol>
+<ol start="5">
+<li>（B）命令可以了解 test. rpm软件包将在系统里安装哪些文件<br>A. rpm-Vp testrpm B. rpm-ql test rpm C. rpm-i test rpm D. rpm-Va test rpm</li>
+</ol>
+<ol start="6">
+<li>如果要找出/ etc/inittab文件属于那个软件包，可以执行下列（AC）命令<br>A. rpm-q /etc/inittab<br>B. rpm-requires testrpm<br>C. rpm-qf /etc/inittab<br>D. Rpm-glgrep /etc/inittab</li>
+</ol>
+<ol>
+<li>进程和程序的区别是（C）<br>A. 程序是一组有序的静态指令，进程是一次程序的执行过程<br>B. 程序只能在前台运行，而进程可以在前台或后台运行<br>C. 程序可以长期保存，进程是暂时的。<br>D. 程序没有状态，而进程是有状态的。</li>
+</ol>
+<ol start="2">
+<li>ps命令显示结果中STAT的s代表（B）。<br>A.运行 B.休眠 C终止 D.挂起</li>
+</ol>
+<ol start="3">
+<li>从后台启动进程，应在命令的结尾加上（A）<br>A.&amp; B.@ C.# D.$</li>
+</ol>
+<ol start="4">
+<li>终止一个前台进程，可用（A）组合键<br>A. Ctrl+c B. Ctrl+z C. Alt+c D. alt+z</li>
+</ol>
+<ol start="5">
+<li>希望把某个在后台挂历起的作业转到后台继续运行，可使用（C）<br>A. nice B.fg C.bg D.renice</li>
+</ol>
+<ol start="6">
+<li>at8:00pm是指（D）<br>A.当天早8点 B.每天早8点 C每天晚上8点 D.当天晚8点</li>
+</ol>
+<ol start="7">
+<li>在cron中若指定00 07 <em> </em>, 24, 6则2,4,6代表（D）。<br>A. 每月的2,4,6 B. 每天的2,4,6 C. 每小时的2,4.6 D. 每周的2,4,6</li>
+</ol>
+<ol start="8">
+<li>Linux中自动安排任务可使用（ABC）<br>A.at B.batch C.cron D.time</li>
+</ol>
+<ol start="9">
+<li>在 shell i中，当用户准备结束登录对话进程时，可用（C）命令。<br>A.logout B.exit C.Ctrl+d D.shutdown</li>
+</ol>
+<ol start="10">
+<li>一般关机的命令有（ABC）<br>A.init 0 B.shutdown now C.halt D.poweroff</li>
+</ol>
+<ol>
+<li>光盘的文件系统是（）<br>A.ext2 B.ext3 C.vfat D.iso9660</li>
+</ol>
+<ol start="2">
+<li>用户一般用（d）工具来建立分区上的文件系统？<br>A.mknod B.fdisk C.fomat D.mkfs</li>
+</ol>
+<ol start="3">
+<li>在 shell中，使用（B）命令可显示磁盘空间<br>A.df B.du C.dir D.tar</li>
+</ol>
+<ol start="4">
+<li>登录后希望重新加载 fstab文件中的所有条目，用户可以以root身份执行（C）命令？<br>A. mount-d B. mount -c C. mount-a D. mount-b</li>
+</ol>
+<ol start="5">
+<li>当一个目录作为一个挂载点被使用后，该目录上的原文件会（B）。<br>A.被永久删除 B.被隐藏，待挂载设备卸载后恢复 C.放入回收站 D.被隐藏，待计算机重新启动后恢复</li>
+</ol>
+<ol start="6">
+<li>从当前文件系统中卸载一个已挂载的文件系统的命令（A）<br>A. umount B. dismount C. mount-u D. 从netc/ fstab文件中删除此文件系统项</li>
+</ol>
+<ol start="7">
+<li>Quotacheck的功能是（A）<br>A. 检査启动了配额的文件系统，并可建立配额管理文件<br>B. 创建启动了配额的文件系统，并可建立配额管理文件<br>C. 修改启动了配额的文件系统，并可建立配额管理文件<br>D. 删除启动了配额的文件系统，并可建立配额管理文件</li>
+</ol>
+<ol start="8">
+<li>强制用户使用组群软配额时，设置用户超过此数额的过渡期的命令是（D）？<br>A. quotaon B. quota-u C. quota-1 D. edquota-t</li>
+</ol>
+<ol start="9">
+<li>关于文件系统的挂载和卸载，下面描述正确的有（AC）<br>A. 启动时系统按照 fstab文件描述的内容加载文件系统。<br>B. 挂载U盘时只能挂载到/ media目录。<br>C. 不管光驱中是否有光盘，系统都可以挂载光盘<br>D. Mount-t iso9660dev/ cdrom/ cdrom中的 cdr目录会自动生成</li>
+</ol>
+<ol start="10">
+<li>/etc/fstab文件中其中一行如下所示，在此文件中表示挂载点的是第（D）列信息？ /dev/hdal / ext3 defaults 1 2<br>A. 4 B. 5 C. 3 D. 2</li>
+</ol>
+<ol>
+<li>Linx中/etc/ syscomfig/network文件中 hostname是指（D）。<br>A. DNS名 B. netbios名 C.IP D.A和B都可以</li>
+</ol>
+<ol start="2">
+<li>Route命令中-net是指（A）。<br>A.目标是一个网段B目标是一个主机C.目标是所有网段。D.目标是所有主机。</li>
+</ol>
+<ol start="3">
+<li>存放Linx主机名的文件是（B）。<br>A. /etc/hosts B. /etc/sysconfig/networt C. /etc/hostname D. /etc/host.conf</li>
+</ol>
+<ol start="4">
+<li>快速启动网卡“eth0”的命令是（D）。<br>A. ifconfig eth0 noshut B. ipconfig eth0 noshut C. ifnoshut eth0 D. ifup eth0</li>
+</ol>
+<ol start="5">
+<li>指定系统主机名的配置文件是（A）<br>A./etc/hosts B./etc/host.conf C./etc/sysconfig/network D./etc/resolv.conf</li>
+</ol>
+<ol start="6">
+<li>在Iinu中，给计算机分配P地址正确的方法是（C）<br>A. ipconfig eth0166.111.219.150255255.255.0<br>B ifconfig eth0166.111.219.150255.255255.0<br>C. ifconfig eth0166.111.219.150 netmask255.255.255.0<br>D. 在 Linux窗口配置中配置</li>
+</ol>
+<ol start="7">
+<li>Redhat linux9.0下可以设置每个运行级别启动服务的工具有（C）。<br>A. xinetd B. config C. ntsysv D. jobs</li>
+</ol>
+<ol start="8">
+<li>配置主机网卡IP地址的配置文件是（A）<br>A. /etc/sysconfig/network-scripts/ifcfg-eth0<br>B. resolv.conf<br>C. /etc/sysconfig/network<br>D. /etc/host.conf</li>
+</ol>
+<ol start="9">
+<li>以下配置行需要写在 ifcfg-eth0文件中的有（BD）<br>A. IPADDP=192.168.0.1<br>B. BOOTPROTO=DHCP<br>C. NAMESERVER=192.168.0<br>D. DEVICE=eth0</li>
+</ol>
+<ol start="10">
+<li>Red hat linux90，显示内核路由表的命令是（A）<br>A.route B.ifconfig C.netstat D.ifup </li>
+</ol>
+<ol start="11">
+<li>某主机的IP地址为202.120.90.13，那么某默认的子网掩码是（D）<br>A.255.255.0.0<br>B.255.0.0.0<br>C.255.255.255.255<br>D.255.255.255.0</li>
+</ol>
+<ol start="12">
+<li>TCP/IP给临时端口分配的端口号为（A）<br>A.1024以上 B.0-1024 C.256-1024 D.0-128</li>
+</ol>
+<ol start="13">
+<li>eth l表示的设备为（B）。<br>A.显卡 B.网卡 C.声卡 D.视频压缩卡</li>
+</ol>
+<ol start="14">
+<li>与“ ifup etho”命令功能相同的命令是（D）。<br>A. ifdown eth0 up B. ipconfig up eth0 C. ifconfig up eth0 D. ifconfig eth0 up</li>
+</ol>
+<ol start="15">
+<li>欲发送10个分组报文测试于主机abc. edu. cn的连通性，应使用的命令是（A）<br>A. ping-a 10 abc.edu.cn<br>B. ping-10 abc.edu.cn<br>C. ifconfig-a 10 abc.edu.cn<br>D. rout-10 abc.edu.cn</li>
+</ol>
+<ol>
+<li>Samba中要让 Windows主机在网上邻居中看到，则配置文件中要有（D）。<br>A. security= B. valid users= C. read only= D. netbios name=</li>
+</ol>
+<ol start="2">
+<li>重启 Samba的命令是（B）<br>A. /etc/rc.d/init.d/samba restart<br>B. /etc/rc.d/init.d/smb restart<br>C. /etc/rd/init.d/named restart<br>D. /etc/rc.d/init.d/smb start</li>
+</ol>
+<ol start="3">
+<li>Linux中实现与 Windows主机之间的文件及打印共享使用（C）。<br>A.网络邻居 B.NFS C.Samba D.NIS</li>
+</ol>
+<ol start="4">
+<li>在 smb. conf中设置 Linux主机的 netbios名称选项是（A）<br>A.netbios name B.netbios C.hostname D.name</li>
+</ol>
+<ol start="5">
+<li>Samba服务器的默认安全级别是（B）<br>A.share B.user C.server D.domain</li>
+</ol>
+<ol start="6">
+<li>一个完整的smb.conf一般由（BCD）组成<br>A.消息头 B.参数 C.全局参数 D.共享设置</li>
+</ol>
+<ol start="7">
+<li>Samba服务器的进程由哪两个部分组成（B）<br>A.named和sendmail B.nbd和nmbd C.bootp和dhcpd D.httpd和squid</li>
+</ol>
+<ol start="8">
+<li>Red hat linux9， Samba服务管理进程是（C）<br>A.nmbd B.smbd C.Smb D.nmb</li>
+</ol>
+<ol start="9">
+<li>添加 Samba账户的命令是（C）<br>A.useradd B.smbuseradd C.smbadduser D.addsmbuser</li>
+</ol>
+<ol start="10">
+<li>通过设置（C）来控制访问 Samba共享服务的合法IP地址？<br>A.allowed B.host valid C.host allow D.public</li>
+</ol>
+<ol>
+<li>匿名FTP站点的主目录是（B）。<br>A./ftp B./var/ftp C./home D./etc</li>
+</ol>
+<ol start="2">
+<li>vsftpd服务器为匿名服务器时可以从哪个目录下载文件（A）。<br>A / var/ftp B /etc/vsftpd C /var/vsft D /etc/ft</li>
+</ol>
+<ol start="3">
+<li>暂时退出FTP命令回到shel中时应键入以下哪个命令（C）。<br>A.exit B.close C.! D.quit</li>
+</ol>
+<ol start="4">
+<li>在TCPP模型中，应用层包含了所有的高层协议，在下列的一些应用协议中（B）能够实现本地与远程主机之间的文件传输工作<br>A Telnet B FTP C SNMP D NFS</li>
+</ol>
+<ol start="5">
+<li>vsftpd在默认情况下监听（B）号端口<br>B.21C.23D.25</li>
+</ol>
+<ol start="6">
+<li>Red hat linux9默认的FTP服务器是（C）<br>A. wu-ftp B. Proftp C. vsftpd D. pure-ftp</li>
+</ol>
+<ol start="7">
+<li>vsftpd服务的启动脚本是（D）<br>A.ftp B.vsftp C.vtpd D.vsftpd</li>
+</ol>
+<ol start="8">
+<li>某个vsftpd服务器配置文件的部分内容如下，哪个说法是正确的（B）<br>Anonymous enable=no<br>Lacal_anable=yes<br>userlist_enable=yes<br>userlist_deny=no<br>user_file=/etc/vsftpd/user_list<br>A.此vsftpd服务器不仅为 Red Hat Linux 9.0 用户提供服务，也为匿名用户提供服务。<br>B./etc/vsftpd/user_list文件中指定的用户才能访间vsftpd服务器C.只有/etc/vsftpd/user_list文件中指定的用户才能访问vsftpd服务器<br>D.所有 Red Hat Linux 9.0 用户可上传文件，而匿名用户只能下载文件</li>
+</ol>
+<ol start="9">
+<li>以下属于FTP客户端命令的有（ABCD）<br>A. Is B.get C.put D.bye </li>
+</ol>
+<ol start="10">
+<li>vsftpd除了安全、高速、稳定之外，还具有（AD）特性<br>A.支持虚拟用户<br>B.支持PAM或xinetd/tcp_wrappers认证方式<br>C.支持两种运行方式：独立的和xinetd<br>D.支持带宽限制等</li>
+</ol>
+<ol>
+<li>DNS中ptr记录是指（A）<br>A.主机记录 B.指针 C.别名 D.主机信息</li>
+</ol>
+<ol start="2">
+<li>可用来测试DNS配置的命令是（B）<br>A.testran B.nslookup C.configtest D.testdns</li>
+</ol>
+<ol start="3">
+<li>BIND DNS默认情况具有三个资源记录文件是（ABD）。<br>A.localhost.zone B.named.local C.linux.com D.named.ca</li>
+</ol>
+<ol start="4">
+<li>Linux中DNS调试工具有（D）<br>A.bind B.service C.nslookup D.dig</li>
+</ol>
+<ol start="5">
+<li>以下是DNS资源记录类型的有（CD）<br>A.SOA B.MX C.NS D.A</li>
+</ol>
+<ol start="6">
+<li>Red Hat Linux 9.0 中的DNs使用的软件是（C）<br>A.qmail B.apache C.bind D.quota</li>
+</ol>
+<ol start="7">
+<li>DNS别名记录的标志是（C）。<br>A.A B.PTR C.CNAME D.MZ</li>
+</ol>
+<ol start="8">
+<li>下列命令能启动DNS服务的是（A）<br>A.service named start B./etc/init.d/named start<br>C.service dns start D./etc/init.d/dns restart</li>
+</ol>
+<ol start="9">
+<li>DNS域名系统主要负责主机名和（A）之间的解析<br>A.IP地址 B.MAC地址 C.网络地址 D.主机别名</li>
+</ol>
+<ol>
+<li>Apache的守护进程是（B）。<br>A.www B.httpd C.web D.apache</li>
+</ol>
+<ol start="2">
+<li>浏览器与Web服务器通信采用的协议为（A）<br>A.FTP B.HTP C.SMTP D.Telnet</li>
+</ol>
+<ol start="3">
+<li>下列说法错误的是（D）<br>A.Apache可以实现模块动态加载<br>B.Apache的核心模块是不可以卸载的<br>C.实现用户主页的模块是 mod_userdi.so<br>D.Apache核心配置文件是<a href="http://www.confd" target="_blank" rel="noopener">www.confd</a></li>
+</ol>
+<ol start="4">
+<li>让Apache2.0支持中文网页，可以在httpd.conf文件中设置以下选项（AB）。<br>A.Defaultlanguage zh_cn<br>B.Add DefaultCharest GB2312<br>C.Language Chinese<br>D.DocumentRoot /var/www/</li>
+</ol>
+<ol start="5">
+<li>在默认的安装中， Apache把自己的配置文件放在了以下哪个目录中（B）？<br>A./etc/httpd/ B./etc/httpd/conf/ C./etc/ D./etc/apache/</li>
+</ol>
+<ol>
+<li>以下哪一个目录是 Linux中的顶级目录<br>A./etc B./boot C./ D./home</li>
+</ol>
+<ol start="2">
+<li>下面关于Shell的说法，不正确的是<br>A.操作系统的外壳 B.用户与 Linux内核之间的接囗程序 C.一个命令语言解释器 D.一种和C类似的程序语言</li>
+</ol>
+<ol start="3">
+<li>以下Linux内核版本中，以下属于稳定版本是<br>A.2.1.23    B.2.0.36   C.2.4.0  D.2.3.11</li>
+</ol>
+<ol start="4">
+<li>Linux中充当虚拟内存的是哪个分区<br>A.swap      B./     C./boot     D.home</li>
+</ol>
+<ol start="5">
+<li>Linux中安装软件可使用<br>A.setup B.install C.rpm D.源代码安装</li>
+</ol>
+<ol start="6">
+<li>以下是 Redhat Linux支持的硬盘接囗有<br>A. IDE      B.SCSI      C.COM       D.PS/2</li>
+</ol>
+<ol start="7">
+<li>Redhat linux的支持的文件系统类型有<br>A.vfat  B.ext2  C.ext3  D.iso9660</li>
+</ol>
+<ol start="8">
+<li>Linux分区类型默认的是<br>A. vfat B. ext2 C. swap D. dos</li>
+</ol>
+<ol start="9">
+<li>一般说来， Redhat Linux内核的源程序可以在哪个目录下找到。<br>A. /usr/local B. /usr/src C. /lib D. /usr/share</li>
+</ol>
+<ol start="10">
+<li>在 Redhat Linux 9.0 安装程序中自带的图形分区工具是<br>A.smart fdisk     B.fdisk       C.Disk druid    D.disk man</li>
+</ol>
+<ol start="11">
+<li>安装 Red Hat Enterprise Linux AS 4.0 般需要准备三个分区，它们是<br>A./分区     B./boot分区     C./home分区     D.swap分区</li>
+</ol>
+<ol start="12">
+<li>Linux中图象文件属于<br>A.文本文件 B.连接文件 C.特殊文件 D.二进制文件</li>
+</ol>
+<ol start="13">
+<li>一般说来，系统中的主分区编号表示为hdax形式时，编号可能为<br>A.3     B.4     C.5     D.6</li>
+</ol>
+<ol start="14">
+<li>Linux系统中有基本的文件类型有<br>A.文本文件 B.普通文件 C.目录文件 D.设备文件</li>
+</ol>
+<ol start="15">
+<li>我们可以使用tar命令的（）选项来建立一个tar归档文件<br>A.a     B.c     C.d     D.x</li>
+</ol>
+<ol start="16">
+<li>用来显示文件内容的命令有<br>A.cat   B.more   C.less     D.head</li>
+</ol>
+<ol start="17">
+<li>vi的三种工作模式是<br>A.末行模式  B.插入模式  C.命令模式  D.检查模式</li>
+</ol>
+<ol start="18">
+<li>系统管理常用的二进制文件，一般放置在（）目录下<br>A. /sbin     B. /root    C. /usr/sbin       D. /boot</li>
+</ol>
+<ol start="19">
+<li>vi编辑器的区域可以分为<br>A. 插入区   B. 编辑区   C. 命令区   D. 显示区</li>
+</ol>
+<ol start="20">
+<li>使用$cd ~命令后，我们会进入（）目录<br>A.用户的主目录      B./     C.~     D. /root</li>
+</ol>
+<ol start="21">
+<li>要给所有的人读取权限，用数字表示<br>A. 441  B. 444  C. 222  D. 111</li>
+</ol>
+<ol start="22">
+<li>建一个用户指定用户的自家目录。参数为<br>A.-u    B.-d    C.-g    D.-M</li>
+</ol>
+<ol start="23">
+<li>使用chmod命令修改文件权限时，可以使用的有关用户的选项参数有<br>A.g     B.u     C.a     D.o</li>
+</ol>
+<ol start="24">
+<li>现在将/目录下的www文件权限改为只有主用户有执行的权限，其他人都没有B.  chmod001/www C.  chmod u+ Xg-X，0-x/wwwD.  chmod o-x g-xu-x/www</li>
+</ol>
+<ol start="25">
+<li>为了保证系统的安全，现在的inux系统一般将 letc/ passwd密码文件加密后，保存为件A. /etc/group B. /etc/netgroup C. etc/libsafe. notify</li>
+<li>/etc/passwd文件中包含的信息有用户主目录27. 关机命令正确的是A. int0B.  poweroff C.  shutdown- r now D. init628. init是Liux系统的第一个进程，该进程是根据哪个文件来创建子进程的A. /etcB.  /etc/inittab C. / etc/modules. conf D. /etc/llo.conf</li>
+<li>在shel中，当用户准备结束登录对话进程时，可用C. ctrl-d D.  shutdown</li>
+<li>我们将逻辑分区建立在哪个分区上B. 扩展分C. 主分区D. 第二分区31. 一个文件名字为rr.gz，可以用来解压缩的命令是p</li>
+<li>将光驱装载到/mt/ carom，知道应该用 mount命令，但你忘记具体的命令参数格式。已知 mount不是Lin內部命令，以下选项中哪一项不能查看 mount的帮助ount h B. man mou C info mount D help mount</li>
+<li>已知Lim系统中的唯一一块硬盘是第一个IDE接囗的 master设备，该硬盘按顺序有主分区和一个扩展分区，这个扩展分区又划分了3个逻辑分区，则该硬盘上的第逻辑分区在 Linux中的设备名称是B/dev/he D/dev/hdb</li>
+<li>Limz的文件权限共9位长度（例如 rwxrWXrWX），分成三段，第二段表示的内容是文件类型B.文件所有者的权限C.文件所有者所在组的权限D.其他用户的权限35. Limz的内核版本由3部分组成，如果一个内核版本是2.0.36，其主版本号是36. 用vi編辑器編写了一个脚本文件she11.sh，将文件名修改为she112.sh，下列命令可以实现cp she l. sh she112 sh B my shell sh she112 sh e11&gt; she112 sh she 112. sh</li>
+<li>Limz有三个查看文件的命令，若希望在查看文件内容过程中可以用光标上下移动来查看文件内容，应使用B. mo</li>
+<li>对名为fid的文件用 chmod551fido进行了修改，则它的许可权是：</li>
+<li>Lim文件系统的文件都按其作用分门别类地放在相关的目录中，对于外部设备文件般应将其放在哪个目录中B. / et C D/1ib在Limz系统中，管道的符号是</li>
 </ol>
 
       

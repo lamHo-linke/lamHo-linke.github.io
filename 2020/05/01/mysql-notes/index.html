@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.4k字</span>
+            <span class="post-count">1.6k字</span>
         </span>
     </span>
 
@@ -168,6 +168,14 @@
 </ol>
 <ol start="9">
 <li><strong>LIMIT</strong><br> 限制提取的数据量<br> <code>LIMIT 5</code>：0~4<br> <code>LIMIT 5,10</code>：6~15<br> <code>LIMIT 50,-1</code>：51~最后</li>
+</ol>
+<ol start="10">
+<li><strong>IN</strong>和<strong>EXISTS</strong>的区别<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> <span class="keyword">id</span> <span class="keyword">IN</span> (<span class="keyword">SELECT</span> <span class="keyword">id</span> <span class="keyword">FROM</span> B);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> A <span class="keyword">WHERE</span> <span class="keyword">EXISTS</span> (<span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">FROM</span> B <span class="keyword">WHERE</span> A.id=B.id);</span><br></pre></td></tr></table></figure>
+IN是在内存里遍历比较，而EXISTS需要查询数据库，所以当B表数据量较大时，exists效率优于in。<ul>
+<li><code>IN()</code>只执行一次，它查出B表中的所有id字段并缓存起来。之后，检查A表的id是否与B表中的id相等，如果相等则将A表的记录加入结果集中，直到遍历完A表的所有记录。</li>
+<li><code>EXISTS()</code>会执行A.length次，它并不缓存EXISTS()结果集，因为EXISTS()结果集的内容并不重要，重要的是其内查询语句的结果集空或者非空，空则返回false，非空则返回true。</li>
+</ul>
+</li>
 </ol>
 <hr>
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ol>
