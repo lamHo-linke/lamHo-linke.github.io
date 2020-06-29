@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.6k字</span>
+            <span class="post-count">1.7k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">6分钟</span>
+            <span class="post-count">7分钟</span>
         </span>
     </span>
 </div>
@@ -113,7 +113,7 @@
 </li>
 </ol>
 <ol start="4">
-<li><strong>在开始菜单点击MySQL的终端（MySQL 8.0 Command Line Client -  Unicode），运行以上语句导入数据报错：<br> ERROR 3948 (42000): Loading local data is disabled; this must be enabled on both the client and server sides</strong><br> 在cmd进入MySQL的bin文件夹，运行MySQL，设置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set global local_infile&#x3D;on;</span><br></pre></td></tr></table></figure>
+<li><strong>在开始菜单点击MySQL的终端（MySQL 8.0 Command Line Client -  Unicode），运行以上语句导入数据报错：<br> ERROR 3948 (42000): Loading local data is disabled; this must be enabled on both the client and server sides</strong><br> 在cmd进入MySQL的bin文件夹，运行MySQL（<code>mysql -u root -p</code>），设置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set global local_infile&#x3D;on;</span><br></pre></td></tr></table></figure>
  可用。</li>
 </ol>
 <ol start="5">
@@ -175,6 +175,62 @@ IN是在内存里遍历比较，而EXISTS需要查询数据库，所以当B表�
 <li><code>IN()</code>只执行一次，它查出B表中的所有id字段并缓存起来。之后，检查A表的id是否与B表中的id相等，如果相等则将A表的记录加入结果集中，直到遍历完A表的所有记录。</li>
 <li><code>EXISTS()</code>会执行A.length次，它并不缓存EXISTS()结果集，因为EXISTS()结果集的内容并不重要，重要的是其内查询语句的结果集空或者非空，空则返回false，非空则返回true。</li>
 </ul>
+</li>
+</ol>
+<ol start="11">
+<li><table>
+<thead>
+<tr>
+<th><code>LIKE</code>模糊匹配</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%a</td>
+<td>以a结尾</td>
+</tr>
+<tr>
+<td>a%</td>
+<td>以a开头</td>
+</tr>
+<tr>
+<td>%a%</td>
+<td>含有a</td>
+</tr>
+<tr>
+<td>_a_</td>
+<td>三位且中间是a</td>
+</tr>
+<tr>
+<td>_a.</td>
+<td>两位且结尾是a</td>
+</tr>
+<tr>
+<td>a_.</td>
+<td>两位且开头是a</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<ol start="12">
+<li>常用函数<br><code>LEFT(string,3)</code> 取字符串的前3个字符<br><code>BETWEEN a AND b</code> a≤数≤b<br><code>LENGTH(string)</code> 字符串长度<br><code>COUNT()</code><br><code>ORDER BY</code> 默认升序<code>ASC</code>，倒序用<code>DESC</code><br><code>DISTINCT</code> 去重</li>
+</ol>
+<ol start="13">
+<li><p>聚合函数<br><code>SUM</code>, <code>COUNT</code>, <code>AVG</code>, <code>MAX</code>, <code>MIN</code>, <code>VAR</code></p>
+<p>WHERE不可以+聚合函数<br>HAVING可以+聚合函数</p>
+</li>
+</ol>
+<ol start="14">
+<li>返回第一个非NULL的值<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COALESCE(a,b,c)</span><br></pre></td></tr></table></figure>
+如果 a=NULL，选b；<br>如果 b=NULL，选c；<br>如果 a,b,c 都 NULL，返回NULL。</li>
+</ol>
+<ol start="15">
+<li><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CASE WHEN cond1 THEN value1</span><br><span class="line">     WHEN cond2 THEN value2</span><br><span class="line">     ELSE value3</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 </li>
 </ol>
 <hr>
